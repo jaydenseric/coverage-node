@@ -32,6 +32,7 @@ module.exports = tests => {
         await nodeWithCoverage(coverageDirPath, [nodeModulesModuleMainFilePath])
 
         assert.deepStrictEqual(await analyseCoverage(coverageDirPath), {
+          filesCount: 0,
           covered: [],
           ignored: [],
           uncovered: []
@@ -52,6 +53,7 @@ module.exports = tests => {
       await nodeWithCoverage(coverageDirPath, [filePath])
 
       assert.deepStrictEqual(await analyseCoverage(coverageDirPath), {
+        filesCount: 0,
         covered: [],
         ignored: [],
         uncovered: []
@@ -71,6 +73,7 @@ module.exports = tests => {
         await nodeWithCoverage(coverageDirPath, [filePath])
 
         assert.deepStrictEqual(await analyseCoverage(coverageDirPath), {
+          filesCount: 0,
           covered: [],
           ignored: [],
           uncovered: []
@@ -89,6 +92,7 @@ module.exports = tests => {
       await nodeWithCoverage(coverageDirPath, [filePath])
 
       assert.deepStrictEqual(await analyseCoverage(coverageDirPath), {
+        filesCount: 0,
         covered: [],
         ignored: [],
         uncovered: []
@@ -106,6 +110,7 @@ module.exports = tests => {
       await nodeWithCoverage(coverageDirPath, [filePath])
 
       assert.deepStrictEqual(await analyseCoverage(coverageDirPath), {
+        filesCount: 1,
         covered: [filePath],
         ignored: [],
         uncovered: []
@@ -123,6 +128,7 @@ module.exports = tests => {
       await nodeWithCoverage(coverageDirPath, [filePath])
 
       assert.deepStrictEqual(await analyseCoverage(coverageDirPath), {
+        filesCount: 1,
         covered: [],
         ignored: [],
         uncovered: [

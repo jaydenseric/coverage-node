@@ -1,5 +1,15 @@
 # coverage-node changelog
 
+## Next
+
+### Minor
+
+- Added a new `filesCount` field to the code coverage analysis resolved by the `analyseCoverage` function.
+
+### Patch
+
+- Fixed the total number of files in the report summary sometimes being too big.
+
 ## 1.0.1
 
 ### Patch

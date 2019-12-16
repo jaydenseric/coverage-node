@@ -143,6 +143,7 @@ _How to import._
 
 | Property | Type | Description |
 | :-- | :-- | :-- |
+| `filesCount` | number | Number of files analyzed. |
 | `covered` | Array&lt;string> | Covered file absolute paths. |
 | `ignored` | Array&lt;[SourceCodeRanges](#type-sourcecoderanges)> | Ignored source code ranges. |
 | `uncovered` | Array&lt;[SourceCodeRanges](#type-sourcecoderanges)> | Uncovered source code ranges. |
