@@ -31,7 +31,7 @@ In a [`package.json` script](https://docs.npmjs.com/files/package.json#scripts),
 ## Support
 
 - Linux, macOS.
-- Node.js v10+. Be aware that [Node.js v10-11 generates unreliable coverage data](https://github.com/nodejs/node/issues/25937#issuecomment-563115421).
+- Node.js v10+, but [Node.js v13.3+ generates more reliable coverage data](https://github.com/nodejs/node/issues/25937#issuecomment-563115421).
 
 ## Ignored files
 
