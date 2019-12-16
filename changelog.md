@@ -5,6 +5,7 @@
 ### Patch
 
 - Don’t test Node.js v8 in CI.
+- Changed the `fsPathRemove` function to use `rm -rf` instead of `rm -r`, and tested that it doesn’t error when the path doesn’t exist.
 
 ## 1.0.0
 
