@@ -6,6 +6,7 @@
 
 - Updated the [eslint-config-env](https://npm.im/eslint-config-env) dev dependency.
 - Don’t test Node.js v8 in CI.
+- The `tempDirOperation` function now checks the created temp dir path is defined before attempting to remove it in the cleanup phase.
 - `fsPathRemove` function improvements:
   - Reject with an error if the provided path is not a string.
   - Use `rm -rf` instead of `rm -r` so that it doesn’t error when the path doesn’t exist.
