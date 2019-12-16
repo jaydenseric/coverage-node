@@ -11,6 +11,7 @@
 - `fsPathRemove` function improvements:
   - Reject with an error if the provided path is not a string.
   - Use `rm -rf` instead of `rm -r` so that it doesn’t error when the path doesn’t exist.
+- Tweaked test fixture formatting.
 
 ## 1.0.0
 

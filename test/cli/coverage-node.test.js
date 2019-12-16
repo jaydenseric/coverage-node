@@ -30,7 +30,8 @@ module.exports = tests => {
       const filePath = join(tempDirPath, 'index.js')
       await fs.promises.writeFile(
         filePath,
-        '// coverage ignore next line\n() => {}'
+        `// coverage ignore next line
+() => {}`
       )
       const { stdout, stderr } = await execFilePromise('node', [
         'cli/coverage-node',
@@ -84,16 +85,22 @@ module.exports = tests => {
 
         await fs.promises.writeFile(
           fileAPath,
-          `require('${fileBPath}'); require('${fileCPath}'); require('${fileDPath}'); require('${fileEPath}'); require('${fileFPath}')`
+          `require('${fileBPath}')
+require('${fileCPath}')
+require('${fileDPath}')
+require('${fileEPath}')
+require('${fileFPath}')`
         )
         await fs.promises.writeFile(fileBPath, 'function a() {}; a()')
         await fs.promises.writeFile(
           fileCPath,
-          '// coverage ignore next line\n() => {}'
+          `// coverage ignore next line
+() => {}`
         )
         await fs.promises.writeFile(
           fileDPath,
-          '// coverage ignore next line\n() => {}'
+          `// coverage ignore next line
+() => {}`
         )
         await fs.promises.writeFile(fileEPath, '() => {}')
         await fs.promises.writeFile(fileFPath, '() => {}')

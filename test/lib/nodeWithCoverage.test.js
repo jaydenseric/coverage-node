@@ -21,9 +21,9 @@ module.exports = tests => {
         `const nodeWithCoverage = require('${resolve(
           __dirname,
           '../../lib/nodeWithCoverage'
-        )}')
-  nodeWithCoverage('${coverageDirPath}', ['${fileAPath}'], 'this-command-bad')
-    .catch(console.error)`
+        )}');
+nodeWithCoverage('${coverageDirPath}', ['${fileAPath}'], 'this-command-bad')
+  .catch(console.error)`
       )
 
       const { stdout, stderr } = await execFilePromise('node', [fileBPath])
