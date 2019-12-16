@@ -1,0 +1,11 @@
+{
+  "extends": ["env"],
+  "rules": {
+    "node/no-unsupported-features/node-builtins": [
+      "error",
+      {
+        "ignores": ["fs.promises"]
+      }
+    ]
+  }
+}
