@@ -5,7 +5,7 @@
 ### Patch
 
 - Updated the [`eslint-config-env`](https://npm.im/eslint-config-env) dev dependency.
-- Only test Node.js v12 and v13 in CI.
+- Only test Node.js v13 in CI as earlier versions produce flawed coverage data.
 - Updated the support documentation to recommend Node.js v13.3+.
 - Corrected the temporary directory paths created by the `createTempDir` function.
 - The `tempDirOperation` function now checks the temporary directory path was created before attempting to remove it in the cleanup phase.
