@@ -1,5 +1,20 @@
 # coverage-node changelog
 
+## Next
+
+### Major
+
+- The `coverage-node` CLI now skips code coverage when Node.js < v13.3 and displays an explanatory message in place of a code coverage report.
+- Removed the `nodeWithCoverage` function.
+
+### Minor
+
+- New `coverageSupported` and `coverageSupportedMinNodeVersion` constants are exported.
+
+### Patch
+
+- Additionally test Node.js v10 and v12 in CI.
+
 ## 1.1.0
 
 ### Minor

@@ -1,10 +1,11 @@
 'use strict'
 
 const assert = require('assert')
+const { spawn } = require('child_process')
 const fs = require('fs')
 const { join } = require('path')
 const analyseCoverage = require('../../lib/analyseCoverage')
-const nodeWithCoverage = require('../../lib/nodeWithCoverage')
+const childProcessPromise = require('../../lib/childProcessPromise')
 const tempDirOperation = require('../../lib/tempDirOperation')
 
 module.exports = tests => {
@@ -29,7 +30,12 @@ module.exports = tests => {
           "'use strict'"
         )
 
-        await nodeWithCoverage(coverageDirPath, [nodeModulesModuleMainFilePath])
+        await childProcessPromise(
+          spawn('node', [nodeModulesModuleMainFilePath], {
+            stdio: 'inherit',
+            env: { ...process.env, NODE_V8_COVERAGE: coverageDirPath }
+          })
+        )
 
         assert.deepStrictEqual(await analyseCoverage(coverageDirPath), {
           filesCount: 0,
@@ -50,7 +56,12 @@ module.exports = tests => {
       await fs.promises.mkdir(dirPath)
       await fs.promises.writeFile(filePath, "'use strict'")
 
-      await nodeWithCoverage(coverageDirPath, [filePath])
+      await childProcessPromise(
+        spawn('node', [filePath], {
+          stdio: 'inherit',
+          env: { ...process.env, NODE_V8_COVERAGE: coverageDirPath }
+        })
+      )
 
       assert.deepStrictEqual(await analyseCoverage(coverageDirPath), {
         filesCount: 0,
@@ -70,7 +81,12 @@ module.exports = tests => {
 
         await fs.promises.writeFile(filePath, "'use strict'")
 
-        await nodeWithCoverage(coverageDirPath, [filePath])
+        await childProcessPromise(
+          spawn('node', [filePath], {
+            stdio: 'inherit',
+            env: { ...process.env, NODE_V8_COVERAGE: coverageDirPath }
+          })
+        )
 
         assert.deepStrictEqual(await analyseCoverage(coverageDirPath), {
           filesCount: 0,
@@ -89,7 +105,12 @@ module.exports = tests => {
 
       await fs.promises.writeFile(filePath, "'use strict'")
 
-      await nodeWithCoverage(coverageDirPath, [filePath])
+      await childProcessPromise(
+        spawn('node', [filePath], {
+          stdio: 'inherit',
+          env: { ...process.env, NODE_V8_COVERAGE: coverageDirPath }
+        })
+      )
 
       assert.deepStrictEqual(await analyseCoverage(coverageDirPath), {
         filesCount: 0,
@@ -107,7 +128,12 @@ module.exports = tests => {
 
       await fs.promises.writeFile(filePath, "'use strict'")
 
-      await nodeWithCoverage(coverageDirPath, [filePath])
+      await childProcessPromise(
+        spawn('node', [filePath], {
+          stdio: 'inherit',
+          env: { ...process.env, NODE_V8_COVERAGE: coverageDirPath }
+        })
+      )
 
       assert.deepStrictEqual(await analyseCoverage(coverageDirPath), {
         filesCount: 1,
@@ -125,7 +151,12 @@ module.exports = tests => {
 
       await fs.promises.writeFile(filePath, 'function a() {}; function b() {}')
 
-      await nodeWithCoverage(coverageDirPath, [filePath])
+      await childProcessPromise(
+        spawn('node', [filePath], {
+          stdio: 'inherit',
+          env: { ...process.env, NODE_V8_COVERAGE: coverageDirPath }
+        })
+      )
 
       assert.deepStrictEqual(await analyseCoverage(coverageDirPath), {
         filesCount: 1,

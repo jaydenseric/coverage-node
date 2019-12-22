@@ -5,8 +5,8 @@
 A simple CLI to run [Node.js](https://nodejs.org) and report code coverage.
 
 - ✨ Zero config.
-- 🏁 ~240 [SLOC](https://en.wikipedia.org/wiki/Source_lines_of_code), written from scratch to use [code coverage features](https://nodejs.org/api/cli.html#cli_node_v8_coverage_dir) built into Node.js v10+.
-- 📦 [~300 kB install size](https://packagephobia.now.sh/result?p=coverage-node), compared to [6.61 MB for `c8`](https://packagephobia.now.sh/result?p=c8@6.0.1) or [13 MB for `nyc`](https://packagephobia.now.sh/result?p=nyc@14.1.1).
+- 🏁 ~294 [SLOC](https://en.wikipedia.org/wiki/Source_lines_of_code), written from scratch to use [code coverage features](https://nodejs.org/api/cli.html#cli_node_v8_coverage_dir) built into Node.js v10+.
+- 📦 [~308 kB install size](https://packagephobia.now.sh/result?p=coverage-node), compared to [6.61 MB for `c8`](https://packagephobia.now.sh/result?p=c8@6.0.1) or [13 MB for `nyc`](https://packagephobia.now.sh/result?p=nyc@14.1.1).
 - 🖱Displays ignored or uncovered source code ranges as paths, clickable in IDEs such as [VS Code](https://code.visualstudio.com).
 
 ## Setup
@@ -31,7 +31,7 @@ In a [`package.json` script](https://docs.npmjs.com/files/package.json#scripts),
 ## Support
 
 - Linux, macOS.
-- Node.js v10+, but [Node.js v13.3+ generates more reliable coverage data](https://github.com/nodejs/node/issues/25937#issuecomment-563115421).
+- Node.js v10+, but for Node.js versions &lt; v13.3 that produce [unreliable coverage data](https://github.com/nodejs/node/issues/25937#issuecomment-563115421) the [`coverage-node` CLI](#cli) skips code coverage and logs a warning.
 
 ## Ignored files
 
@@ -68,9 +68,11 @@ npx coverage-node test.js
 ### Table of contents
 
 - [function analyseCoverage](#function-analysecoverage)
-- [function nodeWithCoverage](#function-nodewithcoverage)
 - [function reportCoverage](#function-reportcoverage)
+- [constant coverageSupported](#constant-coveragesupported)
+- [constant coverageSupportedMinNodeVersion](#constant-coveragesupportedminnodeversion)
 - [type CoverageAnalysis](#type-coverageanalysis)
+- [type SemanticVersion](#type-semanticversion)
 - [type SourceCodeLocation](#type-sourcecodelocation)
 - [type SourceCodeRange](#type-sourcecoderange)
 - [type SourceCodeRanges](#type-sourcecoderanges)
@@ -95,28 +97,6 @@ _How to import._
 
 ---
 
-### function nodeWithCoverage
-
-Runs Node.js with code coverage enabled via the [`NODE_V8_COVERAGE`](https://nodejs.org/api/cli.html#cli_node_v8_coverage_dir) environment variable.
-
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| `coverageDirPath` | string | Directory path to store code coverage data. |
-| `args` | Array&lt;string> | Node.js CLI arguments. |
-| `command` | string? = `node` | Node.js CLI command to run with the arguments. |
-
-**Returns:** Promise&lt;number> — Resolves the [Node.js exit code](https://nodejs.org/api/process.html#process_exit_codes).
-
-#### Examples
-
-_How to import._
-
-> ```js
-> const { nodeWithCoverage } = require('coverage-node')
-> ```
-
----
-
 ### function reportCoverage
 
 Reports a code coverage analysis to the console.
@@ -135,6 +115,38 @@ _How to import._
 
 ---
 
+### constant coverageSupported
+
+Is the process Node.js version greater at least [the minimum required to support code coverage](#constant-coveragesupportedminnodeversion).
+
+**Type:** boolean
+
+#### Examples
+
+_How to import._
+
+> ```js
+> const { coverageSupported } = require('coverage-node')
+> ```
+
+---
+
+### constant coverageSupportedMinNodeVersion
+
+Minimum Node.js version supported for code coverage. Although Node.js v10+ supports coverage, only v13.3+ produces coverage data reliable enough to use.
+
+**Type:** [SemanticVersion](#type-semanticversion)
+
+#### Examples
+
+_How to import._
+
+> ```js
+> const { coverageSupportedMinNodeVersion } = require('coverage-node')
+> ```
+
+---
+
 ### type CoverageAnalysis
 
 [Node.js generated V8 JavaScript code coverage data](https://nodejs.org/api/cli.html#cli_node_v8_coverage_dir) analysis; useful for reporting.
@@ -147,6 +159,22 @@ _How to import._
 | `covered` | Array&lt;string> | Covered file absolute paths. |
 | `ignored` | Array&lt;[SourceCodeRanges](#type-sourcecoderanges)> | Ignored source code ranges. |
 | `uncovered` | Array&lt;[SourceCodeRanges](#type-sourcecoderanges)> | Uncovered source code ranges. |
+
+---
+
+### type SemanticVersion
+
+A semantic version.
+
+**Type:** object
+
+| Property     | Type    | Description         |
+| :----------- | :------ | :------------------ |
+| `major`      | number  | Major version.      |
+| `minor`      | number  | Minor version.      |
+| `patch`      | number  | Patch version.      |
+| `prerelease` | string? | Prerelease version. |
+| `build`      | string? | Build metadata.     |
 
 ---
 

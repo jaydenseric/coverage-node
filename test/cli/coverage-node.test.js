@@ -3,9 +3,13 @@
 const assert = require('assert')
 const fs = require('fs')
 const { join, relative } = require('path')
+const coverageSupported = require('../../lib/coverageSupported')
+const minNodeVersion = require('../../lib/coverageSupportedMinNodeVersion')
 const execFilePromise = require('../../lib/execFilePromise')
 const tempDirOperation = require('../../lib/tempDirOperation')
 const stripStackTraces = require('../stripStackTraces')
+
+const stdoutSkippedCodeCoverage = `\n\u001b[33mSkipped code coverage as Node.js is ${process.version}, v${minNodeVersion.major}.${minNodeVersion.minor}.${minNodeVersion.patch}+ is supported.\u001b[39m\n\n`
 
 module.exports = tests => {
   tests.add('`coverage-node` CLI with 1 covered file.', async () => {
@@ -17,10 +21,12 @@ module.exports = tests => {
         filePath
       ])
 
-      assert.strictEqual(
-        stdout.replace(relative('', filePath), '<path>'),
-        '\n\u001b[32m1 file covered:\u001b[39m\n\n  <path>\n\n\u001b[1m\u001b[32m1/1 files covered.\u001b[22m\u001b[39m\n\n'
-      )
+      coverageSupported
+        ? assert.strictEqual(
+            stdout.replace(relative('', filePath), '<path>'),
+            '\n\u001b[32m1 file covered:\u001b[39m\n\n  <path>\n\n\u001b[1m\u001b[32m1/1 files covered.\u001b[22m\u001b[39m\n\n'
+          )
+        : assert.strictEqual(stdout, stdoutSkippedCodeCoverage)
       assert.strictEqual(stderr, '')
     })
   })
@@ -38,10 +44,12 @@ module.exports = tests => {
         filePath
       ])
 
-      assert.strictEqual(
-        stdout.replace(relative('', filePath), '<path>'),
-        '\n\u001b[33m1 file ignoring coverage:\u001b[39m\n\n  <path>:2:1 → 2:8\n\n\u001b[1m\u001b[33m0/1 files covered.\u001b[22m\u001b[39m\n\n'
-      )
+      coverageSupported
+        ? assert.strictEqual(
+            stdout.replace(relative('', filePath), '<path>'),
+            '\n\u001b[33m1 file ignoring coverage:\u001b[39m\n\n  <path>:2:1 → 2:8\n\n\u001b[1m\u001b[33m0/1 files covered.\u001b[22m\u001b[39m\n\n'
+          )
+        : assert.strictEqual(stdout, stdoutSkippedCodeCoverage)
       assert.strictEqual(stderr, '')
     })
   })
@@ -52,23 +60,34 @@ module.exports = tests => {
       await fs.promises.writeFile(filePath, '() => {}')
 
       let threw
+      let stdout
+      let stderr
 
       try {
-        await execFilePromise('node', ['cli/coverage-node', filePath])
+        ;({ stdout, stderr } = await execFilePromise('node', [
+          'cli/coverage-node',
+          filePath
+        ]))
       } catch (error) {
         threw = true
-        var { stdout, stderr } = error
+        ;({ stdout, stderr } = error)
       }
 
-      assert.strictEqual(threw, true, 'CLI should error.')
-      assert.strictEqual(
-        stdout,
-        '\n\u001b[1m\u001b[31m0/1 files covered.\u001b[22m\u001b[39m\n\n'
-      )
-      assert.strictEqual(
-        stderr.replace(relative('', filePath), '<path>'),
-        '\n\u001b[31m1 file missing coverage:\u001b[39m\n\n  <path>:1:1 → 1:8\n'
-      )
+      if (coverageSupported) {
+        assert.strictEqual(threw, true, 'CLI should error.')
+        assert.strictEqual(
+          stdout,
+          '\n\u001b[1m\u001b[31m0/1 files covered.\u001b[22m\u001b[39m\n\n'
+        )
+        assert.strictEqual(
+          stderr.replace(relative('', filePath), '<path>'),
+          '\n\u001b[31m1 file missing coverage:\u001b[39m\n\n  <path>:1:1 → 1:8\n'
+        )
+      } else {
+        assert.strictEqual(threw, undefined, 'CLI shouldn’t error.')
+        assert.strictEqual(stdout, stdoutSkippedCodeCoverage)
+        assert.strictEqual(stderr, '')
+      }
     })
   })
 
@@ -106,29 +125,40 @@ require('${fileFPath}')`
         await fs.promises.writeFile(fileFPath, '() => {}')
 
         let threw
+        let stdout
+        let stderr
 
         try {
-          await execFilePromise('node', ['cli/coverage-node', fileAPath])
+          ;({ stdout, stderr } = await execFilePromise('node', [
+            'cli/coverage-node',
+            fileAPath
+          ]))
         } catch (error) {
           threw = true
-          var { stdout, stderr } = error
+          ;({ stdout, stderr } = error)
         }
 
-        assert.strictEqual(threw, true, 'CLI should error.')
-        assert.strictEqual(
-          stdout
-            .replace(relative('', fileAPath), '<pathA>')
-            .replace(relative('', fileBPath), '<pathB>')
-            .replace(relative('', fileCPath), '<pathC>')
-            .replace(relative('', fileDPath), '<pathD>'),
-          '\n\u001b[32m2 files covered:\u001b[39m\n\n  <pathA>\n  <pathB>\n\n\u001b[33m2 files ignoring coverage:\u001b[39m\n\n  <pathC>:2:1 → 2:8\n  <pathD>:2:1 → 2:8\n\n\u001b[1m\u001b[31m2/6 files covered.\u001b[22m\u001b[39m\n\n'
-        )
-        assert.strictEqual(
-          stderr
-            .replace(relative('', fileEPath), '<pathE>')
-            .replace(relative('', fileFPath), '<pathF>'),
-          '\n\u001b[31m2 files missing coverage:\u001b[39m\n\n  <pathE>:1:1 → 1:8\n  <pathF>:1:1 → 1:8\n'
-        )
+        if (coverageSupported) {
+          assert.strictEqual(threw, true, 'CLI should error.')
+          assert.strictEqual(
+            stdout
+              .replace(relative('', fileAPath), '<pathA>')
+              .replace(relative('', fileBPath), '<pathB>')
+              .replace(relative('', fileCPath), '<pathC>')
+              .replace(relative('', fileDPath), '<pathD>'),
+            '\n\u001b[32m2 files covered:\u001b[39m\n\n  <pathA>\n  <pathB>\n\n\u001b[33m2 files ignoring coverage:\u001b[39m\n\n  <pathC>:2:1 → 2:8\n  <pathD>:2:1 → 2:8\n\n\u001b[1m\u001b[31m2/6 files covered.\u001b[22m\u001b[39m\n\n'
+          )
+          assert.strictEqual(
+            stderr
+              .replace(relative('', fileEPath), '<pathE>')
+              .replace(relative('', fileFPath), '<pathF>'),
+            '\n\u001b[31m2 files missing coverage:\u001b[39m\n\n  <pathE>:1:1 → 1:8\n  <pathF>:1:1 → 1:8\n'
+          )
+        } else {
+          assert.strictEqual(threw, undefined, 'CLI shouldn’t error.')
+          assert.strictEqual(stdout, stdoutSkippedCodeCoverage)
+          assert.strictEqual(stderr, '')
+        }
       })
     }
   )
@@ -142,10 +172,13 @@ require('${fileFPath}')`
         filePath
       ])
 
-      assert.strictEqual(
-        stdout.replace(relative('', filePath), '<path>'),
-        'Message.\n\n\u001b[32m1 file covered:\u001b[39m\n\n  <path>\n\n\u001b[1m\u001b[32m1/1 files covered.\u001b[22m\u001b[39m\n\n'
-      )
+      if (coverageSupported)
+        assert.strictEqual(
+          stdout.replace(relative('', filePath), '<path>'),
+          'Message.\n\n\u001b[32m1 file covered:\u001b[39m\n\n  <path>\n\n\u001b[1m\u001b[32m1/1 files covered.\u001b[22m\u001b[39m\n\n'
+        )
+      else assert.strictEqual(stdout, `Message.\n${stdoutSkippedCodeCoverage}`)
+
       assert.strictEqual(stderr, '')
     })
   })
@@ -219,7 +252,9 @@ deprecated()`
     assert.strictEqual(stdout, '')
     assert.strictEqual(
       stripStackTraces(stderr),
-      'Error running Node.js with coverage:\n  Error: Node.js CLI arguments are required.\n'
+      `Error running Node.js${
+        coverageSupported ? '  with coverage' : ''
+      }:\n  Error: Node.js CLI arguments are required.\n`
     )
   })
 }
