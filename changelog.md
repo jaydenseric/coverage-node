@@ -14,6 +14,7 @@
 ### Patch
 
 - Additionally test Node.js v10 and v12 in CI.
+- Updated the comparison install size in the readme for [`nyc@15.0.0`](https://packagephobia.now.sh/result?p=nyc@15.0.0).
 
 ## 1.1.0
 
