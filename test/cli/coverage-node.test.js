@@ -3,17 +3,17 @@
 const assert = require('assert')
 const fs = require('fs')
 const { join, relative } = require('path')
+const { disposableDirectory } = require('disposable-directory')
 const coverageSupported = require('../../lib/coverageSupported')
 const minNodeVersion = require('../../lib/coverageSupportedMinNodeVersion')
 const execFilePromise = require('../../lib/execFilePromise')
-const tempDirOperation = require('../../lib/tempDirOperation')
 const stripStackTraces = require('../stripStackTraces')
 
 const stdoutSkippedCodeCoverage = `\n\u001b[33mSkipped code coverage as Node.js is ${process.version}, v${minNodeVersion.major}.${minNodeVersion.minor}.${minNodeVersion.patch}+ is supported.\u001b[39m\n\n`
 
 module.exports = tests => {
   tests.add('`coverage-node` CLI with 1 covered file.', async () => {
-    await tempDirOperation(async tempDirPath => {
+    await disposableDirectory(async tempDirPath => {
       const filePath = join(tempDirPath, 'index.js')
       await fs.promises.writeFile(filePath, "'use strict'")
       const { stdout, stderr } = await execFilePromise('node', [
@@ -32,7 +32,7 @@ module.exports = tests => {
   })
 
   tests.add('`coverage-node` CLI with 1 ignored file.', async () => {
-    await tempDirOperation(async tempDirPath => {
+    await disposableDirectory(async tempDirPath => {
       const filePath = join(tempDirPath, 'index.js')
       await fs.promises.writeFile(
         filePath,
@@ -55,7 +55,7 @@ module.exports = tests => {
   })
 
   tests.add('`coverage-node` CLI with 1 uncovered file.', async () => {
-    await tempDirOperation(async tempDirPath => {
+    await disposableDirectory(async tempDirPath => {
       const filePath = join(tempDirPath, 'index.js')
       await fs.promises.writeFile(filePath, '() => {}')
 
@@ -94,7 +94,7 @@ module.exports = tests => {
   tests.add(
     '`coverage-node` CLI with 2 covered, ignored and uncovered files.',
     async () => {
-      await tempDirOperation(async tempDirPath => {
+      await disposableDirectory(async tempDirPath => {
         const fileAPath = join(tempDirPath, 'a.js')
         const fileBPath = join(tempDirPath, 'b.js')
         const fileCPath = join(tempDirPath, 'c.js')
@@ -164,7 +164,7 @@ require('${fileFPath}')`
   )
 
   tests.add('`coverage-node` CLI with a script console log.', async () => {
-    await tempDirOperation(async tempDirPath => {
+    await disposableDirectory(async tempDirPath => {
       const filePath = join(tempDirPath, 'index.js')
       await fs.promises.writeFile(filePath, "console.log('Message.')")
       const { stdout, stderr } = await execFilePromise('node', [
@@ -184,7 +184,7 @@ require('${fileFPath}')`
   })
 
   tests.add('`coverage-node` CLI with a script error.', async () => {
-    await tempDirOperation(async tempDirPath => {
+    await disposableDirectory(async tempDirPath => {
       const filePath = join(tempDirPath, 'index.js')
       await fs.promises.writeFile(filePath, "throw new Error('Error.')")
 
@@ -207,7 +207,7 @@ require('${fileFPath}')`
   })
 
   tests.add('`coverage-node` CLI with a valid Node.js option.', async () => {
-    await tempDirOperation(async tempDirPath => {
+    await disposableDirectory(async tempDirPath => {
       const filePath = join(tempDirPath, 'index.js')
       await fs.promises.writeFile(
         filePath,

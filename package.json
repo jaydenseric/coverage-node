@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "@bcoe/v8-coverage": "^0.2.3",
+    "disposable-directory": "^1.0.0",
     "kleur": "^3.0.3"
   },
   "devDependencies": {

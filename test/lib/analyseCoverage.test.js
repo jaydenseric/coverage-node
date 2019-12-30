@@ -4,15 +4,15 @@ const assert = require('assert')
 const { spawn } = require('child_process')
 const fs = require('fs')
 const { join } = require('path')
+const { disposableDirectory } = require('disposable-directory')
 const analyseCoverage = require('../../lib/analyseCoverage')
 const childProcessPromise = require('../../lib/childProcessPromise')
-const tempDirOperation = require('../../lib/tempDirOperation')
 
 module.exports = tests => {
   tests.add(
     '`analyseCoverage` ignores `node_modules` directory files.',
     async () => {
-      await tempDirOperation(async tempDirPath => {
+      await disposableDirectory(async tempDirPath => {
         const coverageDirPath = join(tempDirPath, 'coverage')
         const nodeModulesDirPath = join(tempDirPath, 'node_modules')
         const nodeModulesModuleName = 'a'
@@ -48,7 +48,7 @@ module.exports = tests => {
   )
 
   tests.add('`analyseCoverage` ignores `test` directory files.', async () => {
-    await tempDirOperation(async tempDirPath => {
+    await disposableDirectory(async tempDirPath => {
       const coverageDirPath = join(tempDirPath, 'coverage')
       const dirPath = join(tempDirPath, 'test')
       const filePath = join(dirPath, 'index.js')
@@ -75,7 +75,7 @@ module.exports = tests => {
   tests.add(
     '`analyseCoverage` ignores files with `.test` prefixed before the extension.',
     async () => {
-      await tempDirOperation(async tempDirPath => {
+      await disposableDirectory(async tempDirPath => {
         const coverageDirPath = join(tempDirPath, 'coverage')
         const filePath = join(tempDirPath, 'index.test.js')
 
@@ -99,7 +99,7 @@ module.exports = tests => {
   )
 
   tests.add('`analyseCoverage` ignores files named `test`.', async () => {
-    await tempDirOperation(async tempDirPath => {
+    await disposableDirectory(async tempDirPath => {
       const coverageDirPath = join(tempDirPath, 'coverage')
       const filePath = join(tempDirPath, 'test.js')
 
@@ -122,7 +122,7 @@ module.exports = tests => {
   })
 
   tests.add('`analyseCoverage` with 1 covered file.', async () => {
-    await tempDirOperation(async tempDirPath => {
+    await disposableDirectory(async tempDirPath => {
       const coverageDirPath = join(tempDirPath, 'coverage')
       const filePath = join(tempDirPath, 'index.js')
 
@@ -145,7 +145,7 @@ module.exports = tests => {
   })
 
   tests.add('`analyseCoverage` with 1 uncovered file.', async () => {
-    await tempDirOperation(async tempDirPath => {
+    await disposableDirectory(async tempDirPath => {
       const coverageDirPath = join(tempDirPath, 'coverage')
       const filePath = join(tempDirPath, 'index.js')
 

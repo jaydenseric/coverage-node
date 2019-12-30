@@ -12,21 +12,13 @@ process
 
 const { TestDirector } = require('test-director')
 const coverageNodeTests = require('./cli/coverage-node.test')
-const fsPathExistsTests = require('./fsPathExists.test')
 const analyseCoverageTests = require('./lib/analyseCoverage.test')
-const createTempDirTests = require('./lib/createTempDir.test')
-const fsPathRemoveTests = require('./lib/fsPathRemove.test')
 const semverTests = require('./lib/semver.test')
 const sourceRangeTests = require('./lib/sourceRange.test')
-const tempDirOperationTests = require('./lib/tempDirOperation.test')
 
 const tests = new TestDirector()
 
 semverTests(tests)
-fsPathExistsTests(tests)
-fsPathRemoveTests(tests)
-createTempDirTests(tests)
-tempDirOperationTests(tests)
 sourceRangeTests(tests)
 analyseCoverageTests(tests)
 coverageNodeTests(tests)

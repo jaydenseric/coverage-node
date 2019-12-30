@@ -3,6 +3,7 @@
 'use strict'
 
 const { spawn } = require('child_process')
+const { disposableDirectory } = require('disposable-directory')
 const kleur = require('kleur')
 const analyseCoverage = require('../lib/analyseCoverage')
 const childProcessPromise = require('../lib/childProcessPromise')
@@ -10,7 +11,6 @@ const coverageSupported = require('../lib/coverageSupported')
 const minNodeVersion = require('../lib/coverageSupportedMinNodeVersion')
 const errorConsole = require('../lib/errorConsole')
 const reportCoverage = require('../lib/reportCoverage')
-const tempDirOperation = require('../lib/tempDirOperation')
 
 const [, , ...nodeArgs] = process.argv
 
@@ -29,7 +29,7 @@ async function coverageNode() {
 
     // eslint-disable-next-line curly
     if (coverageSupported) {
-      await tempDirOperation(async tempDirPath => {
+      await disposableDirectory(async tempDirPath => {
         const { exitCode } = await childProcessPromise(
           spawn('node', nodeArgs, {
             stdio: 'inherit',
