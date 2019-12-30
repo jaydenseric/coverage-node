@@ -4,6 +4,7 @@
 
 ### Patch
 
+- Updated dev dependencies.
 - Updated the compared [`c8` install size](https://packagephobia.now.sh/result?p=c8@7.0.0), fixing [#1](https://github.com/jaydenseric/coverage-node/issues/1).
 
 ## 2.0.0
