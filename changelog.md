@@ -1,6 +1,6 @@
 # coverage-node changelog
 
-## Next
+## 2.0.1
 
 ### Patch
 
