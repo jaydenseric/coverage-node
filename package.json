@@ -44,6 +44,7 @@
     "eslint-plugin-jsdoc": "^18.6.2",
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-prettier": "^3.1.2",
+    "hard-rejection": "^2.1.0",
     "jsdoc-md": "^4.0.1",
     "prettier": "^1.19.1",
     "test-director": "^3.0.0"
@@ -55,7 +56,7 @@
     "test": "npm run test:eslint && npm run test:prettier && npm run test:api",
     "test:eslint": "eslint .",
     "test:prettier": "prettier '**/*.{json,yml,md}' -l",
-    "test:api": "node cli/coverage-node test",
+    "test:api": "node cli/coverage-node -r hard-rejection/register test",
     "prepublishOnly": "npm test"
   }
 }
