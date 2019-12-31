@@ -4,6 +4,7 @@
 
 ### Patch
 
+- Allow a line to contain both code and a coverage ignore next line comment.
 - Simplified `test/index.js`.
 
 ## 2.0.1

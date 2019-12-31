@@ -84,19 +84,41 @@ jkl`
     })
   })
 
-  tests.add('`sourceRange` with a default ignore comment.', () => {
-    const source = `// coverage ignore next line
+  tests.add(
+    '`sourceRange` with a default ignore comment, line exclusive.',
+    () => {
+      const source = `// coverage ignore next line
 a`
 
-    assert.deepStrictEqual(sourceRange(source, 29, 29), {
+      assert.deepStrictEqual(sourceRange(source, 29, 29), {
+        ignore: true,
+        start: {
+          offset: 29,
+          line: 2,
+          column: 1
+        },
+        end: {
+          offset: 29,
+          line: 2,
+          column: 1
+        }
+      })
+    }
+  )
+
+  tests.add('`sourceRange` with a default ignore comment, line shared.', () => {
+    const source = `let a // coverage ignore next line
+b`
+
+    assert.deepStrictEqual(sourceRange(source, 35, 35), {
       ignore: true,
       start: {
-        offset: 29,
+        offset: 35,
         line: 2,
         column: 1
       },
       end: {
-        offset: 29,
+        offset: 35,
         line: 2,
         column: 1
       }
@@ -104,7 +126,7 @@ a`
   })
 
   tests.add(
-    '`sourceRange` with a default ignore comment, arbitrary capitalization.',
+    '`sourceRange` with a default ignore comment, arbitrary capitalization, line exclusive.',
     () => {
       const source = `// Coverage Ignore Next Line
 a`
@@ -125,19 +147,63 @@ a`
     }
   )
 
-  tests.add('`sourceRange` with a custom ignore comment.', () => {
-    const source = `// a
+  tests.add(
+    '`sourceRange` with a default ignore comment, arbitrary capitalization, line shared.',
+    () => {
+      const source = `let a // Coverage Ignore Next Line
+b`
+
+      assert.deepStrictEqual(sourceRange(source, 35, 35), {
+        ignore: true,
+        start: {
+          offset: 35,
+          line: 2,
+          column: 1
+        },
+        end: {
+          offset: 35,
+          line: 2,
+          column: 1
+        }
+      })
+    }
+  )
+
+  tests.add(
+    '`sourceRange` with a custom ignore comment, line exclusive.',
+    () => {
+      const source = `// a
 a`
 
-    assert.deepStrictEqual(sourceRange(source, 5, 5, ' a'), {
+      assert.deepStrictEqual(sourceRange(source, 5, 5, ' a'), {
+        ignore: true,
+        start: {
+          offset: 5,
+          line: 2,
+          column: 1
+        },
+        end: {
+          offset: 5,
+          line: 2,
+          column: 1
+        }
+      })
+    }
+  )
+
+  tests.add('`sourceRange` with a custom ignore comment, line shared.', () => {
+    const source = `let a // a
+b`
+
+    assert.deepStrictEqual(sourceRange(source, 11, 11, ' a'), {
       ignore: true,
       start: {
-        offset: 5,
+        offset: 11,
         line: 2,
         column: 1
       },
       end: {
-        offset: 5,
+        offset: 11,
         line: 2,
         column: 1
       }
@@ -145,7 +211,7 @@ a`
   })
 
   tests.add(
-    '`sourceRange` with a custom ignore comment, arbitrary capitalization.',
+    '`sourceRange` with a custom ignore comment, arbitrary capitalization, line exclusive.',
     () => {
       const source = `// A
 a`
@@ -159,6 +225,28 @@ a`
         },
         end: {
           offset: 5,
+          line: 2,
+          column: 1
+        }
+      })
+    }
+  )
+
+  tests.add(
+    '`sourceRange` with a custom ignore comment, arbitrary capitalization, line shared.',
+    () => {
+      const source = `let a // A
+b`
+
+      assert.deepStrictEqual(sourceRange(source, 11, 11, ' a'), {
+        ignore: true,
+        start: {
+          offset: 11,
+          line: 2,
+          column: 1
+        },
+        end: {
+          offset: 11,
           line: 2,
           column: 1
         }
