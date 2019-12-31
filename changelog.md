@@ -1,5 +1,11 @@
 # coverage-node changelog
 
+## Next
+
+### Patch
+
+- Simplified `test/index.js`.
+
 ## 2.0.1
 
 ### Patch

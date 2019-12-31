@@ -11,16 +11,12 @@ process
   })
 
 const { TestDirector } = require('test-director')
-const coverageNodeTests = require('./cli/coverage-node.test')
-const analyseCoverageTests = require('./lib/analyseCoverage.test')
-const semverTests = require('./lib/semver.test')
-const sourceRangeTests = require('./lib/sourceRange.test')
 
 const tests = new TestDirector()
 
-semverTests(tests)
-sourceRangeTests(tests)
-analyseCoverageTests(tests)
-coverageNodeTests(tests)
+require('./cli/coverage-node.test')(tests)
+require('./lib/analyseCoverage.test')(tests)
+require('./lib/semver.test')(tests)
+require('./lib/sourceRange.test')(tests)
 
 tests.run()
