@@ -1,13 +1,13 @@
 'use strict'
 
-const assert = require('assert')
+const { deepStrictEqual } = require('assert')
 const sourceRange = require('../../lib/sourceRange')
 
 module.exports = tests => {
   tests.add('`sourceRange` with a single char line.', () => {
     const source = `a`
 
-    assert.deepStrictEqual(sourceRange(source, 0, 0), {
+    deepStrictEqual(sourceRange(source, 0, 0), {
       ignore: false,
       start: {
         offset: 0,
@@ -25,7 +25,7 @@ module.exports = tests => {
   tests.add('`sourceRange` with a multi char line.', () => {
     const source = `abc`
 
-    assert.deepStrictEqual(sourceRange(source, 0, 2), {
+    deepStrictEqual(sourceRange(source, 0, 2), {
       ignore: false,
       start: {
         offset: 0,
@@ -47,7 +47,7 @@ def
 ghi
 jkl`
 
-    assert.deepStrictEqual(sourceRange(source, 9, 11), {
+    deepStrictEqual(sourceRange(source, 9, 11), {
       ignore: false,
       start: {
         offset: 9,
@@ -69,7 +69,7 @@ def
 ghi
 jkl`
 
-    assert.deepStrictEqual(sourceRange(source, 6, 11), {
+    deepStrictEqual(sourceRange(source, 6, 11), {
       ignore: false,
       start: {
         offset: 6,
@@ -90,7 +90,7 @@ jkl`
       const source = `// coverage ignore next line
 a`
 
-      assert.deepStrictEqual(sourceRange(source, 29, 29), {
+      deepStrictEqual(sourceRange(source, 29, 29), {
         ignore: true,
         start: {
           offset: 29,
@@ -110,7 +110,7 @@ a`
     const source = `let a // coverage ignore next line
 b`
 
-    assert.deepStrictEqual(sourceRange(source, 35, 35), {
+    deepStrictEqual(sourceRange(source, 35, 35), {
       ignore: true,
       start: {
         offset: 35,
@@ -131,7 +131,7 @@ b`
       const source = `// Coverage Ignore Next Line
 a`
 
-      assert.deepStrictEqual(sourceRange(source, 29, 29), {
+      deepStrictEqual(sourceRange(source, 29, 29), {
         ignore: true,
         start: {
           offset: 29,
@@ -153,7 +153,7 @@ a`
       const source = `let a // Coverage Ignore Next Line
 b`
 
-      assert.deepStrictEqual(sourceRange(source, 35, 35), {
+      deepStrictEqual(sourceRange(source, 35, 35), {
         ignore: true,
         start: {
           offset: 35,
@@ -175,7 +175,7 @@ b`
       const source = `// a
 a`
 
-      assert.deepStrictEqual(sourceRange(source, 5, 5, ' a'), {
+      deepStrictEqual(sourceRange(source, 5, 5, ' a'), {
         ignore: true,
         start: {
           offset: 5,
@@ -195,7 +195,7 @@ a`
     const source = `let a // a
 b`
 
-    assert.deepStrictEqual(sourceRange(source, 11, 11, ' a'), {
+    deepStrictEqual(sourceRange(source, 11, 11, ' a'), {
       ignore: true,
       start: {
         offset: 11,
@@ -216,7 +216,7 @@ b`
       const source = `// A
 a`
 
-      assert.deepStrictEqual(sourceRange(source, 5, 5, ' a'), {
+      deepStrictEqual(sourceRange(source, 5, 5, ' a'), {
         ignore: true,
         start: {
           offset: 5,
@@ -238,7 +238,7 @@ a`
       const source = `let a // A
 b`
 
-      assert.deepStrictEqual(sourceRange(source, 11, 11, ' a'), {
+      deepStrictEqual(sourceRange(source, 11, 11, ' a'), {
         ignore: true,
         start: {
           offset: 11,
@@ -258,7 +258,7 @@ b`
     const source = `// coverage ignore next line
 a`
 
-    assert.deepStrictEqual(sourceRange(source, 29, 29, false), {
+    deepStrictEqual(sourceRange(source, 29, 29, false), {
       ignore: false,
       start: {
         offset: 29,

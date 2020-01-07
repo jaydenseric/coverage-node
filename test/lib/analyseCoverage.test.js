@@ -1,6 +1,6 @@
 'use strict'
 
-const assert = require('assert')
+const { deepStrictEqual } = require('assert')
 const { spawn } = require('child_process')
 const fs = require('fs')
 const { join } = require('path')
@@ -37,7 +37,7 @@ module.exports = tests => {
           })
         )
 
-        assert.deepStrictEqual(await analyseCoverage(coverageDirPath), {
+        deepStrictEqual(await analyseCoverage(coverageDirPath), {
           filesCount: 0,
           covered: [],
           ignored: [],
@@ -63,7 +63,7 @@ module.exports = tests => {
         })
       )
 
-      assert.deepStrictEqual(await analyseCoverage(coverageDirPath), {
+      deepStrictEqual(await analyseCoverage(coverageDirPath), {
         filesCount: 0,
         covered: [],
         ignored: [],
@@ -88,7 +88,7 @@ module.exports = tests => {
           })
         )
 
-        assert.deepStrictEqual(await analyseCoverage(coverageDirPath), {
+        deepStrictEqual(await analyseCoverage(coverageDirPath), {
           filesCount: 0,
           covered: [],
           ignored: [],
@@ -112,7 +112,7 @@ module.exports = tests => {
         })
       )
 
-      assert.deepStrictEqual(await analyseCoverage(coverageDirPath), {
+      deepStrictEqual(await analyseCoverage(coverageDirPath), {
         filesCount: 0,
         covered: [],
         ignored: [],
@@ -135,7 +135,7 @@ module.exports = tests => {
         })
       )
 
-      assert.deepStrictEqual(await analyseCoverage(coverageDirPath), {
+      deepStrictEqual(await analyseCoverage(coverageDirPath), {
         filesCount: 1,
         covered: [filePath],
         ignored: [],
@@ -158,7 +158,7 @@ module.exports = tests => {
         })
       )
 
-      assert.deepStrictEqual(await analyseCoverage(coverageDirPath), {
+      deepStrictEqual(await analyseCoverage(coverageDirPath), {
         filesCount: 1,
         covered: [],
         ignored: [],
