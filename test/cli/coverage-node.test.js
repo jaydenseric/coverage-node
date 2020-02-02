@@ -6,7 +6,7 @@ const { join, relative } = require('path')
 const { disposableDirectory } = require('disposable-directory')
 const coverageSupported = require('../../lib/coverageSupported')
 const minNodeVersion = require('../../lib/coverageSupportedMinNodeVersion')
-const execFilePromise = require('../../lib/execFilePromise')
+const execFilePromise = require('../execFilePromise')
 const stripStackTraces = require('../stripStackTraces')
 
 const stdoutSkippedCodeCoverage = `\n\u001b[33mSkipped code coverage as Node.js is ${process.version}, v${minNodeVersion.major}.${minNodeVersion.minor}.${minNodeVersion.patch}+ is supported.\u001b[39m\n\n`
