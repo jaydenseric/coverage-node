@@ -20,7 +20,7 @@ const [, , ...nodeArgs] = process.argv
  * if coverage isn’t complete the process exits with code `1`.
  * @kind function
  * @name coverageNode
- * @returns {Promise} Resolves when all work is complete.
+ * @returns {Promise<void>} Resolves when all work is complete.
  * @ignore
  */
 async function coverageNode() {

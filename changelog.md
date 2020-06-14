@@ -1,5 +1,11 @@
 # coverage-node changelog
 
+## Next
+
+### Patch
+
+- Improved a JSDoc return type.
+
 ## 2.0.3
 
 ### Patch
