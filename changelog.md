@@ -4,6 +4,7 @@
 
 ### Patch
 
+- Moved reading `process.argv` into the `coverageNode` function scope.
 - Improved a JSDoc return type.
 
 ## 2.0.3

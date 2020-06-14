@@ -12,8 +12,6 @@ const minNodeVersion = require('../lib/coverageSupportedMinNodeVersion')
 const errorConsole = require('../lib/errorConsole')
 const reportCoverage = require('../lib/reportCoverage')
 
-const [, , ...nodeArgs] = process.argv
-
 /**
  * Powers the `coverage-node` CLI. Runs Node.js with the given arguments and
  * coverage enabled. An analysis of the coverage is reported to the console, and
@@ -25,6 +23,8 @@ const [, , ...nodeArgs] = process.argv
  */
 async function coverageNode() {
   try {
+    const [, , ...nodeArgs] = process.argv
+
     if (!nodeArgs.length) throw new Error('Node.js CLI arguments are required.')
 
     // eslint-disable-next-line curly
