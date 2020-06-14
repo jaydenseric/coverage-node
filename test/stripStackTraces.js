@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 /**
  * Strips error stack traces from a multiline string.
@@ -9,5 +9,5 @@
  * @ignore
  */
 module.exports = function stripStackTraces(string) {
-  return string.replace(/^ {2,}at .+\n?/gm, '')
-}
+  return string.replace(/^ {2,}at .+\n?/gm, '');
+};

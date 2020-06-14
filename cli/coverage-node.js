@@ -1,16 +1,16 @@
 #!/usr/bin/env node
 
-'use strict'
+'use strict';
 
-const { spawn } = require('child_process')
-const { disposableDirectory } = require('disposable-directory')
-const kleur = require('kleur')
-const analyseCoverage = require('../lib/analyseCoverage')
-const childProcessPromise = require('../lib/childProcessPromise')
-const coverageSupported = require('../lib/coverageSupported')
-const minNodeVersion = require('../lib/coverageSupportedMinNodeVersion')
-const errorConsole = require('../lib/errorConsole')
-const reportCoverage = require('../lib/reportCoverage')
+const { spawn } = require('child_process');
+const { disposableDirectory } = require('disposable-directory');
+const kleur = require('kleur');
+const analyseCoverage = require('../lib/analyseCoverage');
+const childProcessPromise = require('../lib/childProcessPromise');
+const coverageSupported = require('../lib/coverageSupported');
+const minNodeVersion = require('../lib/coverageSupportedMinNodeVersion');
+const errorConsole = require('../lib/errorConsole');
+const reportCoverage = require('../lib/reportCoverage');
 
 /**
  * Powers the `coverage-node` CLI. Runs Node.js with the given arguments and
@@ -23,51 +23,52 @@ const reportCoverage = require('../lib/reportCoverage')
  */
 async function coverageNode() {
   try {
-    const [, , ...nodeArgs] = process.argv
+    const [, , ...nodeArgs] = process.argv;
 
-    if (!nodeArgs.length) throw new Error('Node.js CLI arguments are required.')
+    if (!nodeArgs.length)
+      throw new Error('Node.js CLI arguments are required.');
 
     // eslint-disable-next-line curly
     if (coverageSupported) {
-      await disposableDirectory(async tempDirPath => {
+      await disposableDirectory(async (tempDirPath) => {
         const { exitCode } = await childProcessPromise(
           spawn('node', nodeArgs, {
             stdio: 'inherit',
-            env: { ...process.env, NODE_V8_COVERAGE: tempDirPath }
+            env: { ...process.env, NODE_V8_COVERAGE: tempDirPath },
           })
-        )
+        );
 
         // Only show a code coverage report if the Node.js script didn’t error,
         // to reduce distraction from the priority to solve errors.
         if (exitCode === 0) {
-          const analysis = await analyseCoverage(tempDirPath)
-          reportCoverage(analysis)
-          if (analysis.uncovered.length) process.exitCode = 1
-        } else process.exitCode = exitCode
-      })
+          const analysis = await analyseCoverage(tempDirPath);
+          reportCoverage(analysis);
+          if (analysis.uncovered.length) process.exitCode = 1;
+        } else process.exitCode = exitCode;
+      });
       // coverage ignore next line
     } else {
       const { exitCode } = await childProcessPromise(
         spawn('node', nodeArgs, { stdio: 'inherit' })
-      )
+      );
 
       if (exitCode === 0)
         console.info(
           `\n${kleur.yellow(
             `Skipped code coverage as Node.js is ${process.version}, v${minNodeVersion.major}.${minNodeVersion.minor}.${minNodeVersion.patch}+ is supported.`
           )}\n`
-        )
-      else process.exitCode = exitCode
+        );
+      else process.exitCode = exitCode;
     }
   } catch (error) {
     errorConsole.group(
       // coverage ignore next line
       `Error running Node.js${coverageSupported ? '  with coverage' : ''}:`
-    )
-    errorConsole.error(error)
-    errorConsole.groupEnd()
-    process.exitCode = 1
+    );
+    errorConsole.error(error);
+    errorConsole.groupEnd();
+    process.exitCode = 1;
   }
 }
 
-coverageNode()
+coverageNode();

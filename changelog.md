@@ -2,11 +2,19 @@
 
 ## Next
 
+### Major
+
+- Updated supported Node.js versions to `^10.17.0 || ^12.0.0 || >= 13.7.0`.
+- Updated dependencies, some of which require newer Node.js versions than were previously supported.
+
 ### Patch
 
+- Updated Prettier config and scripts.
+- Updated ESLint config to match the new Node.js version support.
 - Moved reading `process.argv` into the `coverageNode` function scope.
 - Improved a JSDoc return type.
 - Ensure GitHub Actions run on pull request.
+- Test with Node.js v14 instead of v13.
 - Updated EditorConfig.
 
 ## 2.0.3

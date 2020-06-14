@@ -31,7 +31,7 @@ In a [`package.json` script](https://docs.npmjs.com/files/package.json#scripts),
 ## Support
 
 - Linux, macOS.
-- Node.js v10+, but for Node.js versions &lt; v13.3 that produce [unreliable coverage data](https://github.com/nodejs/node/issues/25937#issuecomment-563115421) the [`coverage-node` CLI](#cli) skips code coverage and logs a warning.
+- Node.js `^10.17.0 || ^12.0.0 || >= 13.7.0`, but for Node.js versions &lt; v13.3 that produce [unreliable coverage data](https://github.com/nodejs/node/issues/25937#issuecomment-563115421) the [`coverage-node` CLI](#cli) skips code coverage and logs a warning.
 
 ## Ignored files
 
@@ -48,7 +48,7 @@ In source code, a comment (case insensitive) can be used to ignore code coverage
 
 ```js
 // coverage ignore next line
-if (false) console.log('Never runs.')
+if (false) console.log('Never runs.');
 ```
 
 ## CLI
@@ -92,7 +92,7 @@ Analyzes [Node.js generated V8 JavaScript code coverage data](https://nodejs.org
 _How to import._
 
 > ```js
-> const { analyseCoverage } = require('coverage-node')
+> const { analyseCoverage } = require('coverage-node');
 > ```
 
 ---
@@ -110,7 +110,7 @@ Reports a code coverage analysis to the console.
 _How to import._
 
 > ```js
-> const { reportCoverage } = require('coverage-node')
+> const { reportCoverage } = require('coverage-node');
 > ```
 
 ---
@@ -126,7 +126,7 @@ Is the process Node.js version greater at least [the minimum required to support
 _How to import._
 
 > ```js
-> const { coverageSupported } = require('coverage-node')
+> const { coverageSupported } = require('coverage-node');
 > ```
 
 ---
@@ -142,7 +142,7 @@ Minimum Node.js version supported for code coverage. Although Node.js v10+ suppo
 _How to import._
 
 > ```js
-> const { coverageSupportedMinNodeVersion } = require('coverage-node')
+> const { coverageSupportedMinNodeVersion } = require('coverage-node');
 > ```
 
 ---
