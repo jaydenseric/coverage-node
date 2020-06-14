@@ -4,7 +4,7 @@ const fs = require('fs');
 const { join } = require('path');
 const { fileURLToPath } = require('url');
 const { mergeProcessCovs } = require('@bcoe/v8-coverage');
-const sourceRange = require('./sourceRange');
+const sourceRange = require('../private/sourceRange');
 
 /**
  * Analyzes [Node.js generated V8 JavaScript code coverage data](https://nodejs.org/api/cli.html#cli_node_v8_coverage_dir)
@@ -13,9 +13,21 @@ const sourceRange = require('./sourceRange');
  * @name analyseCoverage
  * @param {string} coverageDirPath Code coverage data directory path.
  * @returns {Promise<CoverageAnalysis>} Resolves the coverage analysis.
- * @example <caption>How to import.</caption>
+ * @example <caption>Ways to `import`.</caption>
+ * ```js
+ * import { analyseCoverage } from 'coverage-node';
+ * ```
+ *
+ * ```js
+ * import analyseCoverage from 'coverage-node/public/analyseCoverage.js';
+ * ```
+ * @example <caption>Ways to `require`.</caption>
  * ```js
  * const { analyseCoverage } = require('coverage-node');
+ * ```
+ *
+ * ```js
+ * const analyseCoverage = require('coverage-node/public/analyseCoverage');
  * ```
  */
 module.exports = async function analyseCoverage(coverageDirPath) {

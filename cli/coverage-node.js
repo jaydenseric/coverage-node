@@ -5,12 +5,12 @@
 const { spawn } = require('child_process');
 const { disposableDirectory } = require('disposable-directory');
 const kleur = require('kleur');
-const analyseCoverage = require('../lib/analyseCoverage');
-const childProcessPromise = require('../lib/childProcessPromise');
-const coverageSupported = require('../lib/coverageSupported');
-const minNodeVersion = require('../lib/coverageSupportedMinNodeVersion');
-const errorConsole = require('../lib/errorConsole');
-const reportCoverage = require('../lib/reportCoverage');
+const childProcessPromise = require('../private/childProcessPromise');
+const errorConsole = require('../private/errorConsole');
+const analyseCoverage = require('../public/analyseCoverage');
+const coverageSupported = require('../public/coverageSupported');
+const minNodeVersion = require('../public/coverageSupportedMinNodeVersion');
+const reportCoverage = require('../public/reportCoverage');
 
 /**
  * Powers the `coverage-node` CLI. Runs Node.js with the given arguments and

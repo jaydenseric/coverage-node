@@ -1,11 +1,11 @@
 'use strict';
 
+const semver = require('../private/semver');
 const {
   major: minMajor,
   minor: minMinor,
   patch: minPatch,
 } = require('./coverageSupportedMinNodeVersion');
-const semver = require('./semver');
 
 const { major, minor, patch } = semver(process.versions.node);
 
@@ -15,9 +15,21 @@ const { major, minor, patch } = semver(process.versions.node);
  * @kind constant
  * @name coverageSupported
  * @type {boolean}
- * @example <caption>How to import.</caption>
+ * @example <caption>Ways to `import`.</caption>
+ * ```js
+ * import { coverageSupported } from 'coverage-node';
+ * ```
+ *
+ * ```js
+ * import coverageSupported from 'coverage-node/public/coverageSupported.js';
+ * ```
+ * @example <caption>Ways to `require`.</caption>
  * ```js
  * const { coverageSupported } = require('coverage-node');
+ * ```
+ *
+ * ```js
+ * const coverageSupported = require('coverage-node/public/coverageSupported');
  * ```
  */
 module.exports =

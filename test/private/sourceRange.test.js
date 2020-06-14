@@ -1,7 +1,7 @@
 'use strict';
 
 const { deepStrictEqual } = require('assert');
-const sourceRange = require('../../lib/sourceRange');
+const sourceRange = require('../../private/sourceRange');
 
 module.exports = (tests) => {
   tests.add('`sourceRange` with a single char line.', () => {

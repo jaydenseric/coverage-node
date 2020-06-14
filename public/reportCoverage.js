@@ -2,16 +2,28 @@
 
 const { relative } = require('path');
 const kleur = require('kleur');
-const errorConsole = require('./errorConsole');
+const errorConsole = require('../private/errorConsole');
 
 /**
  * Reports a code coverage analysis to the console.
  * @kind function
  * @name reportCoverage
  * @param {CoverageAnalysis} coverageAnalysis Coverage analysis from [`analyseCoverage`]{@link analyseCoverage}.
- * @example <caption>How to import.</caption>
+ * @example <caption>Ways to `import`.</caption>
+ * ```js
+ * import { reportCoverage } from 'coverage-node';
+ * ```
+ *
+ * ```js
+ * import reportCoverage from 'coverage-node/public/reportCoverage.js';
+ * ```
+ * @example <caption>Ways to `require`.</caption>
  * ```js
  * const { reportCoverage } = require('coverage-node');
+ * ```
+ *
+ * ```js
+ * const reportCoverage = require('coverage-node/public/reportCoverage');
  * ```
  */
 module.exports = function reportCoverage({

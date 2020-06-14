@@ -1,7 +1,7 @@
 'use strict';
 
 const { deepStrictEqual } = require('assert');
-const semver = require('../../lib/semver');
+const semver = require('../../private/semver');
 
 module.exports = (tests) => {
   tests.add('`semver` with a simple version.', () => {

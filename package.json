@@ -18,13 +18,25 @@
     "check",
     "report",
     "code",
-    "coverage"
+    "coverage",
+    "esm",
+    "mjs"
   ],
   "files": [
     "cli",
-    "lib"
+    "private",
+    "public"
   ],
-  "main": "lib",
+  "main": "public",
+  "exports": {
+    ".": {
+      "import": "./public/index.mjs",
+      "require": "./public/index.js"
+    },
+    "./public/": "./public/",
+    "./package": "./package.json",
+    "./package.json": "./package.json"
+  },
   "bin": {
     "coverage-node": "cli/coverage-node.js"
   },

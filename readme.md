@@ -89,10 +89,24 @@ Analyzes [Node.js generated V8 JavaScript code coverage data](https://nodejs.org
 
 #### Examples
 
-_How to import._
+_Ways to `import`._
+
+> ```js
+> import { analyseCoverage } from 'coverage-node';
+> ```
+>
+> ```js
+> import analyseCoverage from 'coverage-node/public/analyseCoverage.js';
+> ```
+
+_Ways to `require`._
 
 > ```js
 > const { analyseCoverage } = require('coverage-node');
+> ```
+>
+> ```js
+> const analyseCoverage = require('coverage-node/public/analyseCoverage');
 > ```
 
 ---
@@ -107,10 +121,24 @@ Reports a code coverage analysis to the console.
 
 #### Examples
 
-_How to import._
+_Ways to `import`._
+
+> ```js
+> import { reportCoverage } from 'coverage-node';
+> ```
+>
+> ```js
+> import reportCoverage from 'coverage-node/public/reportCoverage.js';
+> ```
+
+_Ways to `require`._
 
 > ```js
 > const { reportCoverage } = require('coverage-node');
+> ```
+>
+> ```js
+> const reportCoverage = require('coverage-node/public/reportCoverage');
 > ```
 
 ---
@@ -123,10 +151,24 @@ Is the process Node.js version greater at least [the minimum required to support
 
 #### Examples
 
-_How to import._
+_Ways to `import`._
+
+> ```js
+> import { coverageSupported } from 'coverage-node';
+> ```
+>
+> ```js
+> import coverageSupported from 'coverage-node/public/coverageSupported.js';
+> ```
+
+_Ways to `require`._
 
 > ```js
 > const { coverageSupported } = require('coverage-node');
+> ```
+>
+> ```js
+> const coverageSupported = require('coverage-node/public/coverageSupported');
 > ```
 
 ---
@@ -139,10 +181,24 @@ Minimum Node.js version supported for code coverage. Although Node.js v10+ suppo
 
 #### Examples
 
-_How to import._
+_Ways to `import`._
+
+> ```js
+> import { coverageSupportedMinNodeVersion } from 'coverage-node';
+> ```
+>
+> ```js
+> import coverageSupportedMinNodeVersion from 'coverage-node/public/coverageSupportedMinNodeVersion.js';
+> ```
+
+_Ways to `require`._
 
 > ```js
 > const { coverageSupportedMinNodeVersion } = require('coverage-node');
+> ```
+>
+> ```js
+> const coverageSupportedMinNodeVersion = require('coverage-node/public/coverageSupportedMinNodeVersion');
 > ```
 
 ---

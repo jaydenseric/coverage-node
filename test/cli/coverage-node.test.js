@@ -4,8 +4,8 @@ const { strictEqual } = require('assert');
 const fs = require('fs');
 const { join, relative } = require('path');
 const { disposableDirectory } = require('disposable-directory');
-const coverageSupported = require('../../lib/coverageSupported');
-const minNodeVersion = require('../../lib/coverageSupportedMinNodeVersion');
+const coverageSupported = require('../../public/coverageSupported');
+const minNodeVersion = require('../../public/coverageSupportedMinNodeVersion');
 const execFilePromise = require('../execFilePromise');
 const stripStackTraces = require('../stripStackTraces');
 

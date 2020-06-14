@@ -5,8 +5,8 @@ const { spawn } = require('child_process');
 const fs = require('fs');
 const { join } = require('path');
 const { disposableDirectory } = require('disposable-directory');
-const analyseCoverage = require('../../lib/analyseCoverage');
-const childProcessPromise = require('../../lib/childProcessPromise');
+const childProcessPromise = require('../../private/childProcessPromise');
+const analyseCoverage = require('../../public/analyseCoverage');
 
 module.exports = (tests) => {
   tests.add(
