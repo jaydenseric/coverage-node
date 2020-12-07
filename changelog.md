@@ -4,6 +4,7 @@
 
 ### Patch
 
+- Simplified the GitHub Actions CI config with the [`npm install-test`](https://docs.npmjs.com/cli/v7/commands/npm-install-test) command.
 - Improved internal JSDoc.
 
 ## 3.0.0
