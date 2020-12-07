@@ -1,5 +1,11 @@
 # coverage-node changelog
 
+## Next
+
+### Patch
+
+- Improved internal JSDoc.
+
 ## 3.0.0
 
 ### Major
