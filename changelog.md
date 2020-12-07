@@ -2,10 +2,16 @@
 
 ## Next
 
+### Major
+
+- The updated [`kleur`](https://npm.im/kleur) dependency causes subtle differences in which environments get colored console output.
+
 ### Patch
 
+- Updated dependencies.
 - Simplified the GitHub Actions CI config with the [`npm install-test`](https://docs.npmjs.com/cli/v7/commands/npm-install-test) command.
 - Removed `npm-debug.log` from the `.gitignore` file as npm [v4.2.0](https://github.com/npm/npm/releases/tag/v4.2.0)+ doesn’t create it in the current working directory.
+- Use the `FORCE_COLOR` environment variable in tests to ensure output is colorized.
 - Improved internal JSDoc.
 
 ## 3.0.0

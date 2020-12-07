@@ -5,8 +5,8 @@
 A simple CLI to run [Node.js](https://nodejs.org) and report code coverage.
 
 - ✨ Zero config.
-- 🏁 ~261 [SLOC](https://en.wikipedia.org/wiki/Source_lines_of_code), written from scratch to use [code coverage features](https://nodejs.org/api/cli.html#cli_node_v8_coverage_dir) built into Node.js v10+.
-- 📦 [~312 kB install size](https://packagephobia.now.sh/result?p=coverage-node), compared to [2.02 MB for `c8`](https://packagephobia.now.sh/result?p=c8@7.0.0) or [9.01 MB for `nyc`](https://packagephobia.now.sh/result?p=nyc@15.0.0).
+- 🏁 \~261 [SLOC](https://en.wikipedia.org/wiki/Source_lines_of_code), written from scratch to use [code coverage features](https://nodejs.org/api/cli.html#cli_node_v8_coverage_dir) built into Node.js v10+.
+- 📦 [\~312 kB install size](https://packagephobia.now.sh/result?p=coverage-node), compared to [2.02 MB for `c8`](https://packagephobia.now.sh/result?p=c8@7.0.0) or [9.01 MB for `nyc`](https://packagephobia.now.sh/result?p=nyc@15.0.0).
 - 🖱Displays ignored or uncovered source code ranges as paths, clickable in IDEs such as [VS Code](https://code.visualstudio.com).
 
 ## Setup
@@ -31,7 +31,7 @@ In a [`package.json` script](https://docs.npmjs.com/files/package.json#scripts),
 ## Support
 
 - Linux, macOS.
-- Node.js `^10.17.0 || ^12.0.0 || >= 13.7.0`, but for Node.js versions &lt; v13.3 that produce [unreliable coverage data](https://github.com/nodejs/node/issues/25937#issuecomment-563115421) the [`coverage-node` CLI](#cli) skips code coverage and logs a warning.
+- Node.js `^10.17.0 || ^12.0.0 || >= 13.7.0`, but for Node.js versions < v13.3 that produce [unreliable coverage data](https://github.com/nodejs/node/issues/25937#issuecomment-563115421) the [`coverage-node` CLI](#cli) skips code coverage and logs a warning.
 
 ## Ignored files
 
@@ -85,7 +85,7 @@ Analyzes [Node.js generated V8 JavaScript code coverage data](https://nodejs.org
 | :---------------- | :----- | :--------------------------------- |
 | `coverageDirPath` | string | Code coverage data directory path. |
 
-**Returns:** Promise&lt;[CoverageAnalysis](#type-coverageanalysis)> — Resolves the coverage analysis.
+**Returns:** Promise<[CoverageAnalysis](#type-coverageanalysis)> — Resolves the coverage analysis.
 
 #### Examples
 
@@ -212,9 +212,9 @@ _Ways to `require`._
 | Property | Type | Description |
 | :-- | :-- | :-- |
 | `filesCount` | number | Number of files analyzed. |
-| `covered` | Array&lt;string> | Covered file absolute paths. |
-| `ignored` | Array&lt;[SourceCodeRanges](#type-sourcecoderanges)> | Ignored source code ranges. |
-| `uncovered` | Array&lt;[SourceCodeRanges](#type-sourcecoderanges)> | Uncovered source code ranges. |
+| `covered` | Array<string> | Covered file absolute paths. |
+| `ignored` | Array<[SourceCodeRanges](#type-sourcecoderanges)> | Ignored source code ranges. |
+| `uncovered` | Array<[SourceCodeRanges](#type-sourcecoderanges)> | Uncovered source code ranges. |
 
 ---
 
@@ -271,4 +271,4 @@ A source code file with ranges of interest.
 | Property | Type | Description |
 | :-- | :-- | :-- |
 | `path` | string | File absolute path. |
-| `ranges` | Array&lt;[SourceCodeRange](#type-sourcecoderange)> | Ranges of interest. |
+| `ranges` | Array<[SourceCodeRange](#type-sourcecoderange)> | Ranges of interest. |

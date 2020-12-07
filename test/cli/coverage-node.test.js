@@ -16,10 +16,16 @@ module.exports = (tests) => {
     await disposableDirectory(async (tempDirPath) => {
       const filePath = join(tempDirPath, 'index.js');
       await fs.promises.writeFile(filePath, "'use strict'");
-      const { stdout, stderr } = await execFilePromise('node', [
-        'cli/coverage-node',
-        filePath,
-      ]);
+      const { stdout, stderr } = await execFilePromise(
+        'node',
+        ['cli/coverage-node', filePath],
+        {
+          env: {
+            ...process.env,
+            FORCE_COLOR: 1,
+          },
+        }
+      );
 
       coverageSupported
         ? strictEqual(
@@ -39,10 +45,16 @@ module.exports = (tests) => {
         `// coverage ignore next line
 () => {}`
       );
-      const { stdout, stderr } = await execFilePromise('node', [
-        'cli/coverage-node',
-        filePath,
-      ]);
+      const { stdout, stderr } = await execFilePromise(
+        'node',
+        ['cli/coverage-node', filePath],
+        {
+          env: {
+            ...process.env,
+            FORCE_COLOR: 1,
+          },
+        }
+      );
 
       coverageSupported
         ? strictEqual(
@@ -64,10 +76,16 @@ module.exports = (tests) => {
       let stderr;
 
       try {
-        ({ stdout, stderr } = await execFilePromise('node', [
-          'cli/coverage-node',
-          filePath,
-        ]));
+        ({ stdout, stderr } = await execFilePromise(
+          'node',
+          ['cli/coverage-node', filePath],
+          {
+            env: {
+              ...process.env,
+              FORCE_COLOR: 1,
+            },
+          }
+        ));
       } catch (error) {
         threw = true;
         ({ stdout, stderr } = error);
@@ -129,10 +147,16 @@ require('${fileFPath}')`
         let stderr;
 
         try {
-          ({ stdout, stderr } = await execFilePromise('node', [
-            'cli/coverage-node',
-            fileAPath,
-          ]));
+          ({ stdout, stderr } = await execFilePromise(
+            'node',
+            ['cli/coverage-node', fileAPath],
+            {
+              env: {
+                ...process.env,
+                FORCE_COLOR: 1,
+              },
+            }
+          ));
         } catch (error) {
           threw = true;
           ({ stdout, stderr } = error);
@@ -167,10 +191,16 @@ require('${fileFPath}')`
     await disposableDirectory(async (tempDirPath) => {
       const filePath = join(tempDirPath, 'index.js');
       await fs.promises.writeFile(filePath, "console.log('Message.')");
-      const { stdout, stderr } = await execFilePromise('node', [
-        'cli/coverage-node',
-        filePath,
-      ]);
+      const { stdout, stderr } = await execFilePromise(
+        'node',
+        ['cli/coverage-node', filePath],
+        {
+          env: {
+            ...process.env,
+            FORCE_COLOR: 1,
+          },
+        }
+      );
 
       if (coverageSupported)
         strictEqual(
@@ -191,7 +221,12 @@ require('${fileFPath}')`
       let threw;
 
       try {
-        await execFilePromise('node', ['cli/coverage-node', filePath]);
+        await execFilePromise('node', ['cli/coverage-node', filePath], {
+          env: {
+            ...process.env,
+            FORCE_COLOR: 1,
+          },
+        });
       } catch (error) {
         threw = true;
         var { stdout, stderr } = error;
@@ -219,11 +254,16 @@ deprecated()`
       let threw;
 
       try {
-        await execFilePromise('node', [
-          'cli/coverage-node',
-          '--throw-deprecation',
-          filePath,
-        ]);
+        await execFilePromise(
+          'node',
+          ['cli/coverage-node', '--throw-deprecation', filePath],
+          {
+            env: {
+              ...process.env,
+              FORCE_COLOR: 1,
+            },
+          }
+        );
       } catch (error) {
         threw = true;
         var { stdout, stderr } = error;
@@ -239,7 +279,12 @@ deprecated()`
     let threw;
 
     try {
-      await execFilePromise('node', ['cli/coverage-node']);
+      await execFilePromise('node', ['cli/coverage-node'], {
+        env: {
+          ...process.env,
+          FORCE_COLOR: 1,
+        },
+      });
     } catch (error) {
       threw = true;
       var { stdout, stderr } = error;
