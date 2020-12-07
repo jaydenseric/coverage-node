@@ -1,0 +1,5 @@
+<file path>:1
+throw new Error('Error.')
+^
+
+Error: Error.

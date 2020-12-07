@@ -2,14 +2,15 @@
 
 const { strictEqual } = require('assert');
 const fs = require('fs');
-const { join, relative } = require('path');
+const { join, relative, resolve } = require('path');
 const { disposableDirectory } = require('disposable-directory');
+const snapshot = require('snapshot-assertion');
 const coverageSupported = require('../../public/coverageSupported');
-const minNodeVersion = require('../../public/coverageSupportedMinNodeVersion');
 const execFilePromise = require('../execFilePromise');
 const stripStackTraces = require('../stripStackTraces');
 
-const stdoutSkippedCodeCoverage = `\n\u001b[33mSkipped code coverage as Node.js is ${process.version}, v${minNodeVersion.major}.${minNodeVersion.minor}.${minNodeVersion.patch}+ is supported.\u001b[39m\n\n`;
+const SNAPSHOT_REPLACEMENT_FILE_PATH = '<file path>';
+const SNAPSHOT_REPLACEMENT_PROCESS_NODE_VERSION = '<process Node.js version>';
 
 module.exports = (tests) => {
   tests.add('`coverage-node` CLI with 1 covered file.', async () => {
@@ -27,12 +28,24 @@ module.exports = (tests) => {
         }
       );
 
-      coverageSupported
-        ? strictEqual(
-            stdout.replace(relative('', filePath), '<path>'),
-            '\n\u001b[32m1 file covered:\u001b[39m\n\n  <path>\n\n\u001b[1m\u001b[32m1/1 files covered.\u001b[22m\u001b[39m\n\n'
-          )
-        : strictEqual(stdout, stdoutSkippedCodeCoverage);
+      await snapshot(
+        coverageSupported
+          ? stdout.replace(
+              relative('', filePath),
+              SNAPSHOT_REPLACEMENT_FILE_PATH
+            )
+          : stdout.replace(
+              process.version,
+              SNAPSHOT_REPLACEMENT_PROCESS_NODE_VERSION
+            ),
+        resolve(
+          __dirname,
+          `../snapshots/coverage-node/1-covered-file-coverage-${
+            coverageSupported ? 'supported' : 'unsupported'
+          }-stdout.ans`
+        )
+      );
+
       strictEqual(stderr, '');
     });
   });
@@ -56,12 +69,24 @@ module.exports = (tests) => {
         }
       );
 
-      coverageSupported
-        ? strictEqual(
-            stdout.replace(relative('', filePath), '<path>'),
-            '\n\u001b[33m1 file ignoring coverage:\u001b[39m\n\n  <path>:2:1 → 2:8\n\n\u001b[1m\u001b[33m0/1 files covered.\u001b[22m\u001b[39m\n\n'
-          )
-        : strictEqual(stdout, stdoutSkippedCodeCoverage);
+      await snapshot(
+        coverageSupported
+          ? stdout.replace(
+              relative('', filePath),
+              SNAPSHOT_REPLACEMENT_FILE_PATH
+            )
+          : stdout.replace(
+              process.version,
+              SNAPSHOT_REPLACEMENT_PROCESS_NODE_VERSION
+            ),
+        resolve(
+          __dirname,
+          `../snapshots/coverage-node/1-ignored-file-coverage-${
+            coverageSupported ? 'supported' : 'unsupported'
+          }-stdout.ans`
+        )
+      );
+
       strictEqual(stderr, '');
     });
   });
@@ -91,21 +116,35 @@ module.exports = (tests) => {
         ({ stdout, stderr } = error);
       }
 
-      if (coverageSupported) {
-        strictEqual(threw, true, 'CLI should error.');
-        strictEqual(
-          stdout,
-          '\n\u001b[1m\u001b[31m0/1 files covered.\u001b[22m\u001b[39m\n\n'
+      strictEqual(threw, coverageSupported ? true : undefined);
+
+      await snapshot(
+        coverageSupported
+          ? stdout
+          : stdout.replace(
+              process.version,
+              SNAPSHOT_REPLACEMENT_PROCESS_NODE_VERSION
+            ),
+        resolve(
+          __dirname,
+          `../snapshots/coverage-node/1-uncovered-file-coverage-${
+            coverageSupported ? 'supported' : 'unsupported'
+          }-stdout.ans`
+        )
+      );
+
+      if (coverageSupported)
+        await snapshot(
+          stderr.replace(
+            relative('', filePath),
+            SNAPSHOT_REPLACEMENT_FILE_PATH
+          ),
+          resolve(
+            __dirname,
+            '../snapshots/coverage-node/1-uncovered-file-coverage-supported-stderr.ans'
+          )
         );
-        strictEqual(
-          stderr.replace(relative('', filePath), '<path>'),
-          '\n\u001b[31m1 file missing coverage:\u001b[39m\n\n  <path>:1:1 → 1:8\n'
-        );
-      } else {
-        strictEqual(threw, undefined, 'CLI shouldn’t error.');
-        strictEqual(stdout, stdoutSkippedCodeCoverage);
-        strictEqual(stderr, '');
-      }
+      else strictEqual(stderr, '');
     });
   });
 
@@ -162,27 +201,38 @@ require('${fileFPath}')`
           ({ stdout, stderr } = error);
         }
 
-        if (coverageSupported) {
-          strictEqual(threw, true, 'CLI should error.');
-          strictEqual(
-            stdout
-              .replace(relative('', fileAPath), '<pathA>')
-              .replace(relative('', fileBPath), '<pathB>')
-              .replace(relative('', fileCPath), '<pathC>')
-              .replace(relative('', fileDPath), '<pathD>'),
-            '\n\u001b[32m2 files covered:\u001b[39m\n\n  <pathA>\n  <pathB>\n\n\u001b[33m2 files ignoring coverage:\u001b[39m\n\n  <pathC>:2:1 → 2:8\n  <pathD>:2:1 → 2:8\n\n\u001b[1m\u001b[31m2/6 files covered.\u001b[22m\u001b[39m\n\n'
-          );
-          strictEqual(
+        strictEqual(threw, coverageSupported ? true : undefined);
+
+        await snapshot(
+          coverageSupported
+            ? stdout
+                .replace(relative('', fileAPath), '<pathA>')
+                .replace(relative('', fileBPath), '<pathB>')
+                .replace(relative('', fileCPath), '<pathC>')
+                .replace(relative('', fileDPath), '<pathD>')
+            : stdout.replace(
+                process.version,
+                SNAPSHOT_REPLACEMENT_PROCESS_NODE_VERSION
+              ),
+          resolve(
+            __dirname,
+            `../snapshots/coverage-node/2-covered-ignored-uncovered-files-coverage-${
+              coverageSupported ? 'supported' : 'unsupported'
+            }-stdout.ans`
+          )
+        );
+
+        if (coverageSupported)
+          await snapshot(
             stderr
               .replace(relative('', fileEPath), '<pathE>')
               .replace(relative('', fileFPath), '<pathF>'),
-            '\n\u001b[31m2 files missing coverage:\u001b[39m\n\n  <pathE>:1:1 → 1:8\n  <pathF>:1:1 → 1:8\n'
+            resolve(
+              __dirname,
+              '../snapshots/coverage-node/2-covered-ignored-uncovered-files-coverage-supported-stderr.ans'
+            )
           );
-        } else {
-          strictEqual(threw, undefined, 'CLI shouldn’t error.');
-          strictEqual(stdout, stdoutSkippedCodeCoverage);
-          strictEqual(stderr, '');
-        }
+        else strictEqual(stderr, '');
       });
     }
   );
@@ -202,12 +252,23 @@ require('${fileFPath}')`
         }
       );
 
-      if (coverageSupported)
-        strictEqual(
-          stdout.replace(relative('', filePath), '<path>'),
-          'Message.\n\n\u001b[32m1 file covered:\u001b[39m\n\n  <path>\n\n\u001b[1m\u001b[32m1/1 files covered.\u001b[22m\u001b[39m\n\n'
-        );
-      else strictEqual(stdout, `Message.\n${stdoutSkippedCodeCoverage}`);
+      await snapshot(
+        coverageSupported
+          ? stdout.replace(
+              relative('', filePath),
+              SNAPSHOT_REPLACEMENT_FILE_PATH
+            )
+          : stdout.replace(
+              process.version,
+              SNAPSHOT_REPLACEMENT_PROCESS_NODE_VERSION
+            ),
+        resolve(
+          __dirname,
+          `../snapshots/coverage-node/script-console-log-coverage-${
+            coverageSupported ? 'supported' : 'unsupported'
+          }-stdout.ans`
+        )
+      );
 
       strictEqual(stderr, '');
     });
@@ -232,11 +293,15 @@ require('${fileFPath}')`
         var { stdout, stderr } = error;
       }
 
-      strictEqual(threw, true, 'CLI should error.');
+      strictEqual(threw, true);
       strictEqual(stdout, '');
-      strictEqual(
-        stripStackTraces(stderr).replace(filePath, '<path>'),
-        "<path>:1\nthrow new Error('Error.')\n^\n\nError: Error.\n"
+
+      await snapshot(
+        stripStackTraces(stderr).replace(
+          filePath,
+          SNAPSHOT_REPLACEMENT_FILE_PATH
+        ),
+        resolve(__dirname, '../snapshots/coverage-node/script-error-stderr.ans')
       );
     });
   });
@@ -269,7 +334,7 @@ deprecated()`
         var { stdout, stderr } = error;
       }
 
-      strictEqual(threw, true, 'CLI should error.');
+      strictEqual(threw, true);
       strictEqual(stdout, '');
       strictEqual(stderr.includes('DeprecationWarning: Deprecated!'), true);
     });
@@ -290,13 +355,17 @@ deprecated()`
       var { stdout, stderr } = error;
     }
 
-    strictEqual(threw, true, 'CLI should error.');
+    strictEqual(threw, true);
     strictEqual(stdout, '');
-    strictEqual(
+
+    await snapshot(
       stripStackTraces(stderr),
-      `Error running Node.js${
-        coverageSupported ? '  with coverage' : ''
-      }:\n  Error: Node.js CLI arguments are required.\n`
+      resolve(
+        __dirname,
+        `../snapshots/coverage-node/without-arguments-coverage-${
+          coverageSupported ? 'supported' : 'unsupported'
+        }-stderr.ans`
+      )
     );
   });
 };
