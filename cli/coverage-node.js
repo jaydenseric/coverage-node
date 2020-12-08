@@ -63,7 +63,7 @@ async function coverageNode() {
   } catch (error) {
     errorConsole.group(
       // coverage ignore next line
-      `Error running Node.js${coverageSupported ? '  with coverage' : ''}:`
+      `Error running Node.js${coverageSupported ? ' with coverage' : ''}:`
     );
     errorConsole.error(error);
     errorConsole.groupEnd();
