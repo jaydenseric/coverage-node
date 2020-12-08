@@ -13,6 +13,7 @@
 - Removed `npm-debug.log` from the `.gitignore` file as npm [v4.2.0](https://github.com/npm/npm/releases/tag/v4.2.0)+ doesn’t create it in the current working directory.
 - Use the `FORCE_COLOR` environment variable in tests to ensure output is colorized.
 - Use a new [`snapshot-assertion`](https://npm.im/snapshot-assertion) dev dependency to snapshot test CLI output.
+- Use `spawnSync` from the Node.js `child_process` API instead of the `execFilePromise` helper in tests.
 - Improved internal JSDoc.
 
 ## 3.0.0
