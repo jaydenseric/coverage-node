@@ -1,2 +1,3 @@
 Error running Node.js  with coverage:
   Error: Node.js CLI arguments are required.
+      <stack trace>

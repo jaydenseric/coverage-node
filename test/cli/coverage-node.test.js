@@ -7,7 +7,7 @@ const { join, relative, resolve } = require('path');
 const { disposableDirectory } = require('disposable-directory');
 const snapshot = require('snapshot-assertion');
 const coverageSupported = require('../../public/coverageSupported');
-const stripStackTraces = require('../stripStackTraces');
+const replaceStackTraces = require('../replaceStackTraces');
 
 const SNAPSHOT_REPLACEMENT_FILE_PATH = '<file path>';
 const SNAPSHOT_REPLACEMENT_PROCESS_NODE_VERSION = '<process Node.js version>';
@@ -306,7 +306,7 @@ require('${fileFPath}')`
       strictEqual(stdout.toString(), '');
 
       await snapshot(
-        stripStackTraces(stderr.toString()).replace(
+        replaceStackTraces(stderr.toString()).replace(
           filePath,
           SNAPSHOT_REPLACEMENT_FILE_PATH
         ),
@@ -368,7 +368,7 @@ deprecated()`
     strictEqual(stdout.toString(), '');
 
     await snapshot(
-      stripStackTraces(stderr.toString()),
+      replaceStackTraces(stderr.toString()),
       resolve(
         __dirname,
         `../snapshots/coverage-node/without-arguments-coverage-${

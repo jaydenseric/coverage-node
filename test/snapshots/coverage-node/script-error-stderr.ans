@@ -3,3 +3,4 @@ throw new Error('Error.')
 ^
 
 Error: Error.
+    <stack trace>
