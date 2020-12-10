@@ -5,8 +5,8 @@
 A simple CLI to run [Node.js](https://nodejs.org) and report code coverage.
 
 - ✨ Zero config.
-- 🏁 \~261 [SLOC](https://en.wikipedia.org/wiki/Source_lines_of_code), written from scratch to use [code coverage features](https://nodejs.org/api/cli.html#cli_node_v8_coverage_dir) built into Node.js v10+.
-- 📦 [\~312 kB install size](https://packagephobia.now.sh/result?p=coverage-node), compared to [2.02 MB for `c8`](https://packagephobia.now.sh/result?p=c8@7.0.0) or [9.01 MB for `nyc`](https://packagephobia.now.sh/result?p=nyc@15.0.0).
+- 🏁 \~323 [SLOC](https://en.wikipedia.org/wiki/Source_lines_of_code), written from scratch to use [code coverage features](https://nodejs.org/api/cli.html#cli_node_v8_coverage_dir) built into Node.js v10+.
+- 📦 [\~337 kB install size](https://packagephobia.com/result?p=coverage-node), compared to [2.2 MB for `c8` v7.3.5](https://packagephobia.com/result?p=c8@7.3.5) or [8.84 MB for `nyc` v15.1.0](https://packagephobia.com/result?p=nyc@15.1.0).
 - 🖱Displays ignored or uncovered source code ranges as paths, clickable in IDEs such as [VS Code](https://code.visualstudio.com).
 
 ## Setup

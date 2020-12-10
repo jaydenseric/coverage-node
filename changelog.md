@@ -23,6 +23,7 @@
 - Use `spawnSync` from the Node.js `child_process` API instead of the `execFilePromise` helper in tests.
 - Added more `coverage-node` CLI tests.
 - Improved internal JSDoc.
+- Updated SLOC and install size related documentation.
 
 ## 3.0.0
 
@@ -66,7 +67,7 @@
 - Updated dev dependencies.
 - Added a new [`disposable-directory`](https://npm.im/disposable-directory) dependency to simplify the implementation and tests.
 - Moved JSDoc comments above module exports code.
-- Updated the compared [`c8` install size](https://packagephobia.now.sh/result?p=c8@7.0.0), fixing [#1](https://github.com/jaydenseric/coverage-node/issues/1).
+- Updated the compared [`c8` install size](https://packagephobia.com/result?p=c8@7.0.0), fixing [#1](https://github.com/jaydenseric/coverage-node/issues/1).
 
 ## 2.0.0
 
@@ -82,7 +83,7 @@
 ### Patch
 
 - Additionally test Node.js v10 and v12 in CI.
-- Updated the comparison install size in the readme for [`nyc@15.0.0`](https://packagephobia.now.sh/result?p=nyc@15.0.0).
+- Updated the comparison install size in the readme for [`nyc@15.0.0`](https://packagephobia.com/result?p=nyc@15.0.0).
 
 ## 1.1.0
 
