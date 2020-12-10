@@ -5,8 +5,9 @@
 const { spawn } = require('child_process');
 const { disposableDirectory } = require('disposable-directory');
 const kleur = require('kleur');
+const CliError = require('../private/CliError');
 const childProcessPromise = require('../private/childProcessPromise');
-const errorConsole = require('../private/errorConsole');
+const reportCliError = require('../private/reportCliError');
 const analyseCoverage = require('../public/analyseCoverage');
 const coverageSupported = require('../public/coverageSupported');
 const minNodeVersion = require('../public/coverageSupportedMinNodeVersion');
@@ -26,7 +27,7 @@ async function coverageNode() {
     const [, , ...nodeArgs] = process.argv;
 
     if (!nodeArgs.length)
-      throw new Error('Node.js CLI arguments are required.');
+      throw new CliError('Node.js CLI arguments are required.');
 
     // eslint-disable-next-line curly
     if (coverageSupported) {
@@ -61,12 +62,14 @@ async function coverageNode() {
       else process.exitCode = exitCode;
     }
   } catch (error) {
-    errorConsole.group(
-      // coverage ignore next line
-      `Error running Node.js${coverageSupported ? ' with coverage' : ''}:`
+    reportCliError(
+      `Node.js${
+        // coverage ignore next line
+        coverageSupported ? ' with coverage' : ''
+      }`,
+      error
     );
-    errorConsole.error(error);
-    errorConsole.groupEnd();
+
     process.exitCode = 1;
   }
 }

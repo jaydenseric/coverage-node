@@ -6,6 +6,10 @@
 
 - The updated [`kleur`](https://npm.im/kleur) dependency causes subtle differences in which environments get colored console output.
 
+### Minor
+
+- Improved console output for `coverage-node` CLI errors.
+
 ### Patch
 
 - Updated dependencies.
@@ -16,6 +20,7 @@
 - Use a new [`snapshot-assertion`](https://npm.im/snapshot-assertion) dev dependency to snapshot test CLI output.
 - Replaced the `stripStackTraces` test helper with a smarter `replaceStackTraces` helper that allows tests to detect a missing stack trace.
 - Use `spawnSync` from the Node.js `child_process` API instead of the `execFilePromise` helper in tests.
+- Added more `coverage-node` CLI tests.
 - Improved internal JSDoc.
 
 ## 3.0.0

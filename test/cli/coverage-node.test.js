@@ -317,7 +317,7 @@ require('${fileFPath}')`
     });
   });
 
-  tests.add('`coverage-node` CLI with a valid Node.js option.', async () => {
+  tests.add('`coverage-node` CLI with a Node.js option, valid.', async () => {
     await disposableDirectory(async (tempDirPath) => {
       const filePath = join(tempDirPath, 'index.js');
 
@@ -345,6 +345,72 @@ deprecated()`
       strictEqual(
         stderr.toString().includes('DeprecationWarning: Deprecated!'),
         true
+      );
+
+      strictEqual(status, 1);
+    });
+  });
+
+  tests.add('`coverage-node` CLI with a Node.js option, invalid.', async () => {
+    await disposableDirectory(async (tempDirPath) => {
+      const filePath = join(tempDirPath, 'index.js');
+
+      await fs.promises.writeFile(filePath, "'use strict'");
+
+      const { stdout, stderr, status, error } = spawnSync(
+        'node',
+        ['cli/coverage-node', '--not-a-real-option', filePath],
+        {
+          env: {
+            ...process.env,
+            FORCE_COLOR: 1,
+          },
+        }
+      );
+
+      if (error) throw error;
+
+      strictEqual(stdout.toString(), '');
+
+      await snapshot(
+        replaceStackTraces(stderr.toString()),
+        resolve(
+          __dirname,
+          '../snapshots/coverage-node/node-option-invalid-stderr.ans'
+        )
+      );
+
+      strictEqual(status, 9);
+    });
+  });
+
+  tests.add('`coverage-node` CLI with a missing file.', async () => {
+    await disposableDirectory(async (tempDirPath) => {
+      const filePath = join(tempDirPath, 'index.js');
+
+      const { stdout, stderr, status, error } = spawnSync(
+        'node',
+        ['cli/coverage-node', filePath],
+        {
+          env: {
+            ...process.env,
+            FORCE_COLOR: 1,
+          },
+        }
+      );
+
+      if (error) throw error;
+
+      strictEqual(stdout.toString(), '');
+
+      await snapshot(
+        replaceStackTraces(stderr.toString())
+          .replace(
+            /(?:node:)?internal\/modules\/cjs\/loader(?:\.js)?:\d+/,
+            '<Node.js internal path>'
+          )
+          .replace(filePath, SNAPSHOT_REPLACEMENT_FILE_PATH),
+        resolve(__dirname, '../snapshots/coverage-node/missing-file-stderr.ans')
       );
 
       strictEqual(status, 1);

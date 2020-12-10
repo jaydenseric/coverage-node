@@ -1,3 +1,5 @@
-Error running Node.js:
-  Error: Node.js CLI arguments are required.
-      <stack trace>
+
+[1m[31mError running Node.js:[22m[39m
+
+  [31mNode.js CLI arguments are required.[39m
+
