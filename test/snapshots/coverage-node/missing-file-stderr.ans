@@ -1,9 +1,0 @@
-<Node.js internal path>
-  throw err;
-  ^
-
-Error: Cannot find module '<file path>'
-    <stack trace> {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: []
-}

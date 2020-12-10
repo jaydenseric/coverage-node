@@ -346,7 +346,6 @@ deprecated()`
         stderr.toString().includes('DeprecationWarning: Deprecated!'),
         true
       );
-
       strictEqual(status, 1);
     });
   });
@@ -402,17 +401,10 @@ deprecated()`
       if (error) throw error;
 
       strictEqual(stdout.toString(), '');
-
-      await snapshot(
-        replaceStackTraces(stderr.toString())
-          .replace(
-            /(?:node:)?internal\/modules\/cjs\/loader(?:\.js)?:\d+/,
-            '<Node.js internal path>'
-          )
-          .replace(filePath, SNAPSHOT_REPLACEMENT_FILE_PATH),
-        resolve(__dirname, '../snapshots/coverage-node/missing-file-stderr.ans')
+      strictEqual(
+        stderr.toString().includes(`Error: Cannot find module '${filePath}'`),
+        true
       );
-
       strictEqual(status, 1);
     });
   });
