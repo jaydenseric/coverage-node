@@ -8,6 +8,7 @@
 
 ### Minor
 
+- Added runtime argument type checks for various private and public functions.
 - Improved console output for `coverage-node` CLI errors.
 
 ### Patch

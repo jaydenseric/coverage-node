@@ -31,6 +31,9 @@ const sourceRange = require('../private/sourceRange');
  * ```
  */
 module.exports = async function analyseCoverage(coverageDirPath) {
+  if (typeof coverageDirPath !== 'string')
+    throw new TypeError('First argument `coverageDirPath` must be a string.');
+
   const coverageDirFileNames = await fs.promises.readdir(coverageDirPath);
   const filteredProcessCoverages = [];
 

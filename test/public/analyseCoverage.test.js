@@ -1,6 +1,6 @@
 'use strict';
 
-const { deepStrictEqual } = require('assert');
+const { deepStrictEqual, rejects } = require('assert');
 const { spawn } = require('child_process');
 const fs = require('fs');
 const { join } = require('path');
@@ -9,6 +9,16 @@ const childProcessPromise = require('../../private/childProcessPromise');
 const analyseCoverage = require('../../public/analyseCoverage');
 
 module.exports = (tests) => {
+  tests.add(
+    '`reportCliError` with first argument `coverageDirPath` not a string.',
+    async () => {
+      await rejects(
+        analyseCoverage(true),
+        new TypeError('First argument `coverageDirPath` must be a string.')
+      );
+    }
+  );
+
   tests.add(
     '`analyseCoverage` ignores `node_modules` directory files.',
     async () => {

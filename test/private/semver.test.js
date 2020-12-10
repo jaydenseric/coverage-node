@@ -1,9 +1,18 @@
 'use strict';
 
-const { deepStrictEqual } = require('assert');
+const { deepStrictEqual, throws } = require('assert');
 const semver = require('../../private/semver');
 
 module.exports = (tests) => {
+  tests.add(
+    '`reportCliError` with first argument `semver` not a string.',
+    () => {
+      throws(() => {
+        semver(true);
+      }, new TypeError('First argument `semver` must be a string.'));
+    }
+  );
+
   tests.add('`semver` with a simple version.', () => {
     deepStrictEqual(semver('1.2.3'), {
       major: 1,

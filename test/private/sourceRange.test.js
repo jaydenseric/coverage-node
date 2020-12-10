@@ -1,9 +1,42 @@
 'use strict';
 
-const { deepStrictEqual } = require('assert');
+const { deepStrictEqual, throws } = require('assert');
 const sourceRange = require('../../private/sourceRange');
 
 module.exports = (tests) => {
+  tests.add('`sourceRange` with first argument `source` not a string.', () => {
+    throws(() => {
+      sourceRange(true);
+    }, new TypeError('First argument `source` must be a string.'));
+  });
+
+  tests.add(
+    '`sourceRange` with second argument `startOffset` not a number.',
+    () => {
+      throws(() => {
+        sourceRange('a', true);
+      }, new TypeError('Second argument `startOffset` must be a number.'));
+    }
+  );
+
+  tests.add(
+    '`sourceRange` with third argument `endOffset` not a number.',
+    () => {
+      throws(() => {
+        sourceRange('a', 0, true);
+      }, new TypeError('Third argument `endOffset` must be a number.'));
+    }
+  );
+
+  tests.add(
+    '`sourceRange` with fourth argument `ignoreNextLineComment` not a string or `false`.',
+    () => {
+      throws(() => {
+        sourceRange('a', 0, 0, true);
+      }, new TypeError('Fourth argument `ignoreNextLineComment` must be a string or `false`.'));
+    }
+  );
+
   tests.add('`sourceRange` with a single char line.', () => {
     const source = `a`;
 

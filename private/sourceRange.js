@@ -8,7 +8,7 @@
  * @param {string} source Source code.
  * @param {number} startOffset Start character offset.
  * @param {number} endOffset End character offset.
- * @param {string} [ignoreNextLineComment=' coverage ignore next line'] Single line case-insensitive comment content to ignore ranges that start on the the next line.
+ * @param {string|boolean} [ignoreNextLineComment=' coverage ignore next line'] Single line case-insensitive comment content to ignore ranges that start on the the next line, or `false` to disable ignore comments.
  * @returns {SourceCodeRange} Source code range info.
  * @ignore
  */
@@ -18,6 +18,23 @@ module.exports = function sourceRange(
   endOffset,
   ignoreNextLineComment = ' coverage ignore next line'
 ) {
+  if (typeof source !== 'string')
+    throw new TypeError('First argument `source` must be a string.');
+
+  if (typeof startOffset !== 'number')
+    throw new TypeError('Second argument `startOffset` must be a number.');
+
+  if (typeof endOffset !== 'number')
+    throw new TypeError('Third argument `endOffset` must be a number.');
+
+  if (
+    typeof ignoreNextLineComment !== 'string' &&
+    ignoreNextLineComment !== false
+  )
+    throw new TypeError(
+      'Fourth argument `ignoreNextLineComment` must be a string or `false`.'
+    );
+
   if (ignoreNextLineComment)
     var ignoreNextLineCommentLowerCase = `//${ignoreNextLineComment.toLowerCase()}`;
 

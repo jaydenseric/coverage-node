@@ -9,6 +9,9 @@
  * @ignore
  */
 module.exports = function semver(semver) {
+  if (typeof semver !== 'string')
+    throw new TypeError('First argument `semver` must be a string.');
+
   const [, major, minor, patch, prerelease, build] = semver.match(
     // The is is official recommended RegEx, see:
     // https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string
