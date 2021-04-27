@@ -1,9 +1,7 @@
-'use strict';
+import { strictEqual, throws } from 'assert';
+import replaceStackTraces from './replaceStackTraces.mjs';
 
-const { strictEqual, throws } = require('assert');
-const replaceStackTraces = require('./replaceStackTraces');
-
-module.exports = (tests) => {
+export default (tests) => {
   tests.add(
     '`replaceStackTraces` with first argument `string` not a string.',
     () => {

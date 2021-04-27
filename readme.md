@@ -22,8 +22,8 @@ In a [`package.json` script](https://docs.npmjs.com/files/package.json#scripts),
 ```diff
  {
    "scripts": {
--    "test": "node test.js"
-+    "test": "coverage-node test.js"
+-    "test": "node test.mjs"
++    "test": "coverage-node test.mjs"
    }
  }
 ```
@@ -37,10 +37,10 @@ In a [`package.json` script](https://docs.npmjs.com/files/package.json#scripts),
 
 Code coverage analysis ignores:
 
-- `node_modules` directory files, e.g. `node_modules/foo/index.js`.
-- `test` directory files, e.g. `test/index.js`.
-- Files with `.test` prefixed before the extension, e.g. `foo.test.js`.
-- Files named `test` (regardless of extension), e.g. `test.js`.
+- `node_modules` directory files, e.g. `node_modules/foo/index.mjs`.
+- `test` directory files, e.g. `test/index.mjs`.
+- Files with `.test` prefixed before the extension, e.g. `foo.test.mjs`.
+- Files named `test` (regardless of extension), e.g. `test.mjs`.
 
 ## Ignored lines
 
@@ -59,8 +59,8 @@ If the script doesn’t error a code coverage analysis is reported to the consol
 
 [`npx`](https://npm.im/npx) can be used to quickly check code coverage for a script:
 
-```shell
-npx coverage-node test.js
+```sh
+npx coverage-node test.mjs
 ```
 
 ## API
@@ -96,17 +96,7 @@ _Ways to `import`._
 > ```
 >
 > ```js
-> import analyseCoverage from 'coverage-node/public/analyseCoverage.js';
-> ```
-
-_Ways to `require`._
-
-> ```js
-> const { analyseCoverage } = require('coverage-node');
-> ```
->
-> ```js
-> const analyseCoverage = require('coverage-node/public/analyseCoverage');
+> import analyseCoverage from 'coverage-node/public/analyseCoverage.mjs';
 > ```
 
 ---
@@ -128,17 +118,7 @@ _Ways to `import`._
 > ```
 >
 > ```js
-> import reportCoverage from 'coverage-node/public/reportCoverage.js';
-> ```
-
-_Ways to `require`._
-
-> ```js
-> const { reportCoverage } = require('coverage-node');
-> ```
->
-> ```js
-> const reportCoverage = require('coverage-node/public/reportCoverage');
+> import reportCoverage from 'coverage-node/public/reportCoverage.mjs';
 > ```
 
 ---
@@ -158,17 +138,7 @@ _Ways to `import`._
 > ```
 >
 > ```js
-> import coverageSupported from 'coverage-node/public/coverageSupported.js';
-> ```
-
-_Ways to `require`._
-
-> ```js
-> const { coverageSupported } = require('coverage-node');
-> ```
->
-> ```js
-> const coverageSupported = require('coverage-node/public/coverageSupported');
+> import coverageSupported from 'coverage-node/public/coverageSupported.mjs';
 > ```
 
 ---
@@ -188,17 +158,7 @@ _Ways to `import`._
 > ```
 >
 > ```js
-> import coverageSupportedMinNodeVersion from 'coverage-node/public/coverageSupportedMinNodeVersion.js';
-> ```
-
-_Ways to `require`._
-
-> ```js
-> const { coverageSupportedMinNodeVersion } = require('coverage-node');
-> ```
->
-> ```js
-> const coverageSupportedMinNodeVersion = require('coverage-node/public/coverageSupportedMinNodeVersion');
+> import coverageSupportedMinNodeVersion from 'coverage-node/public/coverageSupportedMinNodeVersion.mjs';
 > ```
 
 ---

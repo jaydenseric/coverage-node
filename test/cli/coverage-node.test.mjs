@@ -1,27 +1,29 @@
-'use strict';
+import { strictEqual } from 'assert';
+import { spawnSync } from 'child_process';
+import fs from 'fs';
+import { join, relative } from 'path';
+import { fileURLToPath } from 'url';
+import { disposableDirectory } from 'disposable-directory';
+import snapshot from 'snapshot-assertion';
+import coverageSupported from '../../public/coverageSupported.mjs';
+import replaceStackTraces from '../replaceStackTraces.mjs';
 
-const { strictEqual } = require('assert');
-const { spawnSync } = require('child_process');
-const fs = require('fs');
-const { join, relative, resolve } = require('path');
-const { disposableDirectory } = require('disposable-directory');
-const snapshot = require('snapshot-assertion');
-const coverageSupported = require('../../public/coverageSupported');
-const replaceStackTraces = require('../replaceStackTraces');
-
+const COVERAGE_NODE_CLI_PATH = fileURLToPath(
+  new URL('../../cli/coverage-node.mjs', import.meta.url)
+);
 const SNAPSHOT_REPLACEMENT_FILE_PATH = '<file path>';
 const SNAPSHOT_REPLACEMENT_PROCESS_NODE_VERSION = '<process Node.js version>';
 
-module.exports = (tests) => {
+export default (tests) => {
   tests.add('`coverage-node` CLI with 1 covered file.', async () => {
     await disposableDirectory(async (tempDirPath) => {
-      const filePath = join(tempDirPath, 'index.js');
+      const filePath = join(tempDirPath, 'index.mjs');
 
-      await fs.promises.writeFile(filePath, "'use strict'");
+      await fs.promises.writeFile(filePath, '1;');
 
       const { stdout, stderr, status, error } = spawnSync(
         'node',
-        ['cli/coverage-node', filePath],
+        [COVERAGE_NODE_CLI_PATH, filePath],
         {
           env: {
             ...process.env,
@@ -43,11 +45,11 @@ module.exports = (tests) => {
                 process.version,
                 SNAPSHOT_REPLACEMENT_PROCESS_NODE_VERSION
               ),
-        resolve(
-          __dirname,
+        new URL(
           `../snapshots/coverage-node/1-covered-file-coverage-${
             coverageSupported ? 'supported' : 'unsupported'
-          }-stdout.ans`
+          }-stdout.ans`,
+          import.meta.url
         )
       );
 
@@ -58,17 +60,18 @@ module.exports = (tests) => {
 
   tests.add('`coverage-node` CLI with 1 ignored file.', async () => {
     await disposableDirectory(async (tempDirPath) => {
-      const filePath = join(tempDirPath, 'index.js');
+      const filePath = join(tempDirPath, 'index.mjs');
 
       await fs.promises.writeFile(
         filePath,
         `// coverage ignore next line
-() => {}`
+() => {};
+`
       );
 
       const { stdout, stderr, status, error } = spawnSync(
         'node',
-        ['cli/coverage-node', filePath],
+        [COVERAGE_NODE_CLI_PATH, filePath],
         {
           env: {
             ...process.env,
@@ -90,11 +93,11 @@ module.exports = (tests) => {
                 process.version,
                 SNAPSHOT_REPLACEMENT_PROCESS_NODE_VERSION
               ),
-        resolve(
-          __dirname,
+        new URL(
           `../snapshots/coverage-node/1-ignored-file-coverage-${
             coverageSupported ? 'supported' : 'unsupported'
-          }-stdout.ans`
+          }-stdout.ans`,
+          import.meta.url
         )
       );
 
@@ -105,13 +108,13 @@ module.exports = (tests) => {
 
   tests.add('`coverage-node` CLI with 1 uncovered file.', async () => {
     await disposableDirectory(async (tempDirPath) => {
-      const filePath = join(tempDirPath, 'index.js');
+      const filePath = join(tempDirPath, 'index.mjs');
 
-      await fs.promises.writeFile(filePath, '() => {}');
+      await fs.promises.writeFile(filePath, '() => {};');
 
       const { stdout, stderr, status, error } = spawnSync(
         'node',
-        ['cli/coverage-node', filePath],
+        [COVERAGE_NODE_CLI_PATH, filePath],
         {
           env: {
             ...process.env,
@@ -131,11 +134,11 @@ module.exports = (tests) => {
                 process.version,
                 SNAPSHOT_REPLACEMENT_PROCESS_NODE_VERSION
               ),
-        resolve(
-          __dirname,
+        new URL(
           `../snapshots/coverage-node/1-uncovered-file-coverage-${
             coverageSupported ? 'supported' : 'unsupported'
-          }-stdout.ans`
+          }-stdout.ans`,
+          import.meta.url
         )
       );
 
@@ -144,9 +147,9 @@ module.exports = (tests) => {
           stderr
             .toString()
             .replace(relative('', filePath), SNAPSHOT_REPLACEMENT_FILE_PATH),
-          resolve(
-            __dirname,
-            '../snapshots/coverage-node/1-uncovered-file-coverage-supported-stderr.ans'
+          new URL(
+            '../snapshots/coverage-node/1-uncovered-file-coverage-supported-stderr.ans',
+            import.meta.url
           )
         );
       else strictEqual(stderr.toString(), '');
@@ -159,38 +162,39 @@ module.exports = (tests) => {
     '`coverage-node` CLI with 2 covered, ignored and uncovered files.',
     async () => {
       await disposableDirectory(async (tempDirPath) => {
-        const fileAPath = join(tempDirPath, 'a.js');
-        const fileBPath = join(tempDirPath, 'b.js');
-        const fileCPath = join(tempDirPath, 'c.js');
-        const fileDPath = join(tempDirPath, 'd.js');
-        const fileEPath = join(tempDirPath, 'e.js');
-        const fileFPath = join(tempDirPath, 'f.js');
+        const fileAPath = join(tempDirPath, 'a.mjs');
+        const fileBPath = join(tempDirPath, 'b.mjs');
+        const fileCPath = join(tempDirPath, 'c.mjs');
+        const fileDPath = join(tempDirPath, 'd.mjs');
+        const fileEPath = join(tempDirPath, 'e.mjs');
+        const fileFPath = join(tempDirPath, 'f.mjs');
 
         await fs.promises.writeFile(
           fileAPath,
-          `require('${fileBPath}')
-require('${fileCPath}')
-require('${fileDPath}')
-require('${fileEPath}')
-require('${fileFPath}')`
+          `import '${fileBPath}';
+import '${fileCPath}';
+import '${fileDPath}';
+import '${fileEPath}';
+import '${fileFPath}';
+`
         );
-        await fs.promises.writeFile(fileBPath, 'function a() {}; a()');
+        await fs.promises.writeFile(fileBPath, 'function a() {}; a();');
         await fs.promises.writeFile(
           fileCPath,
           `// coverage ignore next line
-() => {}`
+() => {};`
         );
         await fs.promises.writeFile(
           fileDPath,
           `// coverage ignore next line
-() => {}`
+() => {};`
         );
-        await fs.promises.writeFile(fileEPath, '() => {}');
-        await fs.promises.writeFile(fileFPath, '() => {}');
+        await fs.promises.writeFile(fileEPath, '() => {};');
+        await fs.promises.writeFile(fileFPath, '() => {};');
 
         const { stdout, stderr, status, error } = spawnSync(
           'node',
-          ['cli/coverage-node', fileAPath],
+          [COVERAGE_NODE_CLI_PATH, fileAPath],
           {
             env: {
               ...process.env,
@@ -215,11 +219,11 @@ require('${fileFPath}')`
                   process.version,
                   SNAPSHOT_REPLACEMENT_PROCESS_NODE_VERSION
                 ),
-          resolve(
-            __dirname,
+          new URL(
             `../snapshots/coverage-node/2-covered-ignored-uncovered-files-coverage-${
               coverageSupported ? 'supported' : 'unsupported'
-            }-stdout.ans`
+            }-stdout.ans`,
+            import.meta.url
           )
         );
 
@@ -229,9 +233,9 @@ require('${fileFPath}')`
               .toString()
               .replace(relative('', fileEPath), '<pathE>')
               .replace(relative('', fileFPath), '<pathF>'),
-            resolve(
-              __dirname,
-              '../snapshots/coverage-node/2-covered-ignored-uncovered-files-coverage-supported-stderr.ans'
+            new URL(
+              '../snapshots/coverage-node/2-covered-ignored-uncovered-files-coverage-supported-stderr.ans',
+              import.meta.url
             )
           );
         else strictEqual(stderr.toString(), '');
@@ -243,13 +247,13 @@ require('${fileFPath}')`
 
   tests.add('`coverage-node` CLI with a script console log.', async () => {
     await disposableDirectory(async (tempDirPath) => {
-      const filePath = join(tempDirPath, 'index.js');
+      const filePath = join(tempDirPath, 'index.mjs');
 
-      await fs.promises.writeFile(filePath, "console.log('Message.')");
+      await fs.promises.writeFile(filePath, "console.log('Message.');");
 
       const { stdout, stderr, status, error } = spawnSync(
         'node',
-        ['cli/coverage-node', filePath],
+        [COVERAGE_NODE_CLI_PATH, filePath],
         {
           env: {
             ...process.env,
@@ -271,11 +275,11 @@ require('${fileFPath}')`
                 process.version,
                 SNAPSHOT_REPLACEMENT_PROCESS_NODE_VERSION
               ),
-        resolve(
-          __dirname,
+        new URL(
           `../snapshots/coverage-node/script-console-log-coverage-${
             coverageSupported ? 'supported' : 'unsupported'
-          }-stdout.ans`
+          }-stdout.ans`,
+          import.meta.url
         )
       );
 
@@ -286,13 +290,13 @@ require('${fileFPath}')`
 
   tests.add('`coverage-node` CLI with a script error.', async () => {
     await disposableDirectory(async (tempDirPath) => {
-      const filePath = join(tempDirPath, 'index.js');
+      const filePath = join(tempDirPath, 'index.mjs');
 
-      await fs.promises.writeFile(filePath, "throw new Error('Error.')");
+      await fs.promises.writeFile(filePath, "throw new Error('Error.');");
 
       const { stdout, stderr, status, error } = spawnSync(
         'node',
-        ['cli/coverage-node', filePath],
+        [COVERAGE_NODE_CLI_PATH, filePath],
         {
           env: {
             ...process.env,
@@ -310,7 +314,10 @@ require('${fileFPath}')`
           filePath,
           SNAPSHOT_REPLACEMENT_FILE_PATH
         ),
-        resolve(__dirname, '../snapshots/coverage-node/script-error-stderr.ans')
+        new URL(
+          '../snapshots/coverage-node/script-error-stderr.ans',
+          import.meta.url
+        )
       );
 
       strictEqual(status, 1);
@@ -319,18 +326,20 @@ require('${fileFPath}')`
 
   tests.add('`coverage-node` CLI with a Node.js option, valid.', async () => {
     await disposableDirectory(async (tempDirPath) => {
-      const filePath = join(tempDirPath, 'index.js');
+      const filePath = join(tempDirPath, 'index.mjs');
 
       await fs.promises.writeFile(
         filePath,
-        `const { deprecate } = require('util')
-const deprecated = deprecate(() => {}, 'Deprecated!')
-deprecated()`
+        `import { deprecate } from 'util';
+
+const deprecated = deprecate(() => {}, 'Deprecated!');
+deprecated();
+`
       );
 
       const { stdout, stderr, status, error } = spawnSync(
         'node',
-        ['cli/coverage-node', '--throw-deprecation', filePath],
+        [COVERAGE_NODE_CLI_PATH, '--throw-deprecation', filePath],
         {
           env: {
             ...process.env,
@@ -352,13 +361,13 @@ deprecated()`
 
   tests.add('`coverage-node` CLI with a Node.js option, invalid.', async () => {
     await disposableDirectory(async (tempDirPath) => {
-      const filePath = join(tempDirPath, 'index.js');
+      const filePath = join(tempDirPath, 'index.mjs');
 
-      await fs.promises.writeFile(filePath, "'use strict'");
+      await fs.promises.writeFile(filePath, '1;');
 
       const { stdout, stderr, status, error } = spawnSync(
         'node',
-        ['cli/coverage-node', '--not-a-real-option', filePath],
+        [COVERAGE_NODE_CLI_PATH, '--not-a-real-option', filePath],
         {
           env: {
             ...process.env,
@@ -373,9 +382,9 @@ deprecated()`
 
       await snapshot(
         replaceStackTraces(stderr.toString()),
-        resolve(
-          __dirname,
-          '../snapshots/coverage-node/node-option-invalid-stderr.ans'
+        new URL(
+          '../snapshots/coverage-node/node-option-invalid-stderr.ans',
+          import.meta.url
         )
       );
 
@@ -385,11 +394,11 @@ deprecated()`
 
   tests.add('`coverage-node` CLI with a missing file.', async () => {
     await disposableDirectory(async (tempDirPath) => {
-      const filePath = join(tempDirPath, 'index.js');
+      const filePath = join(tempDirPath, 'index.mjs');
 
       const { stdout, stderr, status, error } = spawnSync(
         'node',
-        ['cli/coverage-node', filePath],
+        [COVERAGE_NODE_CLI_PATH, filePath],
         {
           env: {
             ...process.env,
@@ -412,7 +421,7 @@ deprecated()`
   tests.add('`coverage-node` CLI without arguments.', async () => {
     const { stdout, stderr, status, error } = spawnSync(
       'node',
-      ['cli/coverage-node'],
+      ['cli/coverage-node.mjs'],
       {
         env: {
           ...process.env,
@@ -427,11 +436,11 @@ deprecated()`
 
     await snapshot(
       replaceStackTraces(stderr.toString()),
-      resolve(
-        __dirname,
+      new URL(
         `../snapshots/coverage-node/without-arguments-coverage-${
           coverageSupported ? 'supported' : 'unsupported'
-        }-stderr.ans`
+        }-stderr.ans`,
+        import.meta.url
       )
     );
 

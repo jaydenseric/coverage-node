@@ -1,9 +1,7 @@
-'use strict';
+import { rejects } from 'assert';
+import childProcessPromise from '../../private/childProcessPromise.mjs';
 
-const { rejects } = require('assert');
-const childProcessPromise = require('../../private/childProcessPromise');
-
-module.exports = (tests) => {
+export default (tests) => {
   tests.add(
     '`childProcessPromise` with first argument `childProcess` not a `ChildProcess` instance.',
     async () => {

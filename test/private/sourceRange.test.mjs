@@ -1,9 +1,7 @@
-'use strict';
+import { deepStrictEqual, throws } from 'assert';
+import sourceRange from '../../private/sourceRange.mjs';
 
-const { deepStrictEqual, throws } = require('assert');
-const sourceRange = require('../../private/sourceRange');
-
-module.exports = (tests) => {
+export default (tests) => {
   tests.add('`sourceRange` with first argument `source` not a string.', () => {
     throws(() => {
       sourceRange(true);

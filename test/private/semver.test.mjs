@@ -1,9 +1,7 @@
-'use strict';
+import { deepStrictEqual, throws } from 'assert';
+import semver from '../../private/semver.mjs';
 
-const { deepStrictEqual, throws } = require('assert');
-const semver = require('../../private/semver');
-
-module.exports = (tests) => {
+export default (tests) => {
   tests.add(
     '`reportCliError` with first argument `semver` not a string.',
     () => {

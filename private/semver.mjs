@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Extracts versions from a semver string.
  * @kind function
@@ -8,7 +6,7 @@
  * @returns {SemanticVersion} The major, minor, patch, prerelease and build versions.
  * @ignore
  */
-module.exports = function semver(semver) {
+export default function semver(semver) {
   if (typeof semver !== 'string')
     throw new TypeError('First argument `semver` must be a string.');
 
@@ -24,4 +22,4 @@ module.exports = function semver(semver) {
     prerelease,
     build,
   };
-};
+}

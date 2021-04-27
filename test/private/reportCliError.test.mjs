@@ -1,20 +1,18 @@
-'use strict';
+import { strictEqual, throws } from 'assert';
+import { spawnSync } from 'child_process';
+import fs from 'fs';
+import { join } from 'path';
+import { fileURLToPath } from 'url';
+import { disposableDirectory } from 'disposable-directory';
+import snapshot from 'snapshot-assertion';
+import reportCliError from '../../private/reportCliError.mjs';
+import replaceStackTraces from '../replaceStackTraces.mjs';
 
-const { strictEqual, throws } = require('assert');
-const { spawnSync } = require('child_process');
-const fs = require('fs');
-const { join, resolve } = require('path');
-const { disposableDirectory } = require('disposable-directory');
-const snapshot = require('snapshot-assertion');
-const reportCliError = require('../../private/reportCliError');
-const replaceStackTraces = require('../replaceStackTraces');
-
-const REPORT_CLI_ERROR_PATH = resolve(
-  __dirname,
-  '../../private/reportCliError'
+const REPORT_CLI_ERROR_PATH = fileURLToPath(
+  new URL('../../private/reportCliError.mjs', import.meta.url)
 );
 
-module.exports = (tests) => {
+export default (tests) => {
   tests.add(
     '`reportCliError` with first argument `cliDescription` not a string.',
     () => {
@@ -28,12 +26,14 @@ module.exports = (tests) => {
     '`reportCliError` with a `Error` instance, with stack.',
     async () => {
       await disposableDirectory(async (tempDirPath) => {
-        const filePath = join(tempDirPath, 'test.js');
+        const filePath = join(tempDirPath, 'test.mjs');
 
         await fs.promises.writeFile(
           filePath,
-          `const reportCliError = require('${REPORT_CLI_ERROR_PATH}');
-reportCliError('CLI', new Error('Message.'));`
+          `import reportCliError from '${REPORT_CLI_ERROR_PATH}';
+
+reportCliError('CLI', new Error('Message.'));
+`
         );
 
         const { stdout, stderr, status, error } = spawnSync(
@@ -53,9 +53,9 @@ reportCliError('CLI', new Error('Message.'));`
 
         await snapshot(
           replaceStackTraces(stderr.toString()),
-          resolve(
-            __dirname,
-            '../snapshots/reportCliError/Error-instance-with-stack-stderr.ans'
+          new URL(
+            '../snapshots/reportCliError/Error-instance-with-stack-stderr.ans',
+            import.meta.url
           )
         );
 
@@ -68,14 +68,16 @@ reportCliError('CLI', new Error('Message.'));`
     '`reportCliError` with a `Error` instance, without stack.',
     async () => {
       await disposableDirectory(async (tempDirPath) => {
-        const filePath = join(tempDirPath, 'test.js');
+        const filePath = join(tempDirPath, 'test.mjs');
 
         await fs.promises.writeFile(
           filePath,
-          `const reportCliError = require('${REPORT_CLI_ERROR_PATH}');
+          `import reportCliError from '${REPORT_CLI_ERROR_PATH}';
+
 const error = new Error('Message.');
 delete error.stack;
-reportCliError('CLI', error);`
+reportCliError('CLI', error);
+`
         );
 
         const { stdout, stderr, status, error } = spawnSync(
@@ -95,9 +97,9 @@ reportCliError('CLI', error);`
 
         await snapshot(
           replaceStackTraces(stderr.toString()),
-          resolve(
-            __dirname,
-            '../snapshots/reportCliError/Error-instance-without-stack-stderr.ans'
+          new URL(
+            '../snapshots/reportCliError/Error-instance-without-stack-stderr.ans',
+            import.meta.url
           )
         );
 
@@ -108,14 +110,18 @@ reportCliError('CLI', error);`
 
   tests.add('`reportCliError` with a `CliError` instance.', async () => {
     await disposableDirectory(async (tempDirPath) => {
-      const filePath = join(tempDirPath, 'test.js');
-      const cliErrorPath = resolve(__dirname, '../../private/CliError');
+      const filePath = join(tempDirPath, 'test.mjs');
+      const cliErrorPath = fileURLToPath(
+        new URL('../../private/CliError.mjs', import.meta.url)
+      );
 
       await fs.promises.writeFile(
         filePath,
-        `const CliError = require('${cliErrorPath}');
-const reportCliError = require('${REPORT_CLI_ERROR_PATH}');
-reportCliError('CLI', new CliError('Message.'));`
+        `import CliError from '${cliErrorPath}';
+import reportCliError from '${REPORT_CLI_ERROR_PATH}';
+
+reportCliError('CLI', new CliError('Message.'));
+`
       );
 
       const { stdout, stderr, status, error } = spawnSync('node', [filePath], {
@@ -131,9 +137,9 @@ reportCliError('CLI', new CliError('Message.'));`
 
       await snapshot(
         replaceStackTraces(stderr.toString()),
-        resolve(
-          __dirname,
-          '../snapshots/reportCliError/CliError-instance-stderr.ans'
+        new URL(
+          '../snapshots/reportCliError/CliError-instance-stderr.ans',
+          import.meta.url
         )
       );
 
@@ -143,12 +149,14 @@ reportCliError('CLI', new CliError('Message.'));`
 
   tests.add('`reportCliError` with a primitive value.', async () => {
     await disposableDirectory(async (tempDirPath) => {
-      const filePath = join(tempDirPath, 'test.js');
+      const filePath = join(tempDirPath, 'test.mjs');
 
       await fs.promises.writeFile(
         filePath,
-        `const reportCliError = require('${REPORT_CLI_ERROR_PATH}');
-reportCliError('CLI', '');`
+        `import reportCliError from '${REPORT_CLI_ERROR_PATH}';
+
+reportCliError('CLI', '');
+`
       );
 
       const { stdout, stderr, status, error } = spawnSync('node', [filePath], {
@@ -164,9 +172,9 @@ reportCliError('CLI', '');`
 
       await snapshot(
         replaceStackTraces(stderr.toString()),
-        resolve(
-          __dirname,
-          '../snapshots/reportCliError/primitive-value-stderr.ans'
+        new URL(
+          '../snapshots/reportCliError/primitive-value-stderr.ans',
+          import.meta.url
         )
       );
 

@@ -1,14 +1,12 @@
-'use strict';
+import { deepStrictEqual, rejects } from 'assert';
+import { spawn } from 'child_process';
+import fs from 'fs';
+import { join } from 'path';
+import { disposableDirectory } from 'disposable-directory';
+import childProcessPromise from '../../private/childProcessPromise.mjs';
+import analyseCoverage from '../../public/analyseCoverage.mjs';
 
-const { deepStrictEqual, rejects } = require('assert');
-const { spawn } = require('child_process');
-const fs = require('fs');
-const { join } = require('path');
-const { disposableDirectory } = require('disposable-directory');
-const childProcessPromise = require('../../private/childProcessPromise');
-const analyseCoverage = require('../../public/analyseCoverage');
-
-module.exports = (tests) => {
+export default (tests) => {
   tests.add(
     '`reportCliError` with first argument `coverageDirPath` not a string.',
     async () => {
@@ -26,7 +24,7 @@ module.exports = (tests) => {
         const coverageDirPath = join(tempDirPath, 'coverage');
         const nodeModulesDirPath = join(tempDirPath, 'node_modules');
         const nodeModulesModuleName = 'a';
-        const nodeModulesModuleMainFileName = 'index.js';
+        const nodeModulesModuleMainFileName = 'index.mjs';
         const nodeModulesModuleMainFilePath = join(
           nodeModulesDirPath,
           nodeModulesModuleName,
@@ -37,10 +35,7 @@ module.exports = (tests) => {
         await fs.promises.mkdir(
           join(nodeModulesDirPath, nodeModulesModuleName)
         );
-        await fs.promises.writeFile(
-          nodeModulesModuleMainFilePath,
-          "'use strict'"
-        );
+        await fs.promises.writeFile(nodeModulesModuleMainFilePath, '1;');
 
         await childProcessPromise(
           spawn('node', [nodeModulesModuleMainFilePath], {
@@ -63,10 +58,10 @@ module.exports = (tests) => {
     await disposableDirectory(async (tempDirPath) => {
       const coverageDirPath = join(tempDirPath, 'coverage');
       const dirPath = join(tempDirPath, 'test');
-      const filePath = join(dirPath, 'index.js');
+      const filePath = join(dirPath, 'index.mjs');
 
       await fs.promises.mkdir(dirPath);
-      await fs.promises.writeFile(filePath, "'use strict'");
+      await fs.promises.writeFile(filePath, '1;');
 
       await childProcessPromise(
         spawn('node', [filePath], {
@@ -89,9 +84,9 @@ module.exports = (tests) => {
     async () => {
       await disposableDirectory(async (tempDirPath) => {
         const coverageDirPath = join(tempDirPath, 'coverage');
-        const filePath = join(tempDirPath, 'index.test.js');
+        const filePath = join(tempDirPath, 'index.test.mjs');
 
-        await fs.promises.writeFile(filePath, "'use strict'");
+        await fs.promises.writeFile(filePath, '1;');
 
         await childProcessPromise(
           spawn('node', [filePath], {
@@ -113,9 +108,9 @@ module.exports = (tests) => {
   tests.add('`analyseCoverage` ignores files named `test`.', async () => {
     await disposableDirectory(async (tempDirPath) => {
       const coverageDirPath = join(tempDirPath, 'coverage');
-      const filePath = join(tempDirPath, 'test.js');
+      const filePath = join(tempDirPath, 'test.mjs');
 
-      await fs.promises.writeFile(filePath, "'use strict'");
+      await fs.promises.writeFile(filePath, '1;');
 
       await childProcessPromise(
         spawn('node', [filePath], {
@@ -136,9 +131,9 @@ module.exports = (tests) => {
   tests.add('`analyseCoverage` with 1 covered file.', async () => {
     await disposableDirectory(async (tempDirPath) => {
       const coverageDirPath = join(tempDirPath, 'coverage');
-      const filePath = join(tempDirPath, 'index.js');
+      const filePath = join(tempDirPath, 'index.mjs');
 
-      await fs.promises.writeFile(filePath, "'use strict'");
+      await fs.promises.writeFile(filePath, '1;');
 
       await childProcessPromise(
         spawn('node', [filePath], {
@@ -159,9 +154,12 @@ module.exports = (tests) => {
   tests.add('`analyseCoverage` with 1 uncovered file.', async () => {
     await disposableDirectory(async (tempDirPath) => {
       const coverageDirPath = join(tempDirPath, 'coverage');
-      const filePath = join(tempDirPath, 'index.js');
+      const filePath = join(tempDirPath, 'index.mjs');
 
-      await fs.promises.writeFile(filePath, 'function a() {}; function b() {}');
+      await fs.promises.writeFile(
+        filePath,
+        'function a() {}; function b() {};'
+      );
 
       await childProcessPromise(
         spawn('node', [filePath], {

@@ -1,17 +1,15 @@
 #!/usr/bin/env node
 
-'use strict';
-
-const { spawn } = require('child_process');
-const { disposableDirectory } = require('disposable-directory');
-const kleur = require('kleur');
-const CliError = require('../private/CliError');
-const childProcessPromise = require('../private/childProcessPromise');
-const reportCliError = require('../private/reportCliError');
-const analyseCoverage = require('../public/analyseCoverage');
-const coverageSupported = require('../public/coverageSupported');
-const minNodeVersion = require('../public/coverageSupportedMinNodeVersion');
-const reportCoverage = require('../public/reportCoverage');
+import { spawn } from 'child_process';
+import { disposableDirectory } from 'disposable-directory';
+import kleur from 'kleur';
+import CliError from '../private/CliError.mjs';
+import childProcessPromise from '../private/childProcessPromise.mjs';
+import reportCliError from '../private/reportCliError.mjs';
+import analyseCoverage from '../public/analyseCoverage.mjs';
+import coverageSupported from '../public/coverageSupported.mjs';
+import minNodeVersion from '../public/coverageSupportedMinNodeVersion.mjs';
+import reportCoverage from '../public/reportCoverage.mjs';
 
 /**
  * Powers the `coverage-node` CLI. Runs Node.js with the given arguments and

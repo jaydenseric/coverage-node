@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Gets info about a source code range, including line/column numbers and if
  * it’s ignored by a comment.
@@ -12,7 +10,7 @@
  * @returns {SourceCodeRange} Source code range info.
  * @ignore
  */
-module.exports = function sourceRange(
+export default function sourceRange(
   source,
   startOffset,
   endOffset,
@@ -79,4 +77,4 @@ module.exports = function sourceRange(
   }
 
   return range;
-};
+}

@@ -1,10 +1,8 @@
-'use strict';
-
-const fs = require('fs');
-const { join } = require('path');
-const { fileURLToPath } = require('url');
-const { mergeProcessCovs } = require('@bcoe/v8-coverage');
-const sourceRange = require('../private/sourceRange');
+import fs from 'fs';
+import { join } from 'path';
+import { fileURLToPath } from 'url';
+import v8Coverage from '@bcoe/v8-coverage';
+import sourceRange from '../private/sourceRange.mjs';
 
 /**
  * Analyzes [Node.js generated V8 JavaScript code coverage data](https://nodejs.org/api/cli.html#cli_node_v8_coverage_dir)
@@ -19,18 +17,10 @@ const sourceRange = require('../private/sourceRange');
  * ```
  *
  * ```js
- * import analyseCoverage from 'coverage-node/public/analyseCoverage.js';
- * ```
- * @example <caption>Ways to `require`.</caption>
- * ```js
- * const { analyseCoverage } = require('coverage-node');
- * ```
- *
- * ```js
- * const analyseCoverage = require('coverage-node/public/analyseCoverage');
+ * import analyseCoverage from 'coverage-node/public/analyseCoverage.mjs';
  * ```
  */
-module.exports = async function analyseCoverage(coverageDirPath) {
+export default async function analyseCoverage(coverageDirPath) {
   if (typeof coverageDirPath !== 'string')
     throw new TypeError('First argument `coverageDirPath` must be a string.');
 
@@ -63,7 +53,7 @@ module.exports = async function analyseCoverage(coverageDirPath) {
           })
       );
 
-  const mergedCoverage = mergeProcessCovs(
+  const mergedCoverage = v8Coverage.mergeProcessCovs(
     await Promise.all(filteredProcessCoverages)
   );
 
@@ -117,4 +107,4 @@ module.exports = async function analyseCoverage(coverageDirPath) {
   }
 
   return analysis;
-};
+}

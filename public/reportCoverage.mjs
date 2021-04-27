@@ -1,8 +1,6 @@
-'use strict';
-
-const { relative } = require('path');
-const kleur = require('kleur');
-const errorConsole = require('../private/errorConsole');
+import { relative } from 'path';
+import kleur from 'kleur';
+import errorConsole from '../private/errorConsole.mjs';
 
 /**
  * Reports a code coverage analysis to the console.
@@ -15,18 +13,10 @@ const errorConsole = require('../private/errorConsole');
  * ```
  *
  * ```js
- * import reportCoverage from 'coverage-node/public/reportCoverage.js';
- * ```
- * @example <caption>Ways to `require`.</caption>
- * ```js
- * const { reportCoverage } = require('coverage-node');
- * ```
- *
- * ```js
- * const reportCoverage = require('coverage-node/public/reportCoverage');
+ * import reportCoverage from 'coverage-node/public/reportCoverage.mjs';
  * ```
  */
-module.exports = function reportCoverage({
+export default function reportCoverage({
   filesCount,
   covered,
   ignored,
@@ -91,4 +81,4 @@ module.exports = function reportCoverage({
         `${covered.length}/${filesCount} files covered.`
       )}\n`
   );
-};
+}

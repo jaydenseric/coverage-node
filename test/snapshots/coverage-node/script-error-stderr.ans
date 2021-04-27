@@ -1,6 +1,6 @@
-<file path>:1
-throw new Error('Error.')
-^
+file://<file path>:1
+throw new Error('Error.');
+      ^
 
 Error: Error.
     <stack trace>

@@ -27,18 +27,15 @@
     "private",
     "public"
   ],
-  "main": "public",
+  "main": "./public/index.mjs",
   "exports": {
-    ".": {
-      "import": "./public/index.mjs",
-      "require": "./public/index.js"
-    },
-    "./public/": "./public/",
+    ".": "./public/index.mjs",
+    "./public/*": "./public/*",
     "./package": "./package.json",
     "./package.json": "./package.json"
   },
   "bin": {
-    "coverage-node": "cli/coverage-node.js"
+    "coverage-node": "cli/coverage-node.mjs"
   },
   "engines": {
     "node": "^12.20 || >= 14.13"
@@ -59,14 +56,14 @@
     "jsdoc-md": "^10.0.0",
     "prettier": "^2.2.1",
     "snapshot-assertion": "^2.0.0",
-    "test-director": "^5.0.0"
+    "test-director": "^6.0.0"
   },
   "scripts": {
     "prepare": "jsdoc-md",
     "test": "npm run test:eslint && npm run test:prettier && npm run test:api",
-    "test:eslint": "eslint .",
+    "test:eslint": "eslint --ext mjs,js .",
     "test:prettier": "prettier -c .",
-    "test:api": "node cli/coverage-node test",
+    "test:api": "node cli/coverage-node.mjs test/index.mjs",
     "prepublishOnly": "npm test"
   }
 }
