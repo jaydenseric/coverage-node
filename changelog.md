@@ -9,6 +9,7 @@
 
 ### Patch
 
+- Simplified the package `prepare` scripts now that [`jsdoc-md`](https://npm.im/jsdoc-md) v10 automatically generates a Prettier formatted readme.
 - Always use regex `u` mode.
 - Stop using [`hard-rejection`](https://npm.im/hard-rejection) to detect unhandled `Promise` rejections in tests, as Node.js v15+ does this natively.
 - Improved the test helper function `replaceStackTraces`.
