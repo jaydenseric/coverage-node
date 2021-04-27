@@ -15,6 +15,7 @@
 - Always use regex `u` mode.
 - Stop using [`hard-rejection`](https://npm.im/hard-rejection) to detect unhandled `Promise` rejections in tests, as Node.js v15+ does this natively.
 - Improved the test helper function `replaceStackTraces`.
+- Refactored unnecessary template strings.
 - Updated GitHub Actions CI config:
   - Also run tests with Node.js v16.
   - Updated `actions/checkout` to v2.

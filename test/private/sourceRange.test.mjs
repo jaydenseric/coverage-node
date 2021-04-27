@@ -36,7 +36,7 @@ export default (tests) => {
   );
 
   tests.add('`sourceRange` with a single char line.', () => {
-    const source = `a`;
+    const source = 'a';
 
     deepStrictEqual(sourceRange(source, 0, 0), {
       ignore: false,
@@ -54,7 +54,7 @@ export default (tests) => {
   });
 
   tests.add('`sourceRange` with a multi char line.', () => {
-    const source = `abc`;
+    const source = 'abc';
 
     deepStrictEqual(sourceRange(source, 0, 2), {
       ignore: false,
