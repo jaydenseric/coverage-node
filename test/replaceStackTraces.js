@@ -13,6 +13,14 @@ module.exports = function replaceStackTraces(
   string,
   replacer = '$1<stack trace>'
 ) {
+  if (typeof string !== 'string')
+    throw new TypeError('First argument `string` must be a string.');
+
+  if (typeof replacer !== 'string' && typeof replacer !== 'function')
+    throw new TypeError(
+      'Second argument `replacer` must be a string or function.'
+    );
+
   return string.replace(
     /(^ {2,})at (?:(?! \{$).)+(?:\r?\n\1at (?:(?! \{$).)+)*/gmu,
     replacer

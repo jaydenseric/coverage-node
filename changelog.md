@@ -9,6 +9,7 @@
 ### Patch
 
 - Always use regex `u` mode.
+- Improved the test helper function `replaceStackTraces`.
 - Updated GitHub Actions CI config:
   - Also run tests with Node.js v16.
   - Updated `actions/checkout` to v2.
