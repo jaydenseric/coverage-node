@@ -8,6 +8,7 @@
 
 ### Patch
 
+- Always use regex `u` mode.
 - Updated GitHub Actions CI config:
   - Also run tests with Node.js v16.
   - Updated `actions/checkout` to v2.

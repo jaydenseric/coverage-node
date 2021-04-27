@@ -55,9 +55,9 @@ module.exports = async function analyseCoverage(coverageDirPath) {
                   // Exclude `test` directory files.
                   !url.includes('/test/') &&
                   // Exclude files with `.test` prefixed before the extension.
-                  !/\.test\.\w+$/.test(url) &&
+                  !/\.test\.\w+$/u.test(url) &&
                   // Exclude files named `test` (regardless of extension).
-                  !/\/test\.\w+$/.test(url)
+                  !/\/test\.\w+$/u.test(url)
               ),
             };
           })

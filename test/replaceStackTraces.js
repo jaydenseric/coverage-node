@@ -14,7 +14,7 @@ module.exports = function replaceStackTraces(
   replacer = '$1<stack trace>'
 ) {
   return string.replace(
-    /(^ {2,})at (?:(?! {$).)+(?:\r?\n\1at (?:(?! {$).)+)*/gm,
+    /(^ {2,})at (?:(?! \{$).)+(?:\r?\n\1at (?:(?! \{$).)+)*/gmu,
     replacer
   );
 };

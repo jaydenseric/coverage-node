@@ -42,7 +42,7 @@ module.exports = function sourceRange(
     start: { offset: startOffset },
     end: { offset: endOffset },
   };
-  const lines = source.split(/^/gm);
+  const lines = source.split(/^/gmu);
 
   let lineOffset = 0;
 
