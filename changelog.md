@@ -1,5 +1,11 @@
 # coverage-node changelog
 
+## Next
+
+### Major
+
+- Updated supported Node.js versions to `^12.20 || >= 14.13`.
+
 ## 4.0.0
 
 ### Major
