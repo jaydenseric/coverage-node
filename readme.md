@@ -7,7 +7,7 @@ A simple CLI to run [Node.js](https://nodejs.org) and report code coverage.
 - ✨ Zero config.
 - 🏁 \~323 [SLOC](https://en.wikipedia.org/wiki/Source_lines_of_code), written from scratch to use [code coverage features](https://nodejs.org/api/cli.html#cli_node_v8_coverage_dir) built into Node.js v10+.
 - 📦 [\~337 kB install size](https://packagephobia.com/result?p=coverage-node), compared to [2.2 MB for `c8` v7.3.5](https://packagephobia.com/result?p=c8@7.3.5) or [8.84 MB for `nyc` v15.1.0](https://packagephobia.com/result?p=nyc@15.1.0).
-- 🖱Displays ignored or uncovered source code ranges as paths, clickable in IDEs such as [VS Code](https://code.visualstudio.com).
+- 🖱 Displays ignored or uncovered source code ranges as paths, clickable in IDEs such as [VS Code](https://code.visualstudio.com).
 
 ## Setup
 
@@ -17,7 +17,7 @@ To install from [npm](https://npmjs.com) run:
 npm install coverage-node --save-dev
 ```
 
-In a [`package.json` script](https://docs.npmjs.com/files/package.json#scripts), replace the `node` command with `coverage-node`:
+In a [`package.json` script](https://docs.npmjs.com/files/package.json#scripts), replace the `node` command with [`coverage-node`](#command-coverage-node):
 
 ```diff
  {
@@ -31,7 +31,7 @@ In a [`package.json` script](https://docs.npmjs.com/files/package.json#scripts),
 ## Support
 
 - Linux, macOS.
-- Node.js `^12.20 || >= 14.13`, but for Node.js versions < v13.3 that produce [unreliable coverage data](https://github.com/nodejs/node/issues/25937#issuecomment-563115421) the [`coverage-node` CLI](#cli) skips code coverage and logs a warning.
+- Node.js `^12.20 || >= 14.13`, but for Node.js versions < v13.3 that produce [unreliable coverage data](https://github.com/nodejs/node/issues/25937#issuecomment-563115421) the command [`coverage-node`](#command-coverage-node) skips code coverage and logs a warning.
 
 ## Ignored files
 
@@ -53,15 +53,29 @@ if (false) console.log('Never runs.');
 
 ## CLI
 
-The `coverage-node` command substitutes the normal `node` command; any [`node` CLI options](https://nodejs.org/api/cli.html) can be used to run a test script.
+### Command `coverage-node`
 
-If the script doesn’t error a code coverage analysis is reported to the console, and if coverage is incomplete the exit code is `1`.
+Substitutes the normal `node` command; any [`node` CLI options](https://nodejs.org/api/cli.html#cli_options) can be used to run a test script. If the script doesn’t error a code coverage analysis is reported to the console, and if coverage is incomplete the exit code is `1`.
 
-[`npx`](https://npm.im/npx) can be used to quickly check code coverage for a script:
+#### Examples
 
-```sh
-npx coverage-node test.mjs
-```
+_Using [`npx`](https://docs.npmjs.com/cli/v7/commands/npx)._
+
+> [`npx`](https://npm.im/npx) can be used to quickly check code coverage for a script:
+>
+> ```sh
+> npx coverage-node test.mjs
+> ```
+
+_Using a [`package.json` script](https://docs.npmjs.com/cli/v7/using-npm/scripts)._
+
+> ```json
+> {
+>   "scripts": {
+>     "test": "coverage-node test.mjs"
+>   }
+> }
+> ```
 
 ## API
 
