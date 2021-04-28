@@ -11,7 +11,7 @@ A simple CLI to run [Node.js](https://nodejs.org) and report code coverage.
 
 ## Setup
 
-To install from [npm](https://npmjs.com) run:
+To install with [npm](https://npmjs.com/get-npm), run:
 
 ```sh
 npm install coverage-node --save-dev

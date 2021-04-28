@@ -1,5 +1,11 @@
 # coverage-node changelog
 
+## Next
+
+### Patch
+
+- Readme tweaks.
+
 ## 5.0.0
 
 ### Major
