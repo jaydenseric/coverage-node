@@ -4,6 +4,7 @@
 
 ### Patch
 
+- Updated dev dependencies.
 - Readme tweaks.
 
 ## 5.0.0
