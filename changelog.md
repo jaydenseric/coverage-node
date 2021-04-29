@@ -5,6 +5,7 @@
 ### Patch
 
 - Updated dev dependencies.
+- Added a package `test:jsdoc` script that checks the readme API docs are up to date with the source JSDoc.
 - Readme tweaks.
 
 ## 5.0.0
