@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { spawn } from 'child_process';
-import { disposableDirectory } from 'disposable-directory';
+import disposableDirectory from 'disposable-directory';
 import kleur from 'kleur';
 import CliError from '../private/CliError.mjs';
 import childProcessPromise from '../private/childProcessPromise.mjs';

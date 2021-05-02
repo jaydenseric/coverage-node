@@ -3,7 +3,7 @@ import { spawnSync } from 'child_process';
 import fs from 'fs';
 import { join } from 'path';
 import { fileURLToPath } from 'url';
-import { disposableDirectory } from 'disposable-directory';
+import disposableDirectory from 'disposable-directory';
 import snapshot from 'snapshot-assertion';
 import reportCliError from '../../private/reportCliError.mjs';
 import replaceStackTraces from '../replaceStackTraces.mjs';
