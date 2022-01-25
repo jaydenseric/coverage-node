@@ -31,7 +31,7 @@ In a [`package.json` script](https://docs.npmjs.com/files/package.json#scripts),
 ## Support
 
 - Linux, macOS.
-- Node.js `^12.20 || >= 14.13`, but for Node.js versions < v13.3 that produce [unreliable coverage data](https://github.com/nodejs/node/issues/25937#issuecomment-563115421) the command [`coverage-node`](#command-coverage-node) skips code coverage and logs a warning.
+- Node.js `^12.22.0 || ^14.17.0 || >= 16.0.0`, but for Node.js versions < v13.3 that produce [unreliable coverage data](https://github.com/nodejs/node/issues/25937#issuecomment-563115421) the command [`coverage-node`](#command-coverage-node) skips code coverage and logs a warning.
 
 ## Ignored files
 
