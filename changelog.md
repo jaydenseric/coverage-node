@@ -13,6 +13,7 @@
 - Simplified package scripts.
 - Also run GitHub Actions CI with Node.js v17, and drop v15.
 - Configured Prettier option `singleQuote` to the default, `false`.
+- Renamed imports in the test index module.
 - Readme tweaks.
 
 ## 5.0.1

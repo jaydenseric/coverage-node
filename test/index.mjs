@@ -1,20 +1,20 @@
 import TestDirector from "test-director";
-import testCoverageNodeCli from "./cli/coverage-node.test.mjs";
-import testChildProcessPromise from "./private/childProcessPromise.test.mjs";
-import testReportCliError from "./private/reportCliError.test.mjs";
-import testSemver from "./private/semver.test.mjs";
-import testSourceRange from "./private/sourceRange.test.mjs";
-import testAnalyseCoverage from "./public/analyseCoverage.test.mjs";
-import testReplaceStackTraces from "./replaceStackTraces.test.mjs";
+import test_cli_coverage_node from "./cli/coverage-node.test.mjs";
+import test_childProcessPromise from "./private/childProcessPromise.test.mjs";
+import test_reportCliError from "./private/reportCliError.test.mjs";
+import test_semver from "./private/semver.test.mjs";
+import test_sourceRange from "./private/sourceRange.test.mjs";
+import test_analyseCoverage from "./public/analyseCoverage.test.mjs";
+import test_replaceStackTraces from "./replaceStackTraces.test.mjs";
 
 const tests = new TestDirector();
 
-testReplaceStackTraces(tests);
-testCoverageNodeCli(tests);
-testChildProcessPromise(tests);
-testReportCliError(tests);
-testSemver(tests);
-testSourceRange(tests);
-testAnalyseCoverage(tests);
+test_replaceStackTraces(tests);
+test_cli_coverage_node(tests);
+test_childProcessPromise(tests);
+test_reportCliError(tests);
+test_semver(tests);
+test_sourceRange(tests);
+test_analyseCoverage(tests);
 
 tests.run();
