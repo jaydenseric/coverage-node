@@ -42,21 +42,21 @@
   },
   "dependencies": {
     "@bcoe/v8-coverage": "^0.2.3",
-    "disposable-directory": "^4.0.0",
+    "disposable-directory": "^5.0.1",
     "kleur": "^4.1.4"
   },
   "devDependencies": {
-    "eslint": "^7.25.0",
-    "eslint-config-env": "^19.0.2",
+    "eslint": "^8.7.0",
+    "eslint-config-env": "^23.0.2",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jsdoc": "^33.0.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jsdoc": "^37.6.3",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^3.4.0",
-    "jsdoc-md": "^10.1.0",
-    "prettier": "^2.2.1",
-    "snapshot-assertion": "^3.0.0",
-    "test-director": "^6.0.0"
+    "eslint-plugin-prettier": "^4.0.0",
+    "jsdoc-md": "^11.0.2",
+    "prettier": "^2.5.1",
+    "snapshot-assertion": "^4.0.1",
+    "test-director": "^8.0.1"
   },
   "scripts": {
     "jsdoc": "jsdoc-md",

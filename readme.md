@@ -81,8 +81,6 @@ _Using a [`package.json` script](https://docs.npmjs.com/cli/v7/using-npm/scripts
 
 ## API
 
-### Table of contents
-
 - [function analyseCoverage](#function-analysecoverage)
 - [function reportCoverage](#function-reportcoverage)
 - [constant coverageSupported](#constant-coveragesupported)
@@ -188,7 +186,7 @@ _Ways to `import`._
 | Property | Type | Description |
 | :-- | :-- | :-- |
 | `filesCount` | number | Number of files analyzed. |
-| `covered` | Array<string> | Covered file absolute paths. |
+| `covered` | Array\<string> | Covered file absolute paths. |
 | `ignored` | Array<[SourceCodeRanges](#type-sourcecoderanges)> | Ignored source code ranges. |
 | `uncovered` | Array<[SourceCodeRanges](#type-sourcecoderanges)> | Uncovered source code ranges. |
 
