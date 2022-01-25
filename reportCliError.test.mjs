@@ -5,11 +5,11 @@ import { join } from "path";
 import { fileURLToPath } from "url";
 import disposableDirectory from "disposable-directory";
 import snapshot from "snapshot-assertion";
-import reportCliError from "../../private/reportCliError.mjs";
-import replaceStackTraces from "../replaceStackTraces.mjs";
+import reportCliError from "./reportCliError.mjs";
+import replaceStackTraces from "./test/replaceStackTraces.mjs";
 
 const REPORT_CLI_ERROR_PATH = fileURLToPath(
-  new URL("../../private/reportCliError.mjs", import.meta.url)
+  new URL("./reportCliError.mjs", import.meta.url)
 );
 
 export default (tests) => {
@@ -54,7 +54,7 @@ reportCliError("CLI", new Error("Message."));
         await snapshot(
           replaceStackTraces(stderr.toString()),
           new URL(
-            "../snapshots/reportCliError/Error-instance-with-stack-stderr.ans",
+            "./test/snapshots/reportCliError/Error-instance-with-stack-stderr.ans",
             import.meta.url
           )
         );
@@ -98,7 +98,7 @@ reportCliError("CLI", error);
         await snapshot(
           replaceStackTraces(stderr.toString()),
           new URL(
-            "../snapshots/reportCliError/Error-instance-without-stack-stderr.ans",
+            "./test/snapshots/reportCliError/Error-instance-without-stack-stderr.ans",
             import.meta.url
           )
         );
@@ -112,7 +112,7 @@ reportCliError("CLI", error);
     await disposableDirectory(async (tempDirPath) => {
       const filePath = join(tempDirPath, "test.mjs");
       const cliErrorPath = fileURLToPath(
-        new URL("../../private/CliError.mjs", import.meta.url)
+        new URL("./CliError.mjs", import.meta.url)
       );
 
       await fs.promises.writeFile(
@@ -138,7 +138,7 @@ reportCliError("CLI", new CliError("Message."));
       await snapshot(
         replaceStackTraces(stderr.toString()),
         new URL(
-          "../snapshots/reportCliError/CliError-instance-stderr.ans",
+          "./test/snapshots/reportCliError/CliError-instance-stderr.ans",
           import.meta.url
         )
       );
@@ -173,7 +173,7 @@ reportCliError("CLI", "");
       await snapshot(
         replaceStackTraces(stderr.toString()),
         new URL(
-          "../snapshots/reportCliError/primitive-value-stderr.ans",
+          "./test/snapshots/reportCliError/primitive-value-stderr.ans",
           import.meta.url
         )
       );

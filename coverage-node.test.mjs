@@ -5,11 +5,11 @@ import { join, relative } from "path";
 import { fileURLToPath } from "url";
 import disposableDirectory from "disposable-directory";
 import snapshot from "snapshot-assertion";
-import coverageSupported from "../../public/coverageSupported.mjs";
-import replaceStackTraces from "../replaceStackTraces.mjs";
+import coverageSupported from "./coverageSupported.mjs";
+import replaceStackTraces from "./test/replaceStackTraces.mjs";
 
 const COVERAGE_NODE_CLI_PATH = fileURLToPath(
-  new URL("../../cli/coverage-node.mjs", import.meta.url)
+  new URL("./coverage-node.mjs", import.meta.url)
 );
 const SNAPSHOT_REPLACEMENT_FILE_PATH = "<file path>";
 const SNAPSHOT_REPLACEMENT_PROCESS_NODE_VERSION = "<process Node.js version>";
@@ -46,7 +46,7 @@ export default (tests) => {
                 SNAPSHOT_REPLACEMENT_PROCESS_NODE_VERSION
               ),
         new URL(
-          `../snapshots/coverage-node/1-covered-file-coverage-${
+          `./test/snapshots/coverage-node/1-covered-file-coverage-${
             coverageSupported ? "supported" : "unsupported"
           }-stdout.ans`,
           import.meta.url
@@ -94,7 +94,7 @@ export default (tests) => {
                 SNAPSHOT_REPLACEMENT_PROCESS_NODE_VERSION
               ),
         new URL(
-          `../snapshots/coverage-node/1-ignored-file-coverage-${
+          `./test/snapshots/coverage-node/1-ignored-file-coverage-${
             coverageSupported ? "supported" : "unsupported"
           }-stdout.ans`,
           import.meta.url
@@ -135,7 +135,7 @@ export default (tests) => {
                 SNAPSHOT_REPLACEMENT_PROCESS_NODE_VERSION
               ),
         new URL(
-          `../snapshots/coverage-node/1-uncovered-file-coverage-${
+          `./test/snapshots/coverage-node/1-uncovered-file-coverage-${
             coverageSupported ? "supported" : "unsupported"
           }-stdout.ans`,
           import.meta.url
@@ -148,7 +148,7 @@ export default (tests) => {
             .toString()
             .replace(relative("", filePath), SNAPSHOT_REPLACEMENT_FILE_PATH),
           new URL(
-            "../snapshots/coverage-node/1-uncovered-file-coverage-supported-stderr.ans",
+            "./test/snapshots/coverage-node/1-uncovered-file-coverage-supported-stderr.ans",
             import.meta.url
           )
         );
@@ -220,7 +220,7 @@ import "${fileFPath}";
                   SNAPSHOT_REPLACEMENT_PROCESS_NODE_VERSION
                 ),
           new URL(
-            `../snapshots/coverage-node/2-covered-ignored-uncovered-files-coverage-${
+            `./test/snapshots/coverage-node/2-covered-ignored-uncovered-files-coverage-${
               coverageSupported ? "supported" : "unsupported"
             }-stdout.ans`,
             import.meta.url
@@ -234,7 +234,7 @@ import "${fileFPath}";
               .replace(relative("", fileEPath), "<pathE>")
               .replace(relative("", fileFPath), "<pathF>"),
             new URL(
-              "../snapshots/coverage-node/2-covered-ignored-uncovered-files-coverage-supported-stderr.ans",
+              "./test/snapshots/coverage-node/2-covered-ignored-uncovered-files-coverage-supported-stderr.ans",
               import.meta.url
             )
           );
@@ -276,7 +276,7 @@ import "${fileFPath}";
                 SNAPSHOT_REPLACEMENT_PROCESS_NODE_VERSION
               ),
         new URL(
-          `../snapshots/coverage-node/script-console-log-coverage-${
+          `./test/snapshots/coverage-node/script-console-log-coverage-${
             coverageSupported ? "supported" : "unsupported"
           }-stdout.ans`,
           import.meta.url
@@ -315,7 +315,7 @@ import "${fileFPath}";
           SNAPSHOT_REPLACEMENT_FILE_PATH
         ),
         new URL(
-          "../snapshots/coverage-node/script-error-stderr.ans",
+          "./test/snapshots/coverage-node/script-error-stderr.ans",
           import.meta.url
         )
       );
@@ -383,7 +383,7 @@ deprecated();
       await snapshot(
         replaceStackTraces(stderr.toString()),
         new URL(
-          "../snapshots/coverage-node/node-option-invalid-stderr.ans",
+          "./test/snapshots/coverage-node/node-option-invalid-stderr.ans",
           import.meta.url
         )
       );
@@ -421,7 +421,7 @@ deprecated();
   tests.add("`coverage-node` CLI without arguments.", async () => {
     const { stdout, stderr, status, error } = spawnSync(
       "node",
-      ["cli/coverage-node.mjs"],
+      ["coverage-node.mjs"],
       {
         env: {
           ...process.env,
@@ -437,7 +437,7 @@ deprecated();
     await snapshot(
       replaceStackTraces(stderr.toString()),
       new URL(
-        `../snapshots/coverage-node/without-arguments-coverage-${
+        `./test/snapshots/coverage-node/without-arguments-coverage-${
           coverageSupported ? "supported" : "unsupported"
         }-stderr.ans`,
         import.meta.url

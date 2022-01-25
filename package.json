@@ -23,18 +23,30 @@
     "mjs"
   ],
   "files": [
-    "cli",
-    "private",
-    "public"
+    "analyseCoverage.mjs",
+    "childProcessPromise.mjs",
+    "CliError.mjs",
+    "coverage-node.mjs",
+    "coverageSupported.mjs",
+    "coverageSupportedMinNodeVersion.mjs",
+    "errorConsole.mjs",
+    "reportCliError.mjs",
+    "reportCoverage.mjs",
+    "semver.mjs",
+    "sourceRange.mjs",
+    "types.mjs"
   ],
-  "main": "./public/index.mjs",
   "exports": {
-    ".": "./public/index.mjs",
-    "./public/*": "./public/*",
-    "./package.json": "./package.json"
+    "./analyseCoverage.mjs": "./analyseCoverage.mjs",
+    "./coverageSupported.mjs": "./coverageSupported.mjs",
+    "./coverageSupportedMinNodeVersion.mjs": "./coverageSupportedMinNodeVersion.mjs",
+    "./errorConsole.mjs": "./errorConsole.mjs",
+    "./package.json": "./package.json",
+    "./reportCoverage.mjs": "./reportCoverage.mjs",
+    "./types.mjs": "./types.mjs"
   },
   "bin": {
-    "coverage-node": "cli/coverage-node.mjs"
+    "coverage-node": "coverage-node.mjs"
   },
   "engines": {
     "node": "^12.22.0 || ^14.17.0 || >= 16.0.0"
@@ -62,7 +74,7 @@
     "docs-check": "jsdoc-md -c",
     "eslint": "eslint .",
     "prettier": "prettier -c .",
-    "tests": "node cli/coverage-node.mjs test/index.mjs",
+    "tests": "node coverage-node.mjs test.mjs",
     "test": "npm run eslint && npm run prettier && npm run docs-check && npm run tests",
     "prepublishOnly": "npm test"
   }

@@ -3,13 +3,13 @@
 import { spawn } from "child_process";
 import disposableDirectory from "disposable-directory";
 import kleur from "kleur";
-import CliError from "../private/CliError.mjs";
-import childProcessPromise from "../private/childProcessPromise.mjs";
-import reportCliError from "../private/reportCliError.mjs";
-import analyseCoverage from "../public/analyseCoverage.mjs";
-import coverageSupported from "../public/coverageSupported.mjs";
-import minNodeVersion from "../public/coverageSupportedMinNodeVersion.mjs";
-import reportCoverage from "../public/reportCoverage.mjs";
+import CliError from "./CliError.mjs";
+import analyseCoverage from "./analyseCoverage.mjs";
+import childProcessPromise from "./childProcessPromise.mjs";
+import coverageSupported from "./coverageSupported.mjs";
+import minNodeVersion from "./coverageSupportedMinNodeVersion.mjs";
+import reportCliError from "./reportCliError.mjs";
+import reportCoverage from "./reportCoverage.mjs";
 
 /**
  * Powers the `coverage-node` CLI. Runs Node.js with the given arguments and

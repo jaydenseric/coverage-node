@@ -1,5 +1,5 @@
-import semver from "../private/semver.mjs";
 import coverageSupportedMinNodeVersion from "./coverageSupportedMinNodeVersion.mjs";
+import semver from "./semver.mjs";
 
 const {
   major: minMajor,
@@ -14,13 +14,9 @@ const { major, minor, patch } = semver(process.versions.node);
  * @kind constant
  * @name coverageSupported
  * @type {boolean}
- * @example <caption>Ways to `import`.</caption>
+ * @example <caption>How to import.</caption>
  * ```js
- * import { coverageSupported } from "coverage-node";
- * ```
- *
- * ```js
- * import coverageSupported from "coverage-node/public/coverageSupported.mjs";
+ * import coverageSupported from "coverage-node/coverageSupported.mjs";
  * ```
  */
 export default // coverage ignore next line

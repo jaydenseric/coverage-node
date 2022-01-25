@@ -2,7 +2,7 @@ import fs from "fs";
 import { join } from "path";
 import { fileURLToPath } from "url";
 import v8Coverage from "@bcoe/v8-coverage";
-import sourceRange from "../private/sourceRange.mjs";
+import sourceRange from "./sourceRange.mjs";
 
 /**
  * Analyzes [Node.js generated V8 JavaScript code coverage data](https://nodejs.org/api/cli.html#cli_node_v8_coverage_dir)
@@ -11,13 +11,9 @@ import sourceRange from "../private/sourceRange.mjs";
  * @name analyseCoverage
  * @param {string} coverageDirPath Code coverage data directory path.
  * @returns {Promise<CoverageAnalysis>} Resolves the coverage analysis.
- * @example <caption>Ways to `import`.</caption>
+ * @example <caption>How to import.</caption>
  * ```js
- * import { analyseCoverage } from "coverage-node";
- * ```
- *
- * ```js
- * import analyseCoverage from "coverage-node/public/analyseCoverage.mjs";
+ * import analyseCoverage from "coverage-node/analyseCoverage.mjs";
  * ```
  */
 export default async function analyseCoverage(coverageDirPath) {

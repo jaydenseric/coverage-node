@@ -4,13 +4,9 @@
  * @kind constant
  * @name coverageSupportedMinNodeVersion
  * @type {SemanticVersion}
- * @example <caption>Ways to `import`.</caption>
+ * @example <caption>How to import.</caption>
  * ```js
- * import { coverageSupportedMinNodeVersion } from "coverage-node";
- * ```
- *
- * ```js
- * import coverageSupportedMinNodeVersion from "coverage-node/public/coverageSupportedMinNodeVersion.mjs";
+ * import coverageSupportedMinNodeVersion from "coverage-node/coverageSupportedMinNodeVersion.mjs";
  * ```
  */
 export default { major: 13, minor: 3, patch: 0 };

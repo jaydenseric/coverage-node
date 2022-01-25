@@ -1,5 +1,5 @@
 import { deepStrictEqual, throws } from "assert";
-import semver from "../../private/semver.mjs";
+import semver from "./semver.mjs";
 
 export default (tests) => {
   tests.add(

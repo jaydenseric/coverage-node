@@ -3,8 +3,8 @@ import { spawn } from "child_process";
 import fs from "fs";
 import { join } from "path";
 import disposableDirectory from "disposable-directory";
-import childProcessPromise from "../../private/childProcessPromise.mjs";
-import analyseCoverage from "../../public/analyseCoverage.mjs";
+import analyseCoverage from "./analyseCoverage.mjs";
+import childProcessPromise from "./childProcessPromise.mjs";
 
 export default (tests) => {
   tests.add(

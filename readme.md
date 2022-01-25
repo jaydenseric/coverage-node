@@ -103,14 +103,10 @@ Analyzes [Node.js generated V8 JavaScript code coverage data](https://nodejs.org
 
 #### Examples
 
-_Ways to `import`._
+_How to import._
 
 > ```js
-> import { analyseCoverage } from "coverage-node";
-> ```
->
-> ```js
-> import analyseCoverage from "coverage-node/public/analyseCoverage.mjs";
+> import analyseCoverage from "coverage-node/analyseCoverage.mjs";
 > ```
 
 ---
@@ -125,14 +121,10 @@ Reports a code coverage analysis to the console.
 
 #### Examples
 
-_Ways to `import`._
+_How to import._
 
 > ```js
-> import { reportCoverage } from "coverage-node";
-> ```
->
-> ```js
-> import reportCoverage from "coverage-node/public/reportCoverage.mjs";
+> import reportCoverage from "coverage-node/reportCoverage.mjs";
 > ```
 
 ---
@@ -145,14 +137,10 @@ Is the process Node.js version greater at least [the minimum required to support
 
 #### Examples
 
-_Ways to `import`._
+_How to import._
 
 > ```js
-> import { coverageSupported } from "coverage-node";
-> ```
->
-> ```js
-> import coverageSupported from "coverage-node/public/coverageSupported.mjs";
+> import coverageSupported from "coverage-node/coverageSupported.mjs";
 > ```
 
 ---
@@ -165,14 +153,10 @@ Minimum Node.js version supported for code coverage. Although Node.js v10+ suppo
 
 #### Examples
 
-_Ways to `import`._
+_How to import._
 
 > ```js
-> import { coverageSupportedMinNodeVersion } from "coverage-node";
-> ```
->
-> ```js
-> import coverageSupportedMinNodeVersion from "coverage-node/public/coverageSupportedMinNodeVersion.mjs";
+> import coverageSupportedMinNodeVersion from "coverage-node/coverageSupportedMinNodeVersion.mjs";
 > ```
 
 ---

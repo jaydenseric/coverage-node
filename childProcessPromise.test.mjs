@@ -1,5 +1,5 @@
 import { rejects } from "assert";
-import childProcessPromise from "../../private/childProcessPromise.mjs";
+import childProcessPromise from "./childProcessPromise.mjs";
 
 export default (tests) => {
   tests.add(

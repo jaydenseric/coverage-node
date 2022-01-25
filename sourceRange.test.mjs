@@ -1,5 +1,5 @@
 import { deepStrictEqual, throws } from "assert";
-import sourceRange from "../../private/sourceRange.mjs";
+import sourceRange from "./sourceRange.mjs";
 
 export default (tests) => {
   tests.add("`sourceRange` with first argument `source` not a string.", () => {

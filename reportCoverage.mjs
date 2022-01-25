@@ -1,19 +1,15 @@
 import { relative } from "path";
 import kleur from "kleur";
-import errorConsole from "../private/errorConsole.mjs";
+import errorConsole from "./errorConsole.mjs";
 
 /**
  * Reports a code coverage analysis to the console.
  * @kind function
  * @name reportCoverage
  * @param {CoverageAnalysis} coverageAnalysis Coverage analysis from [`analyseCoverage`]{@link analyseCoverage}.
- * @example <caption>Ways to `import`.</caption>
+ * @example <caption>How to import.</caption>
  * ```js
- * import { reportCoverage } from "coverage-node";
- * ```
- *
- * ```js
- * import reportCoverage from "coverage-node/public/reportCoverage.mjs";
+ * import reportCoverage from "coverage-node/reportCoverage.mjs";
  * ```
  */
 export default function reportCoverage({
