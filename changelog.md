@@ -9,6 +9,7 @@
 ### Patch
 
 - Also run GitHub Actions CI with Node.js v17, and drop v15.
+- Readme tweaks.
 
 ## 5.0.1
 

@@ -9,7 +9,7 @@ A simple CLI to run [Node.js](https://nodejs.org) and report code coverage.
 - 📦 [< 400 kB install size](https://packagephobia.com/result?p=coverage-node), compared to [2.2 MB for `c8` v7.7.1](https://packagephobia.com/result?p=c8@7.7.1) or [8.84 MB for `nyc` v15.1.0](https://packagephobia.com/result?p=nyc@15.1.0).
 - 🖱 Displays ignored or uncovered source code ranges as paths, clickable in IDEs such as [VS Code](https://code.visualstudio.com).
 
-## Setup
+## Installation
 
 To install with [npm](https://npmjs.com/get-npm), run:
 
@@ -28,10 +28,12 @@ In a [`package.json` script](https://docs.npmjs.com/files/package.json#scripts),
  }
 ```
 
-## Support
+## Requirements
 
-- Linux, macOS.
-- Node.js `^12.22.0 || ^14.17.0 || >= 16.0.0`, but for Node.js versions < v13.3 that produce [unreliable coverage data](https://github.com/nodejs/node/issues/25937#issuecomment-563115421) the command [`coverage-node`](#command-coverage-node) skips code coverage and logs a warning.
+- Operating system:
+  - Linux
+  - macOS
+- [Node.js](https://nodejs.org): `^12.22.0 || ^14.17.0 || >= 16.0.0`, but for Node.js versions < v13.3 that produce [unreliable coverage data](https://github.com/nodejs/node/issues/25937#issuecomment-563115421) the command [`coverage-node`](#command-coverage-node) skips code coverage and logs a warning.
 
 ## Ignored files
 
