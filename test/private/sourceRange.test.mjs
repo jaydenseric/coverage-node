@@ -1,42 +1,42 @@
-import { deepStrictEqual, throws } from 'assert';
-import sourceRange from '../../private/sourceRange.mjs';
+import { deepStrictEqual, throws } from "assert";
+import sourceRange from "../../private/sourceRange.mjs";
 
 export default (tests) => {
-  tests.add('`sourceRange` with first argument `source` not a string.', () => {
+  tests.add("`sourceRange` with first argument `source` not a string.", () => {
     throws(() => {
       sourceRange(true);
-    }, new TypeError('First argument `source` must be a string.'));
+    }, new TypeError("First argument `source` must be a string."));
   });
 
   tests.add(
-    '`sourceRange` with second argument `startOffset` not a number.',
+    "`sourceRange` with second argument `startOffset` not a number.",
     () => {
       throws(() => {
-        sourceRange('a', true);
-      }, new TypeError('Second argument `startOffset` must be a number.'));
+        sourceRange("a", true);
+      }, new TypeError("Second argument `startOffset` must be a number."));
     }
   );
 
   tests.add(
-    '`sourceRange` with third argument `endOffset` not a number.',
+    "`sourceRange` with third argument `endOffset` not a number.",
     () => {
       throws(() => {
-        sourceRange('a', 0, true);
-      }, new TypeError('Third argument `endOffset` must be a number.'));
+        sourceRange("a", 0, true);
+      }, new TypeError("Third argument `endOffset` must be a number."));
     }
   );
 
   tests.add(
-    '`sourceRange` with fourth argument `ignoreNextLineComment` not a string or `false`.',
+    "`sourceRange` with fourth argument `ignoreNextLineComment` not a string or `false`.",
     () => {
       throws(() => {
-        sourceRange('a', 0, 0, true);
-      }, new TypeError('Fourth argument `ignoreNextLineComment` must be a string or `false`.'));
+        sourceRange("a", 0, 0, true);
+      }, new TypeError("Fourth argument `ignoreNextLineComment` must be a string or `false`."));
     }
   );
 
-  tests.add('`sourceRange` with a single char line.', () => {
-    const source = 'a';
+  tests.add("`sourceRange` with a single char line.", () => {
+    const source = "a";
 
     deepStrictEqual(sourceRange(source, 0, 0), {
       ignore: false,
@@ -53,8 +53,8 @@ export default (tests) => {
     });
   });
 
-  tests.add('`sourceRange` with a multi char line.', () => {
-    const source = 'abc';
+  tests.add("`sourceRange` with a multi char line.", () => {
+    const source = "abc";
 
     deepStrictEqual(sourceRange(source, 0, 2), {
       ignore: false,
@@ -71,7 +71,7 @@ export default (tests) => {
     });
   });
 
-  tests.add('`sourceRange` in multiple lines.', () => {
+  tests.add("`sourceRange` in multiple lines.", () => {
     const source = `abc
 
 def
@@ -93,7 +93,7 @@ jkl`;
     });
   });
 
-  tests.add('`sourceRange` across multiple lines.', () => {
+  tests.add("`sourceRange` across multiple lines.", () => {
     const source = `abc
 
 def
@@ -116,7 +116,7 @@ jkl`;
   });
 
   tests.add(
-    '`sourceRange` with a default ignore comment, line exclusive.',
+    "`sourceRange` with a default ignore comment, line exclusive.",
     () => {
       const source = `// coverage ignore next line
 a`;
@@ -137,7 +137,7 @@ a`;
     }
   );
 
-  tests.add('`sourceRange` with a default ignore comment, line shared.', () => {
+  tests.add("`sourceRange` with a default ignore comment, line shared.", () => {
     const source = `let a // coverage ignore next line
 b`;
 
@@ -157,7 +157,7 @@ b`;
   });
 
   tests.add(
-    '`sourceRange` with a default ignore comment, arbitrary capitalization, line exclusive.',
+    "`sourceRange` with a default ignore comment, arbitrary capitalization, line exclusive.",
     () => {
       const source = `// Coverage Ignore Next Line
 a`;
@@ -179,7 +179,7 @@ a`;
   );
 
   tests.add(
-    '`sourceRange` with a default ignore comment, arbitrary capitalization, line shared.',
+    "`sourceRange` with a default ignore comment, arbitrary capitalization, line shared.",
     () => {
       const source = `let a // Coverage Ignore Next Line
 b`;
@@ -201,12 +201,12 @@ b`;
   );
 
   tests.add(
-    '`sourceRange` with a custom ignore comment, line exclusive.',
+    "`sourceRange` with a custom ignore comment, line exclusive.",
     () => {
       const source = `// a
 a`;
 
-      deepStrictEqual(sourceRange(source, 5, 5, ' a'), {
+      deepStrictEqual(sourceRange(source, 5, 5, " a"), {
         ignore: true,
         start: {
           offset: 5,
@@ -222,11 +222,11 @@ a`;
     }
   );
 
-  tests.add('`sourceRange` with a custom ignore comment, line shared.', () => {
+  tests.add("`sourceRange` with a custom ignore comment, line shared.", () => {
     const source = `let a // a
 b`;
 
-    deepStrictEqual(sourceRange(source, 11, 11, ' a'), {
+    deepStrictEqual(sourceRange(source, 11, 11, " a"), {
       ignore: true,
       start: {
         offset: 11,
@@ -242,12 +242,12 @@ b`;
   });
 
   tests.add(
-    '`sourceRange` with a custom ignore comment, arbitrary capitalization, line exclusive.',
+    "`sourceRange` with a custom ignore comment, arbitrary capitalization, line exclusive.",
     () => {
       const source = `// A
 a`;
 
-      deepStrictEqual(sourceRange(source, 5, 5, ' a'), {
+      deepStrictEqual(sourceRange(source, 5, 5, " a"), {
         ignore: true,
         start: {
           offset: 5,
@@ -264,12 +264,12 @@ a`;
   );
 
   tests.add(
-    '`sourceRange` with a custom ignore comment, arbitrary capitalization, line shared.',
+    "`sourceRange` with a custom ignore comment, arbitrary capitalization, line shared.",
     () => {
       const source = `let a // A
 b`;
 
-      deepStrictEqual(sourceRange(source, 11, 11, ' a'), {
+      deepStrictEqual(sourceRange(source, 11, 11, " a"), {
         ignore: true,
         start: {
           offset: 11,
@@ -285,7 +285,7 @@ b`;
     }
   );
 
-  tests.add('`sourceRange` with ignore comments disabled.', () => {
+  tests.add("`sourceRange` with ignore comments disabled.", () => {
     const source = `// coverage ignore next line
 a`;
 

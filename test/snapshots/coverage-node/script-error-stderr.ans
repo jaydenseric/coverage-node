@@ -1,5 +1,5 @@
 file://<file path>:1
-throw new Error('Error.');
+throw new Error("Error.");
       ^
 
 Error: Error.

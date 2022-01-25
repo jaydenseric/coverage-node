@@ -1,4 +1,4 @@
-import { ChildProcess } from 'child_process';
+import { ChildProcess } from "child_process";
 
 /**
  * Promisifies a Node.js child process.
@@ -11,12 +11,12 @@ import { ChildProcess } from 'child_process';
 export default async function childProcessPromise(childProcess) {
   if (!(childProcess instanceof ChildProcess))
     throw new TypeError(
-      'First argument `childProcess` must be a `ChildProcess` instance.'
+      "First argument `childProcess` must be a `ChildProcess` instance."
     );
 
   return new Promise((resolve, reject) => {
-    childProcess.once('error', reject);
-    childProcess.once('close', (exitCode, signal) =>
+    childProcess.once("error", reject);
+    childProcess.once("close", (exitCode, signal) =>
       resolve({ exitCode, signal })
     );
   });

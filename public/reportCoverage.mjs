@@ -1,6 +1,6 @@
-import { relative } from 'path';
-import kleur from 'kleur';
-import errorConsole from '../private/errorConsole.mjs';
+import { relative } from "path";
+import kleur from "kleur";
+import errorConsole from "../private/errorConsole.mjs";
 
 /**
  * Reports a code coverage analysis to the console.
@@ -9,11 +9,11 @@ import errorConsole from '../private/errorConsole.mjs';
  * @param {CoverageAnalysis} coverageAnalysis Coverage analysis from [`analyseCoverage`]{@link analyseCoverage}.
  * @example <caption>Ways to `import`.</caption>
  * ```js
- * import { reportCoverage } from 'coverage-node';
+ * import { reportCoverage } from "coverage-node";
  * ```
  *
  * ```js
- * import reportCoverage from 'coverage-node/public/reportCoverage.mjs';
+ * import reportCoverage from "coverage-node/public/reportCoverage.mjs";
  * ```
  */
 export default function reportCoverage({
@@ -25,11 +25,11 @@ export default function reportCoverage({
   if (covered.length) {
     console.group(
       `\n${kleur.green(
-        `${covered.length} file${covered.length === 1 ? '' : 's'} covered:`
+        `${covered.length} file${covered.length === 1 ? "" : "s"} covered:`
       )}\n`
     );
 
-    for (const path of covered) console.info(relative('', path));
+    for (const path of covered) console.info(relative("", path));
 
     console.groupEnd();
   }
@@ -38,7 +38,7 @@ export default function reportCoverage({
     console.group(
       `\n${kleur.yellow(
         `${ignored.length} file${
-          ignored.length === 1 ? '' : 's'
+          ignored.length === 1 ? "" : "s"
         } ignoring coverage:`
       )}\n`
     );
@@ -46,7 +46,7 @@ export default function reportCoverage({
     for (const { path, ranges } of ignored)
       for (const { start, end } of ranges)
         console.info(
-          `${relative('', path)}:${start.line}:${start.column} → ${end.line}:${
+          `${relative("", path)}:${start.line}:${start.column} → ${end.line}:${
             end.column
           }`
         );
@@ -58,7 +58,7 @@ export default function reportCoverage({
     errorConsole.group(
       `\n${kleur.red(
         `${uncovered.length} file${
-          uncovered.length === 1 ? '' : 's'
+          uncovered.length === 1 ? "" : "s"
         } missing coverage:`
       )}\n`
     );
@@ -66,7 +66,7 @@ export default function reportCoverage({
     for (const { path, ranges } of uncovered)
       for (const { start, end } of ranges)
         errorConsole.info(
-          `${relative('', path)}:${start.line}:${start.column} → ${end.line}:${
+          `${relative("", path)}:${start.line}:${start.column} → ${end.line}:${
             end.column
           }`
         );
@@ -77,7 +77,7 @@ export default function reportCoverage({
   console.info(
     `\n${kleur
       .bold()
-      [uncovered.length ? 'red' : ignored.length ? 'yellow' : 'green'](
+      [uncovered.length ? "red" : ignored.length ? "yellow" : "green"](
         `${covered.length}/${filesCount} files covered.`
       )}\n`
   );

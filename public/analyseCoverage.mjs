@@ -1,8 +1,8 @@
-import fs from 'fs';
-import { join } from 'path';
-import { fileURLToPath } from 'url';
-import v8Coverage from '@bcoe/v8-coverage';
-import sourceRange from '../private/sourceRange.mjs';
+import fs from "fs";
+import { join } from "path";
+import { fileURLToPath } from "url";
+import v8Coverage from "@bcoe/v8-coverage";
+import sourceRange from "../private/sourceRange.mjs";
 
 /**
  * Analyzes [Node.js generated V8 JavaScript code coverage data](https://nodejs.org/api/cli.html#cli_node_v8_coverage_dir)
@@ -13,25 +13,25 @@ import sourceRange from '../private/sourceRange.mjs';
  * @returns {Promise<CoverageAnalysis>} Resolves the coverage analysis.
  * @example <caption>Ways to `import`.</caption>
  * ```js
- * import { analyseCoverage } from 'coverage-node';
+ * import { analyseCoverage } from "coverage-node";
  * ```
  *
  * ```js
- * import analyseCoverage from 'coverage-node/public/analyseCoverage.mjs';
+ * import analyseCoverage from "coverage-node/public/analyseCoverage.mjs";
  * ```
  */
 export default async function analyseCoverage(coverageDirPath) {
-  if (typeof coverageDirPath !== 'string')
-    throw new TypeError('First argument `coverageDirPath` must be a string.');
+  if (typeof coverageDirPath !== "string")
+    throw new TypeError("First argument `coverageDirPath` must be a string.");
 
   const coverageDirFileNames = await fs.promises.readdir(coverageDirPath);
   const filteredProcessCoverages = [];
 
   for (const fileName of coverageDirFileNames)
-    if (fileName.startsWith('coverage-'))
+    if (fileName.startsWith("coverage-"))
       filteredProcessCoverages.push(
         fs.promises
-          .readFile(join(coverageDirPath, fileName), 'utf8')
+          .readFile(join(coverageDirPath, fileName), "utf8")
           .then((coverageFileJson) => {
             const { result } = JSON.parse(coverageFileJson);
             return {
@@ -39,11 +39,11 @@ export default async function analyseCoverage(coverageDirPath) {
               result: result.filter(
                 ({ url }) =>
                   // Exclude Node.js internals, keeping only files.
-                  url.startsWith('file://') &&
+                  url.startsWith("file://") &&
                   // Exclude `node_modules` directory files.
-                  !url.includes('/node_modules/') &&
+                  !url.includes("/node_modules/") &&
                   // Exclude `test` directory files.
-                  !url.includes('/test/') &&
+                  !url.includes("/test/") &&
                   // Exclude files with `.test` prefixed before the extension.
                   !/\.test\.\w+$/u.test(url) &&
                   // Exclude files named `test` (regardless of extension).
@@ -82,7 +82,7 @@ export default async function analyseCoverage(coverageDirPath) {
       for (const range of ranges) if (!range.count) uncoveredRanges.push(range);
 
     if (uncoveredRanges.length) {
-      const source = await fs.promises.readFile(path, 'utf8');
+      const source = await fs.promises.readFile(path, "utf8");
       const ignored = [];
       const uncovered = [];
 

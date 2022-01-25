@@ -1,15 +1,15 @@
 #!/usr/bin/env node
 
-import { spawn } from 'child_process';
-import disposableDirectory from 'disposable-directory';
-import kleur from 'kleur';
-import CliError from '../private/CliError.mjs';
-import childProcessPromise from '../private/childProcessPromise.mjs';
-import reportCliError from '../private/reportCliError.mjs';
-import analyseCoverage from '../public/analyseCoverage.mjs';
-import coverageSupported from '../public/coverageSupported.mjs';
-import minNodeVersion from '../public/coverageSupportedMinNodeVersion.mjs';
-import reportCoverage from '../public/reportCoverage.mjs';
+import { spawn } from "child_process";
+import disposableDirectory from "disposable-directory";
+import kleur from "kleur";
+import CliError from "../private/CliError.mjs";
+import childProcessPromise from "../private/childProcessPromise.mjs";
+import reportCliError from "../private/reportCliError.mjs";
+import analyseCoverage from "../public/analyseCoverage.mjs";
+import coverageSupported from "../public/coverageSupported.mjs";
+import minNodeVersion from "../public/coverageSupportedMinNodeVersion.mjs";
+import reportCoverage from "../public/reportCoverage.mjs";
 
 /**
  * Powers the `coverage-node` CLI. Runs Node.js with the given arguments and
@@ -25,14 +25,14 @@ async function coverageNode() {
     const [, , ...nodeArgs] = process.argv;
 
     if (!nodeArgs.length)
-      throw new CliError('Node.js CLI arguments are required.');
+      throw new CliError("Node.js CLI arguments are required.");
 
     // eslint-disable-next-line curly
     if (coverageSupported) {
       await disposableDirectory(async (tempDirPath) => {
         const { exitCode } = await childProcessPromise(
-          spawn('node', nodeArgs, {
-            stdio: 'inherit',
+          spawn("node", nodeArgs, {
+            stdio: "inherit",
             env: { ...process.env, NODE_V8_COVERAGE: tempDirPath },
           })
         );
@@ -48,7 +48,7 @@ async function coverageNode() {
       // coverage ignore next line
     } else {
       const { exitCode } = await childProcessPromise(
-        spawn('node', nodeArgs, { stdio: 'inherit' })
+        spawn("node", nodeArgs, { stdio: "inherit" })
       );
 
       if (exitCode === 0)
@@ -63,7 +63,7 @@ async function coverageNode() {
     reportCliError(
       `Node.js${
         // coverage ignore next line
-        coverageSupported ? ' with coverage' : ''
+        coverageSupported ? " with coverage" : ""
       }`,
       error
     );

@@ -7,8 +7,8 @@
  * @ignore
  */
 export default function semver(semver) {
-  if (typeof semver !== 'string')
-    throw new TypeError('First argument `semver` must be a string.');
+  if (typeof semver !== "string")
+    throw new TypeError("First argument `semver` must be a string.");
 
   const [, major, minor, patch, prerelease, build] = semver.match(
     // The is is official recommended RegEx, see:

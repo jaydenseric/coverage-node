@@ -1,7 +1,7 @@
-export { default as coverageSupported } from './coverageSupported.mjs';
-export { default as coverageSupportedMinNodeVersion } from './coverageSupportedMinNodeVersion.mjs';
-export { default as analyseCoverage } from './analyseCoverage.mjs';
-export { default as reportCoverage } from './reportCoverage.mjs';
+export { default as coverageSupported } from "./coverageSupported.mjs";
+export { default as coverageSupportedMinNodeVersion } from "./coverageSupportedMinNodeVersion.mjs";
+export { default as analyseCoverage } from "./analyseCoverage.mjs";
+export { default as reportCoverage } from "./reportCoverage.mjs";
 
 /**
  * [Node.js generated V8 JavaScript code coverage data](https://nodejs.org/api/cli.html#cli_node_v8_coverage_dir)

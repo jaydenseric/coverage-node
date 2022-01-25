@@ -50,7 +50,7 @@ In source code, a comment (case insensitive) can be used to ignore code coverage
 
 ```js
 // coverage ignore next line
-if (false) console.log('Never runs.');
+if (false) console.log("Never runs.");
 ```
 
 ## CLI
@@ -106,11 +106,11 @@ Analyzes [Node.js generated V8 JavaScript code coverage data](https://nodejs.org
 _Ways to `import`._
 
 > ```js
-> import { analyseCoverage } from 'coverage-node';
+> import { analyseCoverage } from "coverage-node";
 > ```
 >
 > ```js
-> import analyseCoverage from 'coverage-node/public/analyseCoverage.mjs';
+> import analyseCoverage from "coverage-node/public/analyseCoverage.mjs";
 > ```
 
 ---
@@ -128,11 +128,11 @@ Reports a code coverage analysis to the console.
 _Ways to `import`._
 
 > ```js
-> import { reportCoverage } from 'coverage-node';
+> import { reportCoverage } from "coverage-node";
 > ```
 >
 > ```js
-> import reportCoverage from 'coverage-node/public/reportCoverage.mjs';
+> import reportCoverage from "coverage-node/public/reportCoverage.mjs";
 > ```
 
 ---
@@ -148,11 +148,11 @@ Is the process Node.js version greater at least [the minimum required to support
 _Ways to `import`._
 
 > ```js
-> import { coverageSupported } from 'coverage-node';
+> import { coverageSupported } from "coverage-node";
 > ```
 >
 > ```js
-> import coverageSupported from 'coverage-node/public/coverageSupported.mjs';
+> import coverageSupported from "coverage-node/public/coverageSupported.mjs";
 > ```
 
 ---
@@ -168,11 +168,11 @@ Minimum Node.js version supported for code coverage. Although Node.js v10+ suppo
 _Ways to `import`._
 
 > ```js
-> import { coverageSupportedMinNodeVersion } from 'coverage-node';
+> import { coverageSupportedMinNodeVersion } from "coverage-node";
 > ```
 >
 > ```js
-> import coverageSupportedMinNodeVersion from 'coverage-node/public/coverageSupportedMinNodeVersion.mjs';
+> import coverageSupportedMinNodeVersion from "coverage-node/public/coverageSupportedMinNodeVersion.mjs";
 > ```
 
 ---

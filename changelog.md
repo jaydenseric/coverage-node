@@ -11,6 +11,7 @@
 ### Patch
 
 - Also run GitHub Actions CI with Node.js v17, and drop v15.
+- Configured Prettier option `singleQuote` to the default, `false`.
 - Readme tweaks.
 
 ## 5.0.1
