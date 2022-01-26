@@ -1,6 +1,6 @@
 {
   "name": "coverage-node",
-  "version": "5.0.1",
+  "version": "6.0.0",
   "description": "A simple CLI to run Node.js and report code coverage.",
   "license": "MIT",
   "author": {
