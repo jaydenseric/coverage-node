@@ -5,8 +5,8 @@
 A simple CLI to run [Node.js](https://nodejs.org) and report code coverage.
 
 - ✨ Zero config.
-- 🏁 \~308 [SLOC](https://en.wikipedia.org/wiki/Source_lines_of_code), written from scratch to use [code coverage features](https://nodejs.org/api/cli.html#cli_node_v8_coverage_dir) built into Node.js v10+.
-- 📦 [< 400 kB install size](https://packagephobia.com/result?p=coverage-node), compared to [2.2 MB for `c8` v7.7.1](https://packagephobia.com/result?p=c8@7.7.1) or [8.84 MB for `nyc` v15.1.0](https://packagephobia.com/result?p=nyc@15.1.0).
+- 🏁 Tiny [SLOC](https://en.wikipedia.org/wiki/Source_lines_of_code), written from scratch to use [code coverage features](https://nodejs.org/api/cli.html#cli_node_v8_coverage_dir) built into Node.js v10+.
+- 📦 [Lean install size](https://packagephobia.com/result?p=coverage-node), compared to [2.2 MB for `c8` v7.7.1](https://packagephobia.com/result?p=c8@7.7.1) or [8.84 MB for `nyc` v15.1.0](https://packagephobia.com/result?p=nyc@15.1.0).
 - 🖱 Displays ignored or uncovered source code ranges as paths, clickable in IDEs such as [VS Code](https://code.visualstudio.com).
 
 ## Installation
@@ -17,7 +17,7 @@ To install with [npm](https://npmjs.com/get-npm), run:
 npm install coverage-node --save-dev
 ```
 
-In a [`package.json` script](https://docs.npmjs.com/files/package.json#scripts), replace the `node` command with [`coverage-node`](#command-coverage-node):
+In a [`package.json` script](https://docs.npmjs.com/cli/v8/configuring-npm/package-json#scripts), replace the `node` command with [`coverage-node`](#command-coverage-node):
 
 ```diff
  {
@@ -61,23 +61,21 @@ Substitutes the normal `node` command; any [`node` CLI options](https://nodejs.o
 
 #### Examples
 
-_Using [`npx`](https://docs.npmjs.com/cli/v7/commands/npx)._
+[`npx`](https://docs.npmjs.com/cli/v8/commands/npx) can be used to quickly check code coverage for a script:
 
-> [`npx`](https://npm.im/npx) can be used to quickly check code coverage for a script:
->
-> ```sh
-> npx coverage-node test.mjs
-> ```
+```sh
+npx coverage-node test.mjs
+```
 
-_Using a [`package.json` script](https://docs.npmjs.com/cli/v7/using-npm/scripts)._
+A [`package.json` script](https://docs.npmjs.com/cli/v8/configuring-npm/package-json#scripts):
 
-> ```json
-> {
->   "scripts": {
->     "test": "coverage-node test.mjs"
->   }
-> }
-> ```
+```json
+{
+  "scripts": {
+    "test": "coverage-node test.mjs"
+  }
+}
+```
 
 ## Exports
 
