@@ -59,13 +59,13 @@
     "eslint-config-env": "^23.0.2",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.4",
-    "eslint-plugin-jsdoc": "^37.6.3",
+    "eslint-plugin-jsdoc": "^37.7.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.0.0",
     "prettier": "^2.5.1",
     "snapshot-assertion": "^4.0.1",
     "test-director": "^8.0.1",
-    "typescript": "^4.6.0-dev.20220124"
+    "typescript": "^4.6.0-dev.20220125"
   },
   "scripts": {
     "eslint": "eslint .",
