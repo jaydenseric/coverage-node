@@ -19,7 +19,7 @@ export default function replaceStackTraces(
     throw new TypeError("Argument 2 `replacer` must be a string.");
 
   return string.replace(
-    /(^ {2,})at (?:(?! \{$).)+(?:\r?\n\1at (?:(?! \{$).)+)*/gmu,
+    /(^ {2,})at (?:(?! \{$).)+(?:\r?\n\1at (?:(?! \{$).)+)*(?:\r?\n\r?\n *Node\.js v\S+$)?/gmu,
     replacer
   );
 }

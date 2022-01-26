@@ -43,7 +43,7 @@ Unrelated.`;
   });
 
   tests.add(
-    "`replaceStackTraces` with an Error stack trace, not extra indented.",
+    "`replaceStackTraces` with an Error stack trace, no trailing Node.js version, not extra indented.",
     () => {
       strictEqual(
         replaceStackTraces(`Unrelated.
@@ -64,7 +64,7 @@ Unrelated.`
   );
 
   tests.add(
-    "`replaceStackTraces` with an Error stack trace, extra indented.",
+    "`replaceStackTraces` with an Error stack trace, no trailing Node.js version, extra indented.",
     () => {
       strictEqual(
         replaceStackTraces(`Unrelated.
@@ -72,6 +72,52 @@ Unrelated.`
   Uncaught Error: Message.
       at Foo (<anonymous>:1:24)
       at <anonymous>:1:50
+
+Unrelated.`),
+        `Unrelated.
+
+  Uncaught Error: Message.
+      <stack trace>
+
+Unrelated.`
+      );
+    }
+  );
+
+  tests.add(
+    "`replaceStackTraces` with an Error stack trace, trailing Node.js version, not extra indented.",
+    () => {
+      strictEqual(
+        replaceStackTraces(`Unrelated.
+
+Uncaught Error: Message.
+    at Foo (<anonymous>:1:24)
+    at <anonymous>:1:50
+
+Node.js v17.4.0
+
+Unrelated.`),
+        `Unrelated.
+
+Uncaught Error: Message.
+    <stack trace>
+
+Unrelated.`
+      );
+    }
+  );
+
+  tests.add(
+    "`replaceStackTraces` with an Error stack trace, trailing Node.js version, extra indented.",
+    () => {
+      strictEqual(
+        replaceStackTraces(`Unrelated.
+
+  Uncaught Error: Message.
+      at Foo (<anonymous>:1:24)
+      at <anonymous>:1:50
+
+  Node.js v17.4.0
 
 Unrelated.`),
         `Unrelated.

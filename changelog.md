@@ -18,6 +18,7 @@
 - Check TypeScript types via a new package `types` script.
 - Fixed various type related issues.
 - Also run GitHub Actions CI with Node.js v17, and drop v15.
+- Fixed snapshot tests for the Node.js v17.0.0+ behavior of adding the Node.js version after trace for errors that cause the process to exit.
 - Configured Prettier option `singleQuote` to the default, `false`.
 - Reorganized the test file structure.
 - Renamed imports in the test index module.
