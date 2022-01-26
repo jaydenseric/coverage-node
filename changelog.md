@@ -24,6 +24,7 @@
 - Added `CliError` class tests.
 - Runtime type check `CLiError` constructor arguments.
 - Simplified runtime type error messages.
+- Added a `license.md` MIT License file.
 - Readme tweaks.
 
 ## 5.0.1
