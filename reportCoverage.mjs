@@ -1,16 +1,13 @@
+// @ts-check
+
 import { relative } from "path";
 import kleur from "kleur";
 import errorConsole from "./errorConsole.mjs";
 
 /**
  * Reports a code coverage analysis to the console.
- * @kind function
- * @name reportCoverage
- * @param {CoverageAnalysis} coverageAnalysis Coverage analysis from [`analyseCoverage`]{@link analyseCoverage}.
- * @example <caption>How to import.</caption>
- * ```js
- * import reportCoverage from "coverage-node/reportCoverage.mjs";
- * ```
+ * @param {import("./analyseCoverage.mjs").CoverageAnalysis} coverageAnalysis
+ *   Coverage analysis from {@linkcode analyseCoverage}.
  */
 export default function reportCoverage({
   filesCount,

@@ -1,11 +1,12 @@
+// @ts-check
+
 /**
  * Replaces Node.js `Error` stack traces in a multiline string.
- * @kind function
- * @name replaceStackTraces
  * @param {string} string Multiline string.
- * @param {string|Function} [replacer="$1<stack trace>"] String match replacer. Use `$1` at the start of a string replacer to preserve the original indentation.
+ * @param {string} [replacer] String match replacer. Use `$1` at the start of a
+ *   string replacer to preserve the original indentation. Defaults to
+ *   `"$1<stack trace>"`.
  * @returns {string} The input string with stack traces replaced.
- * @ignore
  */
 export default function replaceStackTraces(
   string,
@@ -14,10 +15,8 @@ export default function replaceStackTraces(
   if (typeof string !== "string")
     throw new TypeError("First argument `string` must be a string.");
 
-  if (typeof replacer !== "string" && typeof replacer !== "function")
-    throw new TypeError(
-      "Second argument `replacer` must be a string or function."
-    );
+  if (typeof replacer !== "string")
+    throw new TypeError("Second argument `replacer` must be a string.");
 
   return string.replace(
     /(^ {2,})at (?:(?! \{$).)+(?:\r?\n\1at (?:(?! \{$).)+)*/gmu,

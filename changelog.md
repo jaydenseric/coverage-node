@@ -10,14 +10,19 @@
 - Removed `./package` from the package `exports` field; the full `package.json` filename must be used in a `require` path.
 - Removed the package main index module; deep imports must be used.
 - Shortened public module deep import paths, removing the `/public/`.
+- Implemented TypeScript types via JSDoc comments.
 
 ### Patch
 
 - Simplified package scripts.
+- Check TypeScript types via a new package `types` script.
+- Fixed various type related issues.
 - Also run GitHub Actions CI with Node.js v17, and drop v15.
 - Configured Prettier option `singleQuote` to the default, `false`.
 - Reorganized the test file structure.
 - Renamed imports in the test index module.
+- Added `CliError` class tests.
+- Runtime type check `CLiError` constructor arguments.
 - Readme tweaks.
 
 ## 5.0.1

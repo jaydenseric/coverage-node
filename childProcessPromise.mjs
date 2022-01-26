@@ -1,12 +1,15 @@
+// @ts-check
+
 import { ChildProcess } from "child_process";
 
 /**
  * Promisifies a Node.js child process.
- * @kind function
- * @name childProcessPromise
  * @param {ChildProcess} childProcess Node.js child process.
- * @returns {Promise<{exitCode: number, signal: string}>} Resolves the exit code if the child exited on its own, or the signal by which the child process was terminated.
- * @ignore
+ * @returns {Promise<{
+ *   exitCode: number | null,
+ *   signal: NodeJS.Signals | null
+ * }>} Resolves the exit code if the child exited on its own, or the signal by
+ *   which the child process was terminated.
  */
 export default async function childProcessPromise(childProcess) {
   if (!(childProcess instanceof ChildProcess))

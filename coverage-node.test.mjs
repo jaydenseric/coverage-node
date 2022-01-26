@@ -1,3 +1,5 @@
+// @ts-check
+
 import { strictEqual } from "assert";
 import { spawnSync } from "child_process";
 import fs from "fs";
@@ -14,6 +16,10 @@ const COVERAGE_NODE_CLI_PATH = fileURLToPath(
 const SNAPSHOT_REPLACEMENT_FILE_PATH = "<file path>";
 const SNAPSHOT_REPLACEMENT_PROCESS_NODE_VERSION = "<process Node.js version>";
 
+/**
+ * Adds `coverage-node` tests.
+ * @param {import("test-director").default} tests Test director.
+ */
 export default (tests) => {
   tests.add("`coverage-node` CLI with 1 covered file.", async () => {
     await disposableDirectory(async (tempDirPath) => {
@@ -27,7 +33,7 @@ export default (tests) => {
         {
           env: {
             ...process.env,
-            FORCE_COLOR: 1,
+            FORCE_COLOR: "1",
           },
         }
       );
@@ -75,7 +81,7 @@ export default (tests) => {
         {
           env: {
             ...process.env,
-            FORCE_COLOR: 1,
+            FORCE_COLOR: "1",
           },
         }
       );
@@ -118,7 +124,7 @@ export default (tests) => {
         {
           env: {
             ...process.env,
-            FORCE_COLOR: 1,
+            FORCE_COLOR: "1",
           },
         }
       );
@@ -198,7 +204,7 @@ import "${fileFPath}";
           {
             env: {
               ...process.env,
-              FORCE_COLOR: 1,
+              FORCE_COLOR: "1",
             },
           }
         );
@@ -257,7 +263,7 @@ import "${fileFPath}";
         {
           env: {
             ...process.env,
-            FORCE_COLOR: 1,
+            FORCE_COLOR: "1",
           },
         }
       );
@@ -300,7 +306,7 @@ import "${fileFPath}";
         {
           env: {
             ...process.env,
-            FORCE_COLOR: 1,
+            FORCE_COLOR: "1",
           },
         }
       );
@@ -343,7 +349,7 @@ deprecated();
         {
           env: {
             ...process.env,
-            FORCE_COLOR: 1,
+            FORCE_COLOR: "1",
           },
         }
       );
@@ -371,7 +377,7 @@ deprecated();
         {
           env: {
             ...process.env,
-            FORCE_COLOR: 1,
+            FORCE_COLOR: "1",
           },
         }
       );
@@ -402,7 +408,7 @@ deprecated();
         {
           env: {
             ...process.env,
-            FORCE_COLOR: 1,
+            FORCE_COLOR: "1",
           },
         }
       );
@@ -425,7 +431,7 @@ deprecated();
       {
         env: {
           ...process.env,
-          FORCE_COLOR: 1,
+          FORCE_COLOR: "1",
         },
       }
     );

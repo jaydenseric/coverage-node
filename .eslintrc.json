@@ -1,3 +1,8 @@
 {
-  "extends": ["env"]
+  "extends": ["env"],
+  "settings": {
+    "jsdoc": {
+      "mode": "typescript"
+    }
+  }
 }

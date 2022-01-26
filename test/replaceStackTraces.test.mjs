@@ -1,22 +1,35 @@
+// @ts-check
+
 import { strictEqual, throws } from "assert";
 import replaceStackTraces from "./replaceStackTraces.mjs";
 
+/**
+ * Adds `replaceStackTraces` tests.
+ * @param {import("test-director").default} tests Test director.
+ */
 export default (tests) => {
   tests.add(
     "`replaceStackTraces` with first argument `string` not a string.",
     () => {
       throws(() => {
-        replaceStackTraces(true);
+        replaceStackTraces(
+          // @ts-expect-error Testing invalid.
+          true
+        );
       }, new TypeError("First argument `string` must be a string."));
     }
   );
 
   tests.add(
-    "`replaceStackTraces` with second argument `replacer` not a string or function.",
+    "`replaceStackTraces` with second argument `replacer` not a string.",
     () => {
       throws(() => {
-        replaceStackTraces("", true);
-      }, new TypeError("Second argument `replacer` must be a string or function."));
+        replaceStackTraces(
+          "",
+          // @ts-expect-error Testing invalid.
+          true
+        );
+      }, new TypeError("Second argument `replacer` must be a string."));
     }
   );
 

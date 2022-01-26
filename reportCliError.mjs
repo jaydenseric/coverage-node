@@ -1,3 +1,5 @@
+// @ts-check
+
 import { inspect } from "util";
 import kleur from "kleur";
 import CliError from "./CliError.mjs";
@@ -5,11 +7,8 @@ import errorConsole from "./errorConsole.mjs";
 
 /**
  * Reports a CLI error via the process `stderr`.
- * @kind function
- * @name reportCliError
  * @param {string} cliDescription CLI description.
- * @param {*} error Error to report.
- * @ignore
+ * @param {unknown} error Error to report.
  */
 export default function reportCliError(cliDescription, error) {
   if (typeof cliDescription !== "string")

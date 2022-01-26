@@ -1,10 +1,21 @@
+// @ts-check
+
 import { deepStrictEqual, throws } from "assert";
 import sourceRange from "./sourceRange.mjs";
 
+/**
+ * Adds `sourceRange` tests.
+ * @param {import("test-director").default} tests Test director.
+ */
 export default (tests) => {
   tests.add("`sourceRange` with first argument `source` not a string.", () => {
     throws(() => {
-      sourceRange(true);
+      sourceRange(
+        // @ts-expect-error Testing invalid.
+        true,
+        0,
+        0
+      );
     }, new TypeError("First argument `source` must be a string."));
   });
 
@@ -12,7 +23,12 @@ export default (tests) => {
     "`sourceRange` with second argument `startOffset` not a number.",
     () => {
       throws(() => {
-        sourceRange("a", true);
+        sourceRange(
+          "a",
+          // @ts-expect-error Testing invalid.
+          true,
+          0
+        );
       }, new TypeError("Second argument `startOffset` must be a number."));
     }
   );
@@ -21,7 +37,12 @@ export default (tests) => {
     "`sourceRange` with third argument `endOffset` not a number.",
     () => {
       throws(() => {
-        sourceRange("a", 0, true);
+        sourceRange(
+          "a",
+          0,
+          // @ts-expect-error Testing invalid.
+          true
+        );
       }, new TypeError("Third argument `endOffset` must be a number."));
     }
   );
@@ -30,7 +51,13 @@ export default (tests) => {
     "`sourceRange` with fourth argument `ignoreNextLineComment` not a string or `false`.",
     () => {
       throws(() => {
-        sourceRange("a", 0, 0, true);
+        sourceRange(
+          "a",
+          0,
+          0,
+          // @ts-expect-error Testing invalid.
+          true
+        );
       }, new TypeError("Fourth argument `ignoreNextLineComment` must be a string or `false`."));
     }
   );

@@ -1,13 +1,28 @@
+// @ts-check
+
 import { deepStrictEqual, throws } from "assert";
 import semver from "./semver.mjs";
 
+/**
+ * Adds `semver` tests.
+ * @param {import("test-director").default} tests Test director.
+ */
 export default (tests) => {
+  tests.add("`semver` with first argument `semver` not a string.", () => {
+    throws(() => {
+      semver(
+        // @ts-expect-error Testing invalid.
+        true
+      );
+    }, new TypeError("First argument `semver` must be a string."));
+  });
+
   tests.add(
-    "`reportCliError` with first argument `semver` not a string.",
+    "`semver` with first argument `semver` not a semver string.",
     () => {
       throws(() => {
-        semver(true);
-      }, new TypeError("First argument `semver` must be a string."));
+        semver("");
+      }, new TypeError("First argument `semver` must be a semver string."));
     }
   );
 

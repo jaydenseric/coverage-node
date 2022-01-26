@@ -33,17 +33,14 @@
     "reportCliError.mjs",
     "reportCoverage.mjs",
     "semver.mjs",
-    "sourceRange.mjs",
-    "types.mjs"
+    "sourceRange.mjs"
   ],
   "exports": {
     "./analyseCoverage.mjs": "./analyseCoverage.mjs",
     "./coverageSupported.mjs": "./coverageSupported.mjs",
     "./coverageSupportedMinNodeVersion.mjs": "./coverageSupportedMinNodeVersion.mjs",
-    "./errorConsole.mjs": "./errorConsole.mjs",
     "./package.json": "./package.json",
-    "./reportCoverage.mjs": "./reportCoverage.mjs",
-    "./types.mjs": "./types.mjs"
+    "./reportCoverage.mjs": "./reportCoverage.mjs"
   },
   "bin": {
     "coverage-node": "coverage-node.mjs"
@@ -53,6 +50,7 @@
   },
   "dependencies": {
     "@bcoe/v8-coverage": "^0.2.3",
+    "@types/node": "*",
     "disposable-directory": "^5.0.1",
     "kleur": "^4.1.4"
   },
@@ -64,18 +62,17 @@
     "eslint-plugin-jsdoc": "^37.6.3",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "jsdoc-md": "^11.0.2",
     "prettier": "^2.5.1",
     "snapshot-assertion": "^4.0.1",
-    "test-director": "^8.0.1"
+    "test-director": "^8.0.1",
+    "typescript": "^4.6.0-dev.20220124"
   },
   "scripts": {
-    "docs-update": "jsdoc-md",
-    "docs-check": "jsdoc-md -c",
     "eslint": "eslint .",
     "prettier": "prettier -c .",
+    "types": "tsc -p jsconfig.json",
     "tests": "node coverage-node.mjs test.mjs",
-    "test": "npm run eslint && npm run prettier && npm run docs-check && npm run tests",
+    "test": "npm run eslint && npm run prettier && npm run types && npm run tests",
     "prepublishOnly": "npm test"
   }
 }

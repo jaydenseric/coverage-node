@@ -1,3 +1,5 @@
+// @ts-check
+
 import { deepStrictEqual, rejects } from "assert";
 import { spawn } from "child_process";
 import fs from "fs";
@@ -6,12 +8,19 @@ import disposableDirectory from "disposable-directory";
 import analyseCoverage from "./analyseCoverage.mjs";
 import childProcessPromise from "./childProcessPromise.mjs";
 
+/**
+ * Adds `reportCliError` tests.
+ * @param {import("test-director").default} tests Test director.
+ */
 export default (tests) => {
   tests.add(
     "`reportCliError` with first argument `coverageDirPath` not a string.",
     async () => {
       await rejects(
-        analyseCoverage(true),
+        analyseCoverage(
+          // @ts-expect-error Testing invalid.
+          true
+        ),
         new TypeError("First argument `coverageDirPath` must be a string.")
       );
     }
@@ -177,6 +186,7 @@ export default (tests) => {
             path: filePath,
             ranges: [
               {
+                ignore: false,
                 start: {
                   offset: 0,
                   line: 1,
@@ -189,6 +199,7 @@ export default (tests) => {
                 },
               },
               {
+                ignore: false,
                 start: {
                   offset: 17,
                   line: 1,

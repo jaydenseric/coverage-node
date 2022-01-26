@@ -1,3 +1,5 @@
+// @ts-check
+
 import { strictEqual, throws } from "assert";
 import { spawnSync } from "child_process";
 import fs from "fs";
@@ -12,12 +14,20 @@ const REPORT_CLI_ERROR_PATH = fileURLToPath(
   new URL("./reportCliError.mjs", import.meta.url)
 );
 
+/**
+ * Adds `reportCliError` tests.
+ * @param {import("test-director").default} tests Test director.
+ */
 export default (tests) => {
   tests.add(
     "`reportCliError` with first argument `cliDescription` not a string.",
     () => {
       throws(() => {
-        reportCliError(true);
+        reportCliError(
+          // @ts-expect-error Testing invalid.
+          true,
+          new Error("Message.")
+        );
       }, new TypeError("First argument `cliDescription` must be a string."));
     }
   );
@@ -42,7 +52,7 @@ reportCliError("CLI", new Error("Message."));
           {
             env: {
               ...process.env,
-              FORCE_COLOR: 1,
+              FORCE_COLOR: "1",
             },
           }
         );
@@ -86,7 +96,7 @@ reportCliError("CLI", error);
           {
             env: {
               ...process.env,
-              FORCE_COLOR: 1,
+              FORCE_COLOR: "1",
             },
           }
         );
@@ -127,7 +137,7 @@ reportCliError("CLI", new CliError("Message."));
       const { stdout, stderr, status, error } = spawnSync("node", [filePath], {
         env: {
           ...process.env,
-          FORCE_COLOR: 1,
+          FORCE_COLOR: "1",
         },
       });
 
@@ -162,7 +172,7 @@ reportCliError("CLI", "");
       const { stdout, stderr, status, error } = spawnSync("node", [filePath], {
         env: {
           ...process.env,
-          FORCE_COLOR: 1,
+          FORCE_COLOR: "1",
         },
       });
 
