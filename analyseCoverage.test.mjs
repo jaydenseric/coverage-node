@@ -14,14 +14,14 @@ import childProcessPromise from "./childProcessPromise.mjs";
  */
 export default (tests) => {
   tests.add(
-    "`reportCliError` with first argument `coverageDirPath` not a string.",
+    "`reportCliError` with argument 1 `coverageDirPath` not a string.",
     async () => {
       await rejects(
         analyseCoverage(
           // @ts-expect-error Testing invalid.
           true
         ),
-        new TypeError("First argument `coverageDirPath` must be a string.")
+        new TypeError("Argument 1 `coverageDirPath` must be a string.")
       );
     }
   );

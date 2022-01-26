@@ -19,20 +19,20 @@ export default function sourceRange(
   ignoreNextLineComment = " coverage ignore next line"
 ) {
   if (typeof source !== "string")
-    throw new TypeError("First argument `source` must be a string.");
+    throw new TypeError("Argument 1 `source` must be a string.");
 
   if (typeof startOffset !== "number")
-    throw new TypeError("Second argument `startOffset` must be a number.");
+    throw new TypeError("Argument 2 `startOffset` must be a number.");
 
   if (typeof endOffset !== "number")
-    throw new TypeError("Third argument `endOffset` must be a number.");
+    throw new TypeError("Argument 3 `endOffset` must be a number.");
 
   if (
     typeof ignoreNextLineComment !== "string" &&
     ignoreNextLineComment !== false
   )
     throw new TypeError(
-      "Fourth argument `ignoreNextLineComment` must be a string or `false`."
+      "Argument 4 `ignoreNextLineComment` must be a string or `false`."
     );
 
   const ignoreNextLineCommentLowerCase = ignoreNextLineComment

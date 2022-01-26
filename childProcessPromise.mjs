@@ -14,7 +14,7 @@ import { ChildProcess } from "child_process";
 export default async function childProcessPromise(childProcess) {
   if (!(childProcess instanceof ChildProcess))
     throw new TypeError(
-      "First argument `childProcess` must be a `ChildProcess` instance."
+      "Argument 1 `childProcess` must be a `ChildProcess` instance."
     );
 
   return new Promise((resolve, reject) => {

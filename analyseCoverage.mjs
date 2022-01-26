@@ -15,7 +15,7 @@ import sourceRange from "./sourceRange.mjs";
  */
 export default async function analyseCoverage(coverageDirPath) {
   if (typeof coverageDirPath !== "string")
-    throw new TypeError("First argument `coverageDirPath` must be a string.");
+    throw new TypeError("Argument 1 `coverageDirPath` must be a string.");
 
   const coverageDirFileNames = await fs.promises.readdir(coverageDirPath);
   const filteredProcessCoverages = [];

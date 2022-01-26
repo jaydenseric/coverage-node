@@ -23,6 +23,7 @@
 - Renamed imports in the test index module.
 - Added `CliError` class tests.
 - Runtime type check `CLiError` constructor arguments.
+- Simplified runtime type error messages.
 - Readme tweaks.
 
 ## 5.0.1

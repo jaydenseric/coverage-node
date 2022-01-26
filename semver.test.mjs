@@ -8,23 +8,20 @@ import semver from "./semver.mjs";
  * @param {import("test-director").default} tests Test director.
  */
 export default (tests) => {
-  tests.add("`semver` with first argument `semver` not a string.", () => {
+  tests.add("`semver` with argument 1 `semver` not a string.", () => {
     throws(() => {
       semver(
         // @ts-expect-error Testing invalid.
         true
       );
-    }, new TypeError("First argument `semver` must be a string."));
+    }, new TypeError("Argument 1 `semver` must be a string."));
   });
 
-  tests.add(
-    "`semver` with first argument `semver` not a semver string.",
-    () => {
-      throws(() => {
-        semver("");
-      }, new TypeError("First argument `semver` must be a semver string."));
-    }
-  );
+  tests.add("`semver` with argument 1 `semver` not a semver string.", () => {
+    throws(() => {
+      semver("");
+    }, new TypeError("Argument 1 `semver` must be a semver string."));
+  });
 
   tests.add("`semver` with a simple version.", () => {
     deepStrictEqual(semver("1.2.3"), {

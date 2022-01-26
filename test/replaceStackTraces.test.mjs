@@ -9,19 +9,19 @@ import replaceStackTraces from "./replaceStackTraces.mjs";
  */
 export default (tests) => {
   tests.add(
-    "`replaceStackTraces` with first argument `string` not a string.",
+    "`replaceStackTraces` with argument 1 `string` not a string.",
     () => {
       throws(() => {
         replaceStackTraces(
           // @ts-expect-error Testing invalid.
           true
         );
-      }, new TypeError("First argument `string` must be a string."));
+      }, new TypeError("Argument 1 `string` must be a string."));
     }
   );
 
   tests.add(
-    "`replaceStackTraces` with second argument `replacer` not a string.",
+    "`replaceStackTraces` with argument 2 `replacer` not a string.",
     () => {
       throws(() => {
         replaceStackTraces(
@@ -29,7 +29,7 @@ export default (tests) => {
           // @ts-expect-error Testing invalid.
           true
         );
-      }, new TypeError("Second argument `replacer` must be a string."));
+      }, new TypeError("Argument 2 `replacer` must be a string."));
     }
   );
 

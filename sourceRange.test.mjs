@@ -8,7 +8,7 @@ import sourceRange from "./sourceRange.mjs";
  * @param {import("test-director").default} tests Test director.
  */
 export default (tests) => {
-  tests.add("`sourceRange` with first argument `source` not a string.", () => {
+  tests.add("`sourceRange` with argument 1 `source` not a string.", () => {
     throws(() => {
       sourceRange(
         // @ts-expect-error Testing invalid.
@@ -16,39 +16,33 @@ export default (tests) => {
         0,
         0
       );
-    }, new TypeError("First argument `source` must be a string."));
+    }, new TypeError("Argument 1 `source` must be a string."));
+  });
+
+  tests.add("`sourceRange` with argument 2 `startOffset` not a number.", () => {
+    throws(() => {
+      sourceRange(
+        "a",
+        // @ts-expect-error Testing invalid.
+        true,
+        0
+      );
+    }, new TypeError("Argument 2 `startOffset` must be a number."));
+  });
+
+  tests.add("`sourceRange` with argument 3 `endOffset` not a number.", () => {
+    throws(() => {
+      sourceRange(
+        "a",
+        0,
+        // @ts-expect-error Testing invalid.
+        true
+      );
+    }, new TypeError("Argument 3 `endOffset` must be a number."));
   });
 
   tests.add(
-    "`sourceRange` with second argument `startOffset` not a number.",
-    () => {
-      throws(() => {
-        sourceRange(
-          "a",
-          // @ts-expect-error Testing invalid.
-          true,
-          0
-        );
-      }, new TypeError("Second argument `startOffset` must be a number."));
-    }
-  );
-
-  tests.add(
-    "`sourceRange` with third argument `endOffset` not a number.",
-    () => {
-      throws(() => {
-        sourceRange(
-          "a",
-          0,
-          // @ts-expect-error Testing invalid.
-          true
-        );
-      }, new TypeError("Third argument `endOffset` must be a number."));
-    }
-  );
-
-  tests.add(
-    "`sourceRange` with fourth argument `ignoreNextLineComment` not a string or `false`.",
+    "`sourceRange` with argument 4 `ignoreNextLineComment` not a string or `false`.",
     () => {
       throws(() => {
         sourceRange(
@@ -58,7 +52,7 @@ export default (tests) => {
           // @ts-expect-error Testing invalid.
           true
         );
-      }, new TypeError("Fourth argument `ignoreNextLineComment` must be a string or `false`."));
+      }, new TypeError("Argument 4 `ignoreNextLineComment` must be a string or `false`."));
     }
   );
 

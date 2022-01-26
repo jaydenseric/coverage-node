@@ -9,7 +9,7 @@ import childProcessPromise from "./childProcessPromise.mjs";
  */
 export default (tests) => {
   tests.add(
-    "`childProcessPromise` with first argument `childProcess` not a `ChildProcess` instance.",
+    "`childProcessPromise` with argument 1 `childProcess` not a `ChildProcess` instance.",
     async () => {
       await rejects(
         childProcessPromise(
@@ -17,7 +17,7 @@ export default (tests) => {
           true
         ),
         new TypeError(
-          "First argument `childProcess` must be a `ChildProcess` instance."
+          "Argument 1 `childProcess` must be a `ChildProcess` instance."
         )
       );
     }
