@@ -1,5 +1,11 @@
 # coverage-node changelog
 
+## Next
+
+### Patch
+
+- The private `reportCliError` function now explicitly calls `.toString()` for errors that don’t have a `stack` property.
+
 ## 6.0.0
 
 ### Major

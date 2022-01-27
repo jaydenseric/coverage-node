@@ -25,10 +25,10 @@ export default function reportCliError(cliDescription, error) {
         ? error.message
         : error instanceof Error
         ? // Rarely, an error doesn’t have a stack. In that case, the standard
-          // `toString` method returns the error’s `name` + `: ` + the `message`.
-          // This is consistent with the first part of a standard Node.js
-          // error’s `stack`.
-          error.stack || error
+          // `toString` method returns the error’s `name` + `: ` + the
+          // `message`. This is consistent with the first part of a standard
+          // Node.js error’s `stack`.
+          error.stack || error.toString()
         : inspect(error)
     )
   );
