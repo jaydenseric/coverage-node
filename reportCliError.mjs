@@ -1,7 +1,9 @@
 // @ts-check
 
 import { inspect } from "util";
-import kleur from "kleur";
+// See: https://github.com/mysticatea/eslint-plugin-node/issues/258
+// eslint-disable-next-line node/file-extension-in-import
+import { bold, red } from "kleur/colors";
 import CliError from "./CliError.mjs";
 import errorConsole from "./errorConsole.mjs";
 
@@ -16,11 +18,11 @@ export default function reportCliError(cliDescription, error) {
 
   errorConsole.group(
     // Whitespace blank lines shouldn’t have redundant indentation or color.
-    `\n${kleur.bold().red(`Error running ${cliDescription}:`)}\n`
+    `\n${bold(red(`Error running ${cliDescription}:`))}\n`
   );
 
   errorConsole.error(
-    kleur.red(
+    red(
       error instanceof CliError
         ? error.message
         : error instanceof Error

@@ -1,7 +1,9 @@
 // @ts-check
 
 import { relative } from "path";
-import kleur from "kleur";
+// See: https://github.com/mysticatea/eslint-plugin-node/issues/258
+// eslint-disable-next-line node/file-extension-in-import
+import { bold, green, red, yellow } from "kleur/colors";
 import errorConsole from "./errorConsole.mjs";
 
 /**
@@ -17,7 +19,7 @@ export default function reportCoverage({
 }) {
   if (covered.length) {
     console.group(
-      `\n${kleur.green(
+      `\n${green(
         `${covered.length} file${covered.length === 1 ? "" : "s"} covered:`
       )}\n`
     );
@@ -29,7 +31,7 @@ export default function reportCoverage({
 
   if (ignored.length) {
     console.group(
-      `\n${kleur.yellow(
+      `\n${yellow(
         `${ignored.length} file${
           ignored.length === 1 ? "" : "s"
         } ignoring coverage:`
@@ -49,7 +51,7 @@ export default function reportCoverage({
 
   if (uncovered.length) {
     errorConsole.group(
-      `\n${kleur.red(
+      `\n${red(
         `${uncovered.length} file${
           uncovered.length === 1 ? "" : "s"
         } missing coverage:`
@@ -68,10 +70,10 @@ export default function reportCoverage({
   }
 
   console.info(
-    `\n${kleur
-      .bold()
-      [uncovered.length ? "red" : ignored.length ? "yellow" : "green"](
+    `\n${bold(
+      (uncovered.length ? red : ignored.length ? yellow : green)(
         `${covered.length}/${filesCount} files covered.`
-      )}\n`
+      )
+    )}\n`
   );
 }

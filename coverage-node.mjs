@@ -3,7 +3,9 @@
 
 import { spawn } from "child_process";
 import disposableDirectory from "disposable-directory";
-import kleur from "kleur";
+// See: https://github.com/mysticatea/eslint-plugin-node/issues/258
+// eslint-disable-next-line node/file-extension-in-import
+import { yellow } from "kleur/colors";
 import CliError from "./CliError.mjs";
 import analyseCoverage from "./analyseCoverage.mjs";
 import childProcessPromise from "./childProcessPromise.mjs";
@@ -51,7 +53,7 @@ async function coverageNode() {
 
       if (exitCode === 0)
         console.info(
-          `\n${kleur.yellow(
+          `\n${yellow(
             `Skipped code coverage as Node.js is ${process.version}, v${minNodeVersion.major}.${minNodeVersion.minor}.${minNodeVersion.patch}+ is supported.`
           )}\n`
         );

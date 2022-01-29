@@ -5,6 +5,7 @@
 ### Patch
 
 - The private `reportCliError` function now explicitly calls `.toString()` for errors that don’t have a `stack` property.
+- Stopped using the [`kleur`](https://npm.im/kleur) chaining API.
 
 ## 6.0.0
 
