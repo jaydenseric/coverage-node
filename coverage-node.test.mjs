@@ -2,11 +2,12 @@
 
 import { strictEqual } from "assert";
 import { spawnSync } from "child_process";
+import disposableDirectory from "disposable-directory";
 import fs from "fs";
 import { join, relative } from "path";
-import { fileURLToPath } from "url";
-import disposableDirectory from "disposable-directory";
 import snapshot from "snapshot-assertion";
+import { fileURLToPath } from "url";
+
 import coverageSupported from "./coverageSupported.mjs";
 import replaceStackTraces from "./test/replaceStackTraces.mjs";
 

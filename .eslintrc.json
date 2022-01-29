@@ -1,8 +1,30 @@
 {
-  "extends": ["env"],
-  "settings": {
-    "jsdoc": {
-      "mode": "typescript"
+  "extends": ["eslint:recommended"],
+  "env": {
+    "es2021": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": "latest"
+  },
+  "plugins": ["simple-import-sort"],
+  "rules": {
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error"
+  },
+  "overrides": [
+    {
+      "files": ["*.mjs"],
+      "parserOptions": {
+        "sourceType": "module"
+      },
+      "globals": {
+        "__dirname": "off",
+        "__filename": "off",
+        "exports": "off",
+        "module": "off",
+        "require": "off"
+      }
     }
-  }
+  ]
 }

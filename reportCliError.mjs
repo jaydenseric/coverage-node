@@ -1,9 +1,8 @@
 // @ts-check
 
-import { inspect } from "util";
-// See: https://github.com/mysticatea/eslint-plugin-node/issues/258
-// eslint-disable-next-line node/file-extension-in-import
 import { bold, red } from "kleur/colors";
+import { inspect } from "util";
+
 import CliError from "./CliError.mjs";
 import errorConsole from "./errorConsole.mjs";
 

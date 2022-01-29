@@ -1,6 +1,7 @@
 // @ts-check
 
 import { deepStrictEqual, throws } from "assert";
+
 import sourceRange from "./sourceRange.mjs";
 
 /**

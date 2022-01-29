@@ -1,9 +1,8 @@
 // @ts-check
 
-import { relative } from "path";
-// See: https://github.com/mysticatea/eslint-plugin-node/issues/258
-// eslint-disable-next-line node/file-extension-in-import
 import { bold, green, red, yellow } from "kleur/colors";
+import { relative } from "path";
+
 import errorConsole from "./errorConsole.mjs";
 
 /**

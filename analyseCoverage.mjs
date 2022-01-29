@@ -1,9 +1,10 @@
 // @ts-check
 
+import v8Coverage from "@bcoe/v8-coverage";
 import fs from "fs";
 import { join } from "path";
 import { fileURLToPath } from "url";
-import v8Coverage from "@bcoe/v8-coverage";
+
 import sourceRange from "./sourceRange.mjs";
 
 /**

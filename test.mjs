@@ -1,9 +1,10 @@
 // @ts-check
 
 import TestDirector from "test-director";
-import test_CliError from "./CliError.test.mjs";
+
 import test_analyseCoverage from "./analyseCoverage.test.mjs";
 import test_childProcessPromise from "./childProcessPromise.test.mjs";
+import test_CliError from "./CliError.test.mjs";
 import test_cli_coverage_node from "./coverage-node.test.mjs";
 import test_reportCliError from "./reportCliError.test.mjs";
 import test_semver from "./semver.test.mjs";

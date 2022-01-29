@@ -3,12 +3,11 @@
 
 import { spawn } from "child_process";
 import disposableDirectory from "disposable-directory";
-// See: https://github.com/mysticatea/eslint-plugin-node/issues/258
-// eslint-disable-next-line node/file-extension-in-import
 import { yellow } from "kleur/colors";
-import CliError from "./CliError.mjs";
+
 import analyseCoverage from "./analyseCoverage.mjs";
 import childProcessPromise from "./childProcessPromise.mjs";
+import CliError from "./CliError.mjs";
 import coverageSupported from "./coverageSupported.mjs";
 import minNodeVersion from "./coverageSupportedMinNodeVersion.mjs";
 import reportCliError from "./reportCliError.mjs";

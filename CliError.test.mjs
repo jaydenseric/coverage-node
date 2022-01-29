@@ -1,6 +1,7 @@
 // @ts-check
 
 import { strictEqual, throws } from "assert";
+
 import CliError from "./CliError.mjs";
 
 /**

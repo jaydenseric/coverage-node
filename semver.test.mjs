@@ -1,6 +1,7 @@
 // @ts-check
 
 import { deepStrictEqual, throws } from "assert";
+
 import semver from "./semver.mjs";
 
 /**

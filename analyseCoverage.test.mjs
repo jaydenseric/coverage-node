@@ -2,9 +2,10 @@
 
 import { deepStrictEqual, rejects } from "assert";
 import { spawn } from "child_process";
+import disposableDirectory from "disposable-directory";
 import fs from "fs";
 import { join } from "path";
-import disposableDirectory from "disposable-directory";
+
 import analyseCoverage from "./analyseCoverage.mjs";
 import childProcessPromise from "./childProcessPromise.mjs";
 
