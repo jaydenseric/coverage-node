@@ -5,11 +5,11 @@ import { spawnSync } from "child_process";
 import disposableDirectory from "disposable-directory";
 import fs from "fs";
 import { join, relative } from "path";
+import replaceStackTraces from "replace-stack-traces";
 import snapshot from "snapshot-assertion";
 import { fileURLToPath } from "url";
 
 import coverageSupported from "./coverageSupported.mjs";
-import replaceStackTraces from "./test/replaceStackTraces.mjs";
 
 const COVERAGE_NODE_CLI_PATH = fileURLToPath(
   new URL("./coverage-node.mjs", import.meta.url)

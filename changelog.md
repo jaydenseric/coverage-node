@@ -7,6 +7,7 @@
 - Simplified dev dependencies and config for ESLint.
 - The private `reportCliError` function now explicitly calls `.toString()` for errors that don’t have a `stack` property.
 - Stopped using the [`kleur`](https://npm.im/kleur) chaining API.
+- Use a new [`replace-stack-traces`](https://npm.im/replace-stack-traces) dev dependency in tests.
 
 ## 6.0.0
 

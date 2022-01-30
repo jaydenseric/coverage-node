@@ -5,11 +5,11 @@ import { spawnSync } from "child_process";
 import disposableDirectory from "disposable-directory";
 import fs from "fs";
 import { join } from "path";
+import replaceStackTraces from "replace-stack-traces";
 import snapshot from "snapshot-assertion";
 import { fileURLToPath } from "url";
 
 import reportCliError from "./reportCliError.mjs";
-import replaceStackTraces from "./test/replaceStackTraces.mjs";
 
 const REPORT_CLI_ERROR_PATH = fileURLToPath(
   new URL("./reportCliError.mjs", import.meta.url)
