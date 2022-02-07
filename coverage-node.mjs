@@ -41,7 +41,7 @@ async function coverageNode() {
         if (exitCode === 0) {
           const analysis = await analyseCoverage(tempDirPath);
           reportCoverage(analysis);
-          if (analysis.uncovered.length) process.exitCode = 1;
+          if (analysis.uncovered.length && !process.env.TOLERATE_INCOMPLETE_COVERAGE) process.exitCode = 1;
         } else if (exitCode !== null) process.exitCode = exitCode;
       });
       // coverage ignore next line

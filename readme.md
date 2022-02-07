@@ -59,9 +59,9 @@ if (false) console.log("Never runs.");
 
 Substitutes the normal `node` command; any [`node` CLI options](https://nodejs.org/api/cli.html#cli_options) can be used to run a test script. If the script doesn’t error a code coverage analysis is reported to the console, and if coverage is incomplete the exit code is `1`.
 
-If environment IGNORE_COVERAGE is set, coverage-node show result to console, but return last run code from test process:
+If environment TOLERATE_INCOMPLETE_COVERAGE is set, coverage-node show result to console, but return last run code from test process:
 ```sh
-IGNORE_COVERAGE=true npx coverage-node test.mjs
+TOLERATE_INCOMPLETE_COVERAGE=true npx coverage-node test.mjs
 echo $? # return 0, if test is successful 
 ```
 
