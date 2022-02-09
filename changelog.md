@@ -1,5 +1,11 @@
 # coverage-node changelog
 
+## Next
+
+### Patch
+
+- Amended the v6.0.0 changelog entry.
+
 ## 6.0.1
 
 ### Patch
@@ -27,13 +33,14 @@
 - Check TypeScript types via a new package `types` script.
 - Fixed various type related issues.
 - Also run GitHub Actions CI with Node.js v17, and drop v15.
+- Removed the [`jsdoc-md`](https://npm.im/jsdoc-md) dev dependency and the related package scripts, replacing the readme “API” section with a manually written “Exports” section.
 - Fixed snapshot tests for the Node.js v17.0.0+ behavior of adding the Node.js version after trace for errors that cause the process to exit.
-- Configured Prettier option `singleQuote` to the default, `false`.
 - Reorganized the test file structure.
 - Renamed imports in the test index module.
 - Added `CliError` class tests.
 - Runtime type check `CLiError` constructor arguments.
 - Simplified runtime type error messages.
+- Configured Prettier option `singleQuote` to the default, `false`.
 - Added a `license.md` MIT License file.
 - Readme tweaks.
 
