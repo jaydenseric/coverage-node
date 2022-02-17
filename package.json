@@ -51,17 +51,17 @@
   "dependencies": {
     "@bcoe/v8-coverage": "^0.2.3",
     "@types/node": "*",
-    "disposable-directory": "^5.0.1",
+    "disposable-directory": "^5.0.2",
     "kleur": "^4.1.4"
   },
   "devDependencies": {
-    "eslint": "^8.7.0",
+    "eslint": "^8.9.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "prettier": "^2.5.1",
     "replace-stack-traces": "^1.0.0",
-    "snapshot-assertion": "^4.0.1",
-    "test-director": "^8.0.1",
-    "typescript": "^4.6.0-dev.20220125"
+    "snapshot-assertion": "^4.0.2",
+    "test-director": "^8.0.2",
+    "typescript": "^4.7.0-dev.20220217"
   },
   "scripts": {
     "eslint": "eslint .",
