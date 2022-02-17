@@ -57,7 +57,7 @@ if (false) console.log("Never runs.");
 
 ### Command `coverage-node`
 
-Substitutes the normal `node` command; any [`node` CLI options](https://nodejs.org/api/cli.html#cli_options) can be used to run a test script. If the script doesn’t error a code coverage analysis is reported to the console, and if coverage is incomplete the exit code is `1`.
+Substitutes the normal `node` command; any [`node` CLI options](https://nodejs.org/api/cli.html#cli_options) can be used to run a test script. If the script doesn’t error a code coverage analysis is reported to the console, and if coverage is incomplete and there isn’t a truthy `ALLOW_MISSING_COVERAGE` environment variable the process exits with code `1`.
 
 #### Examples
 
@@ -73,6 +73,16 @@ A [`package.json` script](https://docs.npmjs.com/cli/v8/configuring-npm/package-
 {
   "scripts": {
     "test": "coverage-node test.mjs"
+  }
+}
+```
+
+A [`package.json` script](https://docs.npmjs.com/cli/v8/configuring-npm/package-json#scripts) that allows missing coverage:
+
+```json
+{
+  "scripts": {
+    "test": "ALLOW_MISSING_COVERAGE=1 coverage-node test.mjs"
   }
 }
 ```

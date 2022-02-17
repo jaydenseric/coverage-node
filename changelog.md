@@ -2,6 +2,10 @@
 
 ## Next
 
+### Minor
+
+- A truthy `ALLOW_MISSING_COVERAGE` environment variable can now be used with the `coverage-node` CLI to prevent missing coverage from causing the process to exit with code `1`, via [#2](https://github.com/jaydenseric/coverage-node/pull/2).
+
 ### Patch
 
 - Updated dependencies.

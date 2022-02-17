@@ -16,7 +16,8 @@ import reportCoverage from "./reportCoverage.mjs";
 /**
  * Powers the `coverage-node` CLI. Runs Node.js with the given arguments and
  * coverage enabled. An analysis of the coverage is reported to the console, and
- * if coverage isn’t complete the process exits with code `1`.
+ * if coverage is incomplete and there isn’t a truthy `ALLOW_MISSING_COVERAGE`
+ * environment variable the process exits with code `1`.
  * @returns {Promise<void>} Resolves when all work is complete.
  */
 async function coverageNode() {
@@ -41,7 +42,8 @@ async function coverageNode() {
         if (exitCode === 0) {
           const analysis = await analyseCoverage(tempDirPath);
           reportCoverage(analysis);
-          if (analysis.uncovered.length) process.exitCode = 1;
+          if (analysis.uncovered.length && !process.env.ALLOW_MISSING_COVERAGE)
+            process.exitCode = 1;
         } else if (exitCode !== null) process.exitCode = exitCode;
       });
       // coverage ignore next line

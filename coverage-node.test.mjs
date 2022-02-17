@@ -113,57 +113,116 @@ export default (tests) => {
     });
   });
 
-  tests.add("`coverage-node` CLI with 1 uncovered file.", async () => {
-    await disposableDirectory(async (tempDirPath) => {
-      const filePath = join(tempDirPath, "index.mjs");
+  tests.add(
+    "`coverage-node` CLI with 1 uncovered file, `ALLOW_MISSING_COVERAGE` environment variable falsy.",
+    async () => {
+      await disposableDirectory(async (tempDirPath) => {
+        const filePath = join(tempDirPath, "index.mjs");
 
-      await fs.promises.writeFile(filePath, "() => {};");
+        await fs.promises.writeFile(filePath, "() => {};");
 
-      const { stdout, stderr, status, error } = spawnSync(
-        "node",
-        [COVERAGE_NODE_CLI_PATH, filePath],
-        {
-          env: {
-            ...process.env,
-            FORCE_COLOR: "1",
-          },
-        }
-      );
+        const { stdout, stderr, status, error } = spawnSync(
+          "node",
+          [COVERAGE_NODE_CLI_PATH, filePath],
+          {
+            env: {
+              ...process.env,
+              FORCE_COLOR: "1",
+            },
+          }
+        );
 
-      if (error) throw error;
+        if (error) throw error;
 
-      await snapshot(
-        coverageSupported
-          ? stdout.toString()
-          : stdout
-              .toString()
-              .replace(
-                process.version,
-                SNAPSHOT_REPLACEMENT_PROCESS_NODE_VERSION
-              ),
-        new URL(
-          `./test/snapshots/coverage-node/1-uncovered-file-coverage-${
-            coverageSupported ? "supported" : "unsupported"
-          }-stdout.ans`,
-          import.meta.url
-        )
-      );
-
-      if (coverageSupported)
         await snapshot(
-          stderr
-            .toString()
-            .replace(relative("", filePath), SNAPSHOT_REPLACEMENT_FILE_PATH),
+          coverageSupported
+            ? stdout.toString()
+            : stdout
+                .toString()
+                .replace(
+                  process.version,
+                  SNAPSHOT_REPLACEMENT_PROCESS_NODE_VERSION
+                ),
           new URL(
-            "./test/snapshots/coverage-node/1-uncovered-file-coverage-supported-stderr.ans",
+            `./test/snapshots/coverage-node/1-uncovered-file-ALLOW_MISSING_COVERAGE-falsy-coverage-${
+              coverageSupported ? "supported" : "unsupported"
+            }-stdout.ans`,
             import.meta.url
           )
         );
-      else strictEqual(stderr.toString(), "");
 
-      strictEqual(status, coverageSupported ? 1 : 0);
-    });
-  });
+        if (coverageSupported)
+          await snapshot(
+            stderr
+              .toString()
+              .replace(relative("", filePath), SNAPSHOT_REPLACEMENT_FILE_PATH),
+            new URL(
+              "./test/snapshots/coverage-node/1-uncovered-file-ALLOW_MISSING_COVERAGE-falsy-coverage-supported-stderr.ans",
+              import.meta.url
+            )
+          );
+        else strictEqual(stderr.toString(), "");
+
+        strictEqual(status, coverageSupported ? 1 : 0);
+      });
+    }
+  );
+
+  tests.add(
+    "`coverage-node` CLI with 1 uncovered file, `ALLOW_MISSING_COVERAGE` environment variable truthy.",
+    async () => {
+      await disposableDirectory(async (tempDirPath) => {
+        const filePath = join(tempDirPath, "index.mjs");
+
+        await fs.promises.writeFile(filePath, "() => {};");
+
+        const { stdout, stderr, status, error } = spawnSync(
+          "node",
+          [COVERAGE_NODE_CLI_PATH, filePath],
+          {
+            env: {
+              ...process.env,
+              FORCE_COLOR: "1",
+              ALLOW_MISSING_COVERAGE: "1",
+            },
+          }
+        );
+
+        if (error) throw error;
+
+        await snapshot(
+          coverageSupported
+            ? stdout.toString()
+            : stdout
+                .toString()
+                .replace(
+                  process.version,
+                  SNAPSHOT_REPLACEMENT_PROCESS_NODE_VERSION
+                ),
+          new URL(
+            `./test/snapshots/coverage-node/1-uncovered-file-ALLOW_MISSING_COVERAGE-truthy-coverage-${
+              coverageSupported ? "supported" : "unsupported"
+            }-stdout.ans`,
+            import.meta.url
+          )
+        );
+
+        if (coverageSupported)
+          await snapshot(
+            stderr
+              .toString()
+              .replace(relative("", filePath), SNAPSHOT_REPLACEMENT_FILE_PATH),
+            new URL(
+              "./test/snapshots/coverage-node/1-uncovered-file-ALLOW_MISSING_COVERAGE-truthy-coverage-supported-stderr.ans",
+              import.meta.url
+            )
+          );
+        else strictEqual(stderr.toString(), "");
+
+        strictEqual(status, 0);
+      });
+    }
+  );
 
   tests.add(
     "`coverage-node` CLI with 2 covered, ignored and uncovered files.",
