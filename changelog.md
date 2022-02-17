@@ -4,6 +4,7 @@
 
 ### Patch
 
+- Updated dependencies.
 - Amended the v6.0.0 changelog entry.
 
 ## 6.0.1
