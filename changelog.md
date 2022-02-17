@@ -1,6 +1,6 @@
 # coverage-node changelog
 
-## Next
+## 6.1.0
 
 ### Minor
 
