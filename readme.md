@@ -33,7 +33,7 @@ In a [`package.json` script](https://docs.npmjs.com/cli/v8/configuring-npm/packa
 - Operating system:
   - Linux
   - macOS
-- [Node.js](https://nodejs.org): `^12.22.0 || ^14.17.0 || >= 16.0.0`, but for Node.js versions < v13.3 that produce [unreliable coverage data](https://github.com/nodejs/node/issues/25937#issuecomment-563115421) the command [`coverage-node`](#command-coverage-node) skips code coverage and logs a warning.
+- [Node.js](https://nodejs.org): `^14.17.0 || ^16.0.0 || >= 18.0.0`.
 
 ## Ignored files
 
@@ -92,6 +92,4 @@ A [`package.json` script](https://docs.npmjs.com/cli/v8/configuring-npm/package-
 These ECMAScript modules are published to [npm](https://npmjs.com) and exported via the [`package.json`](./package.json) `exports` field:
 
 - [`analyseCoverage.mjs`](./analyseCoverage.mjs)
-- [`coverageSupported.mjs`](./coverageSupported.mjs)
-- [`coverageSupportedMinNodeVersion.mjs`](./coverageSupportedMinNodeVersion.mjs)
 - [`reportCoverage.mjs`](./reportCoverage.mjs)

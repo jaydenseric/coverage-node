@@ -9,13 +9,10 @@ import replaceStackTraces from "replace-stack-traces";
 import snapshot from "snapshot-assertion";
 import { fileURLToPath } from "url";
 
-import coverageSupported from "./coverageSupported.mjs";
-
 const COVERAGE_NODE_CLI_PATH = fileURLToPath(
   new URL("./coverage-node.mjs", import.meta.url)
 );
 const SNAPSHOT_REPLACEMENT_FILE_PATH = "<file path>";
-const SNAPSHOT_REPLACEMENT_PROCESS_NODE_VERSION = "<process Node.js version>";
 
 /**
  * Adds `coverage-node` tests.
@@ -42,20 +39,11 @@ export default (tests) => {
       if (error) throw error;
 
       await snapshot(
-        coverageSupported
-          ? stdout
-              .toString()
-              .replace(relative("", filePath), SNAPSHOT_REPLACEMENT_FILE_PATH)
-          : stdout
-              .toString()
-              .replace(
-                process.version,
-                SNAPSHOT_REPLACEMENT_PROCESS_NODE_VERSION
-              ),
+        stdout
+          .toString()
+          .replace(relative("", filePath), SNAPSHOT_REPLACEMENT_FILE_PATH),
         new URL(
-          `./test/snapshots/coverage-node/1-covered-file-coverage-${
-            coverageSupported ? "supported" : "unsupported"
-          }-stdout.ans`,
+          `./test/snapshots/coverage-node/1-covered-file-stdout.ans`,
           import.meta.url
         )
       );
@@ -90,20 +78,11 @@ export default (tests) => {
       if (error) throw error;
 
       await snapshot(
-        coverageSupported
-          ? stdout
-              .toString()
-              .replace(relative("", filePath), SNAPSHOT_REPLACEMENT_FILE_PATH)
-          : stdout
-              .toString()
-              .replace(
-                process.version,
-                SNAPSHOT_REPLACEMENT_PROCESS_NODE_VERSION
-              ),
+        stdout
+          .toString()
+          .replace(relative("", filePath), SNAPSHOT_REPLACEMENT_FILE_PATH),
         new URL(
-          `./test/snapshots/coverage-node/1-ignored-file-coverage-${
-            coverageSupported ? "supported" : "unsupported"
-          }-stdout.ans`,
+          `./test/snapshots/coverage-node/1-ignored-file-stdout.ans`,
           import.meta.url
         )
       );
@@ -135,35 +114,24 @@ export default (tests) => {
         if (error) throw error;
 
         await snapshot(
-          coverageSupported
-            ? stdout.toString()
-            : stdout
-                .toString()
-                .replace(
-                  process.version,
-                  SNAPSHOT_REPLACEMENT_PROCESS_NODE_VERSION
-                ),
+          stdout.toString(),
           new URL(
-            `./test/snapshots/coverage-node/1-uncovered-file-ALLOW_MISSING_COVERAGE-falsy-coverage-${
-              coverageSupported ? "supported" : "unsupported"
-            }-stdout.ans`,
+            `./test/snapshots/coverage-node/1-uncovered-file-ALLOW_MISSING_COVERAGE-falsy-stdout.ans`,
             import.meta.url
           )
         );
 
-        if (coverageSupported)
-          await snapshot(
-            stderr
-              .toString()
-              .replace(relative("", filePath), SNAPSHOT_REPLACEMENT_FILE_PATH),
-            new URL(
-              "./test/snapshots/coverage-node/1-uncovered-file-ALLOW_MISSING_COVERAGE-falsy-coverage-supported-stderr.ans",
-              import.meta.url
-            )
-          );
-        else strictEqual(stderr.toString(), "");
+        await snapshot(
+          stderr
+            .toString()
+            .replace(relative("", filePath), SNAPSHOT_REPLACEMENT_FILE_PATH),
+          new URL(
+            "./test/snapshots/coverage-node/1-uncovered-file-ALLOW_MISSING_COVERAGE-falsy-stderr.ans",
+            import.meta.url
+          )
+        );
 
-        strictEqual(status, coverageSupported ? 1 : 0);
+        strictEqual(status, 1);
       });
     }
   );
@@ -191,33 +159,22 @@ export default (tests) => {
         if (error) throw error;
 
         await snapshot(
-          coverageSupported
-            ? stdout.toString()
-            : stdout
-                .toString()
-                .replace(
-                  process.version,
-                  SNAPSHOT_REPLACEMENT_PROCESS_NODE_VERSION
-                ),
+          stdout.toString(),
           new URL(
-            `./test/snapshots/coverage-node/1-uncovered-file-ALLOW_MISSING_COVERAGE-truthy-coverage-${
-              coverageSupported ? "supported" : "unsupported"
-            }-stdout.ans`,
+            `./test/snapshots/coverage-node/1-uncovered-file-ALLOW_MISSING_COVERAGE-truthy-stdout.ans`,
             import.meta.url
           )
         );
 
-        if (coverageSupported)
-          await snapshot(
-            stderr
-              .toString()
-              .replace(relative("", filePath), SNAPSHOT_REPLACEMENT_FILE_PATH),
-            new URL(
-              "./test/snapshots/coverage-node/1-uncovered-file-ALLOW_MISSING_COVERAGE-truthy-coverage-supported-stderr.ans",
-              import.meta.url
-            )
-          );
-        else strictEqual(stderr.toString(), "");
+        await snapshot(
+          stderr
+            .toString()
+            .replace(relative("", filePath), SNAPSHOT_REPLACEMENT_FILE_PATH),
+          new URL(
+            "./test/snapshots/coverage-node/1-uncovered-file-ALLOW_MISSING_COVERAGE-truthy-stderr.ans",
+            import.meta.url
+          )
+        );
 
         strictEqual(status, 0);
       });
@@ -272,41 +229,30 @@ import "${fileFPath}";
         if (error) throw error;
 
         await snapshot(
-          coverageSupported
-            ? stdout
-                .toString()
-                .replace(relative("", fileAPath), "<pathA>")
-                .replace(relative("", fileBPath), "<pathB>")
-                .replace(relative("", fileCPath), "<pathC>")
-                .replace(relative("", fileDPath), "<pathD>")
-            : stdout
-                .toString()
-                .replace(
-                  process.version,
-                  SNAPSHOT_REPLACEMENT_PROCESS_NODE_VERSION
-                ),
+          stdout
+            .toString()
+            .replace(relative("", fileAPath), "<pathA>")
+            .replace(relative("", fileBPath), "<pathB>")
+            .replace(relative("", fileCPath), "<pathC>")
+            .replace(relative("", fileDPath), "<pathD>"),
           new URL(
-            `./test/snapshots/coverage-node/2-covered-ignored-uncovered-files-coverage-${
-              coverageSupported ? "supported" : "unsupported"
-            }-stdout.ans`,
+            `./test/snapshots/coverage-node/2-covered-ignored-uncovered-files-stdout.ans`,
             import.meta.url
           )
         );
 
-        if (coverageSupported)
-          await snapshot(
-            stderr
-              .toString()
-              .replace(relative("", fileEPath), "<pathE>")
-              .replace(relative("", fileFPath), "<pathF>"),
-            new URL(
-              "./test/snapshots/coverage-node/2-covered-ignored-uncovered-files-coverage-supported-stderr.ans",
-              import.meta.url
-            )
-          );
-        else strictEqual(stderr.toString(), "");
+        await snapshot(
+          stderr
+            .toString()
+            .replace(relative("", fileEPath), "<pathE>")
+            .replace(relative("", fileFPath), "<pathF>"),
+          new URL(
+            "./test/snapshots/coverage-node/2-covered-ignored-uncovered-files-stderr.ans",
+            import.meta.url
+          )
+        );
 
-        strictEqual(status, coverageSupported ? 1 : 0);
+        strictEqual(status, 1);
       });
     }
   );
@@ -331,20 +277,11 @@ import "${fileFPath}";
       if (error) throw error;
 
       await snapshot(
-        coverageSupported
-          ? stdout
-              .toString()
-              .replace(relative("", filePath), SNAPSHOT_REPLACEMENT_FILE_PATH)
-          : stdout
-              .toString()
-              .replace(
-                process.version,
-                SNAPSHOT_REPLACEMENT_PROCESS_NODE_VERSION
-              ),
+        stdout
+          .toString()
+          .replace(relative("", filePath), SNAPSHOT_REPLACEMENT_FILE_PATH),
         new URL(
-          `./test/snapshots/coverage-node/script-console-log-coverage-${
-            coverageSupported ? "supported" : "unsupported"
-          }-stdout.ans`,
+          `./test/snapshots/coverage-node/script-console-log-stdout.ans`,
           import.meta.url
         )
       );
@@ -503,9 +440,7 @@ deprecated();
     await snapshot(
       replaceStackTraces(stderr.toString()),
       new URL(
-        `./test/snapshots/coverage-node/without-arguments-coverage-${
-          coverageSupported ? "supported" : "unsupported"
-        }-stderr.ans`,
+        `./test/snapshots/coverage-node/without-arguments-stderr.ans`,
         import.meta.url
       )
     );

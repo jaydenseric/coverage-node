@@ -2,8 +2,18 @@
 
 ## Next
 
+### Major
+
+- Updated Node.js support to `^14.17.0 || ^16.0.0 || >= 18.0.0`.
+- The command `coverage-node` no longer skips code coverage and logs a warning for Node.js versions < v13.3 that produce unreliable coverage data as they are no longer supported.
+- Removed these modules that were previously exported:
+  - `coverageSupported.mjs`
+  - `coverageSupportedMinNodeVersion.mjs`
+
 ### Patch
 
+- Updated GitHub Actions CI config:
+  - Run tests with Node.js v14, v16, v18.
 - Fixed a comment typo.
 
 ## 6.1.0

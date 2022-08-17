@@ -27,18 +27,13 @@
     "childProcessPromise.mjs",
     "CliError.mjs",
     "coverage-node.mjs",
-    "coverageSupported.mjs",
-    "coverageSupportedMinNodeVersion.mjs",
     "errorConsole.mjs",
     "reportCliError.mjs",
     "reportCoverage.mjs",
-    "semver.mjs",
     "sourceRange.mjs"
   ],
   "exports": {
     "./analyseCoverage.mjs": "./analyseCoverage.mjs",
-    "./coverageSupported.mjs": "./coverageSupported.mjs",
-    "./coverageSupportedMinNodeVersion.mjs": "./coverageSupportedMinNodeVersion.mjs",
     "./package.json": "./package.json",
     "./reportCoverage.mjs": "./reportCoverage.mjs"
   },
@@ -46,7 +41,7 @@
     "coverage-node": "coverage-node.mjs"
   },
   "engines": {
-    "node": "^12.22.0 || ^14.17.0 || >= 16.0.0"
+    "node": "^14.17.0 || ^16.0.0 || >= 18.0.0"
   },
   "dependencies": {
     "@bcoe/v8-coverage": "^0.2.3",
