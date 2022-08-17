@@ -47,16 +47,16 @@
     "@bcoe/v8-coverage": "^0.2.3",
     "@types/node": "*",
     "disposable-directory": "^5.0.2",
-    "kleur": "^4.1.4"
+    "kleur": "^4.1.5"
   },
   "devDependencies": {
-    "eslint": "^8.9.0",
+    "eslint": "^8.22.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
-    "prettier": "^2.5.1",
-    "replace-stack-traces": "^1.0.0",
+    "prettier": "^2.7.1",
+    "replace-stack-traces": "^2.0.0",
     "snapshot-assertion": "^4.0.2",
-    "test-director": "^8.0.2",
-    "typescript": "^4.7.0-dev.20220217"
+    "test-director": "^9.0.0",
+    "typescript": "^4.7.4"
   },
   "scripts": {
     "eslint": "eslint .",
