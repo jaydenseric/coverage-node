@@ -8,7 +8,7 @@ import errorConsole from "./errorConsole.mjs";
 /**
  * Reports a code coverage analysis to the console.
  * @param {import("./analyseCoverage.mjs").CoverageAnalysis} coverageAnalysis
- *   Coverage analysis from {@linkcode analyseCoverage}.
+ *   Coverage analysis.
  */
 export default function reportCoverage({
   filesCount,

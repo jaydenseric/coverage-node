@@ -22,6 +22,7 @@
   - Run tests with Node.js v14, v16, v18.
   - Updated `actions/checkout` to v3.
   - Updated `actions/setup-node` to v3.
+- Fixed a broken JSDoc link.
 - Fixed a comment typo.
 
 ## 6.1.0
