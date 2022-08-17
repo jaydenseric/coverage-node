@@ -1,5 +1,11 @@
 # coverage-node changelog
 
+## Next
+
+### Patch
+
+- Fixed a comment typo.
+
 ## 6.1.0
 
 ### Minor
