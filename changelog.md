@@ -24,6 +24,10 @@
   - Updated `actions/setup-node` to v3.
 - Fixed a broken JSDoc link.
 - Fixed a comment typo.
+- Revamped the readme:
+  - Removed the badges.
+  - Updated install size comparisons.
+  - Added information about TypeScript config and [optimal JavaScript module design](https://jaydenseric.com/blog/optimal-javascript-module-design).
 
 ## 6.1.0
 

@@ -1,17 +1,15 @@
 # coverage-node
 
-[![npm version](https://badgen.net/npm/v/coverage-node)](https://npm.im/coverage-node) [![CI status](https://github.com/jaydenseric/coverage-node/workflows/CI/badge.svg)](https://github.com/jaydenseric/coverage-node/actions)
-
 A simple CLI to run [Node.js](https://nodejs.org) and report code coverage.
 
 - ✨ Zero config.
-- 🏁 Tiny [SLOC](https://en.wikipedia.org/wiki/Source_lines_of_code), written from scratch to use [code coverage features](https://nodejs.org/api/cli.html#cli_node_v8_coverage_dir) built into Node.js v10+.
-- 📦 [Lean install size](https://packagephobia.com/result?p=coverage-node), compared to [2.2 MB for `c8` v7.7.1](https://packagephobia.com/result?p=c8@7.7.1) or [8.84 MB for `nyc` v15.1.0](https://packagephobia.com/result?p=nyc@15.1.0).
+- 🏁 Tiny source, written from scratch to use [code coverage features](https://nodejs.org/api/cli.html#cli_node_v8_coverage_dir) built into Node.js.
+- 📦 [Lean install size](https://packagephobia.com/result?p=coverage-node), compared to [1.94 MB for `c8` v7.11.1](https://packagephobia.com/result?p=c8@7.11.1) or [8.84 MB for `nyc` v15.1.0](https://packagephobia.com/result?p=nyc@15.1.0).
 - 🖱 Displays ignored or uncovered source code ranges as paths, clickable in IDEs such as [VS Code](https://code.visualstudio.com).
 
 ## Installation
 
-To install with [npm](https://npmjs.com/get-npm), run:
+To install [`coverage-node`](https://npm.im/coverage-node) with [npm](https://npmjs.com/get-npm), run:
 
 ```sh
 npm install coverage-node --save-dev
@@ -30,10 +28,20 @@ In a [`package.json` script](https://docs.npmjs.com/cli/v8/configuring-npm/packa
 
 ## Requirements
 
-- Operating system:
-  - Linux
-  - macOS
-- [Node.js](https://nodejs.org): `^14.17.0 || ^16.0.0 || >= 18.0.0`.
+Supported operating systems:
+
+- Linux
+- macOS
+
+Supported runtime environments:
+
+- [Node.js](https://nodejs.org) versions `^14.17.0 || ^16.0.0 || >= 18.0.0`.
+
+Projects must configure [TypeScript](https://typescriptlang.org) to use types from the ECMAScript modules that have a `// @ts-check` comment:
+
+- [`compilerOptions.allowJs`](https://typescriptlang.org/tsconfig#allowJs) should be `true`.
+- [`compilerOptions.maxNodeModuleJsDepth`](https://typescriptlang.org/tsconfig#maxNodeModuleJsDepth) should be reasonably large, e.g. `10`.
+- [`compilerOptions.module`](https://typescriptlang.org/tsconfig#module) should be `"node16"` or `"nodenext"`.
 
 ## Ignored files
 
@@ -89,7 +97,7 @@ A [`package.json` script](https://docs.npmjs.com/cli/v8/configuring-npm/package-
 
 ## Exports
 
-These ECMAScript modules are published to [npm](https://npmjs.com) and exported via the [`package.json`](./package.json) `exports` field:
+The [npm](https://npmjs.com) package [`coverage-node`](https://npm.im/coverage-node) features [optimal JavaScript module design](https://jaydenseric.com/blog/optimal-javascript-module-design). It doesn’t have a main index module, so use deep imports from the ECMAScript modules that are exported via the [`package.json`](./package.json) field [`exports`](https://nodejs.org/api/packages.html#exports):
 
 - [`analyseCoverage.mjs`](./analyseCoverage.mjs)
 - [`reportCoverage.mjs`](./reportCoverage.mjs)
