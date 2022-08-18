@@ -46,7 +46,7 @@
   "dependencies": {
     "@bcoe/v8-coverage": "^0.2.3",
     "@types/node": "*",
-    "disposable-directory": "^5.0.2",
+    "disposable-directory": "^6.0.0",
     "kleur": "^4.1.5"
   },
   "devDependencies": {

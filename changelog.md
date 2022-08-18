@@ -1,5 +1,11 @@
 # coverage-node changelog
 
+## Next
+
+### Patch
+
+- Updated dependencies.
+
 ## 7.0.0
 
 ### Major
