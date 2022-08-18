@@ -4,7 +4,8 @@
 
 ### Major
 
-- Migrated from the Node.js builtin module `fs` to `fs/promises`.
+- Use the `node:` URL scheme for Node.js builtin module imports.
+- Migrated from the Node.js builtin module `fs` to `node:fs/promises`.
 
 ### Patch
 

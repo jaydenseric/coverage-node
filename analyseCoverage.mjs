@@ -1,9 +1,9 @@
 // @ts-check
 
 import v8Coverage from "@bcoe/v8-coverage";
-import { readdir, readFile } from "fs/promises";
-import { join } from "path";
-import { fileURLToPath } from "url";
+import { readdir, readFile } from "node:fs/promises";
+import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 
 import sourceRange from "./sourceRange.mjs";
 

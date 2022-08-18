@@ -1,6 +1,6 @@
 // @ts-check
 
-import { deepStrictEqual, throws } from "assert";
+import { deepStrictEqual, throws } from "node:assert";
 
 import sourceRange from "./sourceRange.mjs";
 

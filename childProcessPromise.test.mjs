@@ -1,6 +1,6 @@
 // @ts-check
 
-import { rejects } from "assert";
+import { rejects } from "node:assert";
 
 import childProcessPromise from "./childProcessPromise.mjs";
 

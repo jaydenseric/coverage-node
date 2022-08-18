@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 // @ts-check
 
-import { spawn } from "child_process";
 import disposableDirectory from "disposable-directory";
+import { spawn } from "node:child_process";
 
 import analyseCoverage from "./analyseCoverage.mjs";
 import childProcessPromise from "./childProcessPromise.mjs";

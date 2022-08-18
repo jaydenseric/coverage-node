@@ -1,6 +1,6 @@
 // @ts-check
 
-import { ChildProcess } from "child_process";
+import { ChildProcess } from "node:child_process";
 
 /**
  * Promisifies a Node.js child process.

@@ -1,10 +1,10 @@
 // @ts-check
 
-import { deepStrictEqual, rejects } from "assert";
-import { spawn } from "child_process";
 import disposableDirectory from "disposable-directory";
-import { mkdir, writeFile } from "fs/promises";
-import { join } from "path";
+import { deepStrictEqual, rejects } from "node:assert";
+import { spawn } from "node:child_process";
+import { mkdir, writeFile } from "node:fs/promises";
+import { join } from "node:path";
 
 import analyseCoverage from "./analyseCoverage.mjs";
 import childProcessPromise from "./childProcessPromise.mjs";

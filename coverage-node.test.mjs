@@ -1,13 +1,13 @@
 // @ts-check
 
-import { strictEqual } from "assert";
-import { spawnSync } from "child_process";
 import disposableDirectory from "disposable-directory";
-import { writeFile } from "fs/promises";
-import { join, relative } from "path";
+import { strictEqual } from "node:assert";
+import { spawnSync } from "node:child_process";
+import { writeFile } from "node:fs/promises";
+import { join, relative } from "node:path";
+import { fileURLToPath } from "node:url";
 import replaceStackTraces from "replace-stack-traces";
 import snapshot from "snapshot-assertion";
-import { fileURLToPath } from "url";
 
 const COVERAGE_NODE_CLI_PATH = fileURLToPath(
   new URL("./coverage-node.mjs", import.meta.url)
@@ -333,7 +333,7 @@ import "${fileFPath}";
 
       await writeFile(
         filePath,
-        `import { deprecate } from "util";
+        `import { deprecate } from "node:util";
 
 const deprecated = deprecate(() => {}, "Deprecated!");
 deprecated();

@@ -1,7 +1,7 @@
 // @ts-check
 
 import { bold, green, red, yellow } from "kleur/colors";
-import { relative } from "path";
+import { relative } from "node:path";
 
 import errorConsole from "./errorConsole.mjs";
 
