@@ -1,7 +1,7 @@
 // @ts-check
 
 import v8Coverage from "@bcoe/v8-coverage";
-import fs from "fs";
+import { readdir, readFile } from "fs/promises";
 import { join } from "path";
 import { fileURLToPath } from "url";
 
@@ -18,15 +18,14 @@ export default async function analyseCoverage(coverageDirPath) {
   if (typeof coverageDirPath !== "string")
     throw new TypeError("Argument 1 `coverageDirPath` must be a string.");
 
-  const coverageDirFileNames = await fs.promises.readdir(coverageDirPath);
+  const coverageDirFileNames = await readdir(coverageDirPath);
   const filteredProcessCoverages = [];
 
   for (const fileName of coverageDirFileNames)
     if (fileName.startsWith("coverage-"))
       filteredProcessCoverages.push(
-        fs.promises
-          .readFile(join(coverageDirPath, fileName), "utf8")
-          .then((coverageFileJson) => {
+        readFile(join(coverageDirPath, fileName), "utf8").then(
+          (coverageFileJson) => {
             /** @type {import("@bcoe/v8-coverage").ProcessCov} */
             const { result } = JSON.parse(coverageFileJson);
             return {
@@ -45,7 +44,8 @@ export default async function analyseCoverage(coverageDirPath) {
                   !/\/test\.\w+$/u.test(url)
               ),
             };
-          })
+          }
+        )
       );
 
   const mergedCoverage = v8Coverage.mergeProcessCovs(
@@ -70,7 +70,7 @@ export default async function analyseCoverage(coverageDirPath) {
       for (const range of ranges) if (!range.count) uncoveredRanges.push(range);
 
     if (uncoveredRanges.length) {
-      const source = await fs.promises.readFile(path, "utf8");
+      const source = await readFile(path, "utf8");
       const ignored = [];
       const uncovered = [];
 

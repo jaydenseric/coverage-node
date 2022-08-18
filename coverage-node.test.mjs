@@ -3,7 +3,7 @@
 import { strictEqual } from "assert";
 import { spawnSync } from "child_process";
 import disposableDirectory from "disposable-directory";
-import fs from "fs";
+import { writeFile } from "fs/promises";
 import { join, relative } from "path";
 import replaceStackTraces from "replace-stack-traces";
 import snapshot from "snapshot-assertion";
@@ -23,7 +23,7 @@ export default (tests) => {
     await disposableDirectory(async (tempDirPath) => {
       const filePath = join(tempDirPath, "index.mjs");
 
-      await fs.promises.writeFile(filePath, "1;");
+      await writeFile(filePath, "1;");
 
       const { stdout, stderr, status, error } = spawnSync(
         "node",
@@ -57,7 +57,7 @@ export default (tests) => {
     await disposableDirectory(async (tempDirPath) => {
       const filePath = join(tempDirPath, "index.mjs");
 
-      await fs.promises.writeFile(
+      await writeFile(
         filePath,
         `// coverage ignore next line
 () => {};
@@ -98,7 +98,7 @@ export default (tests) => {
       await disposableDirectory(async (tempDirPath) => {
         const filePath = join(tempDirPath, "index.mjs");
 
-        await fs.promises.writeFile(filePath, "() => {};");
+        await writeFile(filePath, "() => {};");
 
         const { stdout, stderr, status, error } = spawnSync(
           "node",
@@ -142,7 +142,7 @@ export default (tests) => {
       await disposableDirectory(async (tempDirPath) => {
         const filePath = join(tempDirPath, "index.mjs");
 
-        await fs.promises.writeFile(filePath, "() => {};");
+        await writeFile(filePath, "() => {};");
 
         const { stdout, stderr, status, error } = spawnSync(
           "node",
@@ -192,7 +192,7 @@ export default (tests) => {
         const fileEPath = join(tempDirPath, "e.mjs");
         const fileFPath = join(tempDirPath, "f.mjs");
 
-        await fs.promises.writeFile(
+        await writeFile(
           fileAPath,
           `import "${fileBPath}";
 import "${fileCPath}";
@@ -201,19 +201,19 @@ import "${fileEPath}";
 import "${fileFPath}";
 `
         );
-        await fs.promises.writeFile(fileBPath, "function a() {}; a();");
-        await fs.promises.writeFile(
+        await writeFile(fileBPath, "function a() {}; a();");
+        await writeFile(
           fileCPath,
           `// coverage ignore next line
 () => {};`
         );
-        await fs.promises.writeFile(
+        await writeFile(
           fileDPath,
           `// coverage ignore next line
 () => {};`
         );
-        await fs.promises.writeFile(fileEPath, "() => {};");
-        await fs.promises.writeFile(fileFPath, "() => {};");
+        await writeFile(fileEPath, "() => {};");
+        await writeFile(fileFPath, "() => {};");
 
         const { stdout, stderr, status, error } = spawnSync(
           "node",
@@ -261,7 +261,7 @@ import "${fileFPath}";
     await disposableDirectory(async (tempDirPath) => {
       const filePath = join(tempDirPath, "index.mjs");
 
-      await fs.promises.writeFile(filePath, 'console.log("Message.");');
+      await writeFile(filePath, 'console.log("Message.");');
 
       const { stdout, stderr, status, error } = spawnSync(
         "node",
@@ -295,7 +295,7 @@ import "${fileFPath}";
     await disposableDirectory(async (tempDirPath) => {
       const filePath = join(tempDirPath, "index.mjs");
 
-      await fs.promises.writeFile(filePath, 'throw new Error("Error.");');
+      await writeFile(filePath, 'throw new Error("Error.");');
 
       const { stdout, stderr, status, error } = spawnSync(
         "node",
@@ -331,7 +331,7 @@ import "${fileFPath}";
     await disposableDirectory(async (tempDirPath) => {
       const filePath = join(tempDirPath, "index.mjs");
 
-      await fs.promises.writeFile(
+      await writeFile(
         filePath,
         `import { deprecate } from "util";
 
@@ -366,7 +366,7 @@ deprecated();
     await disposableDirectory(async (tempDirPath) => {
       const filePath = join(tempDirPath, "index.mjs");
 
-      await fs.promises.writeFile(filePath, "1;");
+      await writeFile(filePath, "1;");
 
       const { stdout, stderr, status, error } = spawnSync(
         "node",

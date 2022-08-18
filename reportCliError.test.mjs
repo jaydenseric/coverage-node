@@ -3,7 +3,7 @@
 import { strictEqual, throws } from "assert";
 import { spawnSync } from "child_process";
 import disposableDirectory from "disposable-directory";
-import fs from "fs";
+import { writeFile } from "fs/promises";
 import { join } from "path";
 import replaceStackTraces from "replace-stack-traces";
 import snapshot from "snapshot-assertion";
@@ -39,7 +39,7 @@ export default (tests) => {
       await disposableDirectory(async (tempDirPath) => {
         const filePath = join(tempDirPath, "test.mjs");
 
-        await fs.promises.writeFile(
+        await writeFile(
           filePath,
           `import reportCliError from "${REPORT_CLI_ERROR_PATH}";
 
@@ -81,7 +81,7 @@ reportCliError("CLI", new Error("Message."));
       await disposableDirectory(async (tempDirPath) => {
         const filePath = join(tempDirPath, "test.mjs");
 
-        await fs.promises.writeFile(
+        await writeFile(
           filePath,
           `import reportCliError from "${REPORT_CLI_ERROR_PATH}";
 
@@ -126,7 +126,7 @@ reportCliError("CLI", error);
         new URL("./CliError.mjs", import.meta.url)
       );
 
-      await fs.promises.writeFile(
+      await writeFile(
         filePath,
         `import CliError from "${cliErrorPath}";
 import reportCliError from "${REPORT_CLI_ERROR_PATH}";
@@ -162,7 +162,7 @@ reportCliError("CLI", new CliError("Message."));
     await disposableDirectory(async (tempDirPath) => {
       const filePath = join(tempDirPath, "test.mjs");
 
-      await fs.promises.writeFile(
+      await writeFile(
         filePath,
         `import reportCliError from "${REPORT_CLI_ERROR_PATH}";
 

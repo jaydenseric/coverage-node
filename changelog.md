@@ -2,6 +2,10 @@
 
 ## Next
 
+### Major
+
+- Migrated from the Node.js builtin module `fs` to `fs/promises`.
+
 ### Patch
 
 - Updated dependencies.
